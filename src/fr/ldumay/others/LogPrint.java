@@ -9,6 +9,19 @@ package fr.ldumay.others;
  *
  * @author ldumay
  */
+
+/**
+ * Class - LogPrint
+ * <br>
+ * <br>Constructor :
+ * <br>- LogPrint()
+ * <br>
+ * <br>Functions :
+ * <br>- LogPrint.affiche(String text)
+ * <br>  |--> void
+ * <br>
+ * <br>End.
+ */
 public class LogPrint {
     
     /**

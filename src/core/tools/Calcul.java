@@ -12,38 +12,38 @@ package core.tools;
 
 /**
  * Class - Calcul
- * <br/>
- * <br/>- public ArrayList visite
- * <br/>
- * <br/>Constructor :
- * <br/>- Calcul()
- * <br/>- Calcul(int varA, int varB)
- * <br/>
- * <br/>Functions :
- * <br/>- Calcul.addition()
- * <br/>  |--> Return int
- * <br/>- Calcul.addition(int varA, int varB)
- * <br/>  |--> Return int
- * <br/>- Calcul.soustraction()
- * <br/>  |--> Return int
- * <br/>- Calcul.soustraction(int varA, int varB)
- * <br/>  |--> Return int
- * <br/>- Calcul.multiplication()
- * <br/>  |--> Return int
- * <br/>- Calcul.multiplication(int varA, int varB)
- * <br/>  |--> Return int
- * <br/>- Calcul.division()
- * <br/>  |--> Return int
- * <br/>- Calcul.division(int varA, int varB)
- * <br/>  |--> Return int
- * <br/>
- * <br/>Basic setter :
- * <br/>- getVarA()
- * <br/>- getVarB()
- * <br/>- setVarA()
- * <br/>- setVarA()
- * <br/>
- * <br/>End.
+ * <br>
+ * <br>- public ArrayList visite
+ * <br>
+ * <br>Constructor :
+ * <br>- Calcul()
+ * <br>- Calcul(int varA, int varB)
+ * <br>
+ * <br>Functions :
+ * <br>- Calcul.addition()
+ * <br>  |--> Return int
+ * <br>- Calcul.addition(int varA, int varB)
+ * <br>  |--> Return int
+ * <br>- Calcul.soustraction()
+ * <br>  |--> Return int
+ * <br>- Calcul.soustraction(int varA, int varB)
+ * <br>  |--> Return int
+ * <br>- Calcul.multiplication()
+ * <br>  |--> Return int
+ * <br>- Calcul.multiplication(int varA, int varB)
+ * <br>  |--> Return int
+ * <br>- Calcul.division()
+ * <br>  |--> Return int
+ * <br>- Calcul.division(int varA, int varB)
+ * <br>  |--> Return int
+ * <br>
+ * <br>Basic setter :
+ * <br>- getVarA()
+ * <br>- getVarB()
+ * <br>- setVarA()
+ * <br>- setVarA()
+ * <br>
+ * <br>End.
  */
 public class Calcul {
 
@@ -142,7 +142,7 @@ public class Calcul {
      * @return
      */
     public double division(int varA, int varB){
-        return (varA==0||varB==0)? 0: varA/varB;
+        return (varA==0||varB==0) ? 0 : varA/varB;
     }
     
     @Override

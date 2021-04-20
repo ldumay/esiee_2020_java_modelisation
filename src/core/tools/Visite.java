@@ -12,31 +12,31 @@ package core.tools;
 
 /**
  * Class - Visite
- * <br/>
- * <br/>Variables class :
- * <br/>
- * <br/>- public String nomDuVisiteur
- * <br/>- public String dateDeNaissanceDuVisiteur
- * <br/>- public String noteDuVisteur
- * <br/>
- * <br/>Constructor :
- * <br/>- Visite()
- * <br/>- Visite(String nomDuVisiteur, String dateDeNaissanceDuVisiteur, int noteDuVisteur)
- * <br/>
- * <br/>Basic getter :
- * <br/>- getNomDuVisiteur();
- * <br/>  |--> Return String
- * <br/>- getDateDeNaissanceDuVisiteur();
- * <br/>  |--> Return String
- * <br/>- getNoteDuVisteur();
- * <br/>  |--> Return int
- * <br/>
- * <br/>Basic setter :
- * <br/>- setNomDuVisiteur(String nomDuVisiteur)
- * <br/>- setDateDeNaissanceDuVisiteur(String dateDeNaissanceDuVisiteur)
- * <br/>- setNoteDuVisteur(int noteDuVisteur)
- * <br/>
- * <br/>End.
+ * <br>
+ * <br>Variables class :
+ * <br>
+ * <br>- public String nomDuVisiteur
+ * <br>- public String dateDeNaissanceDuVisiteur
+ * <br>- public String noteDuVisteur
+ * <br>
+ * <br>Constructor :
+ * <br>- Visite()
+ * <br>- Visite(String nomDuVisiteur, String dateDeNaissanceDuVisiteur, int noteDuVisteur)
+ * <br>
+ * <br>Basic getter :
+ * <br>- getNomDuVisiteur();
+ * <br>  |--> Return String
+ * <br>- getDateDeNaissanceDuVisiteur();
+ * <br>  |--> Return String
+ * <br>- getNoteDuVisteur();
+ * <br>  |--> Return int
+ * <br>
+ * <br>Basic setter :
+ * <br>- setNomDuVisiteur(String nomDuVisiteur)
+ * <br>- setDateDeNaissanceDuVisiteur(String dateDeNaissanceDuVisiteur)
+ * <br>- setNoteDuVisteur(int noteDuVisteur)
+ * <br>
+ * <br>End.
  */
 public class Visite {
 

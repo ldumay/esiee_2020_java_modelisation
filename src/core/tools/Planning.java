@@ -14,20 +14,20 @@ import java.util.ArrayList;
 
 /**
  * Class - DateConversion
- * <br/>
- * <br/>- public ArrayList visite
- * <br/>
- * <br/>Constructor :
- * <br/>- Planning()
- * <br/>
- * <br/>Functions :
- * <br/>- DateConversion.dateConvertTypeDate(Date date, Locale localeSelected)
- * <br/>  |--> Return String
- * <br/>
- * <br/>Basic setter :
- * <br/>- setVisite()
- * <br/>
- * <br/>End.
+ * <br>
+ * <br>- public ArrayList visite
+ * <br>
+ * <br>Constructor :
+ * <br>- Planning()
+ * <br>
+ * <br>Functions :
+ * <br>- DateConversion.dateConvertTypeDate(Date date, Locale localeSelected)
+ * <br>  |--> Return String
+ * <br>
+ * <br>Basic setter :
+ * <br>- setVisite()
+ * <br>
+ * <br>End.
  */
 public class Planning {
     

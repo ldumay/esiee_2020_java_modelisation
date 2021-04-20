@@ -12,18 +12,18 @@ package core.tools;
 
 /**
  * Class - MesDates
- * <br/>
- * <br/>Constructor :
- * <br/>- MesDates()
- * <br/>
- * <br/>Functions :
- * <br/>- MestDates.dateFRtoUS(String date)
- * <br/>  |--> Return String
- * <br/>
- * <br/>- MestDates.dateFRtoUS(String date)
- * <br/>  |--> Return String
- * <br/>
- * <br/>End.
+ * <br>
+ * <br>Constructor :
+ * <br>- MesDates()
+ * <br>
+ * <br>Functions :
+ * <br>- MestDates.dateFRtoUS(String date)
+ * <br>  |--> Return String
+ * <br>
+ * <br>- MestDates.dateFRtoUS(String date)
+ * <br>  |--> Return String
+ * <br>
+ * <br>End.
  */
 public class MesDates {
     

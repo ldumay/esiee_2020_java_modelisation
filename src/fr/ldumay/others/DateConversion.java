@@ -17,24 +17,25 @@ import java.util.Locale;
 
 /**
  * Class - DateConversion
- * <br/>
- * <br/>- public String year
- * <br/>- public String month
- * <br/>- public String day
- * <br/>Constructor :
- * <br/>- DateConversion()
- * <br/>
- * <br/>Functions :
- * <br/>- DateConversion.dateConvertTypeDate(Date date, Locale localeSelected)
- * <br/>  |--> Return String
- * <br/>
- * <br/>End.
+ * <br>
+ * <br>- public String year
+ * <br>- public String month
+ * <br>- public String day
+ * <br>
+ * <br>Constructor :
+ * <br>- DateConversion()
+ * <br>
+ * <br>Functions :
+ * <br>- DateConversion.dateConvertTypeDate(Date date, Locale localeSelected)
+ * <br>  |--> Return String
+ * <br>
+ * <br>End.
  */
 public class DateConversion {
     
-    private String year = null;
-    private String month = null;
-    private String day = null;
+    private final String year = null;
+    private final String month = null;
+    private final String day = null;
     
     /**
      * Constructor
