@@ -55,6 +55,9 @@ public class Visite {
      * Constructor
      * 
      * Visite(String nomDuVisiteur, String dateDeNaissanceDuVisiteur, int noteDuVisteur)
+     * @param nomDuVisiteur
+     * @param dateDeNaissanceDuVisiteur
+     * @param noteDuVisteur
      */
     public Visite(String nomDuVisiteur, String dateDeNaissanceDuVisiteur, int noteDuVisteur) {
         this.nomDuVisiteur = nomDuVisiteur;
@@ -73,6 +76,6 @@ public class Visite {
     public void setNoteDuVisteur(int noteDuVisteur) { this.noteDuVisteur = noteDuVisteur; }
     
     @Override
-    public String toString(){ return this.nomDuVisiteur+this.dateDeNaissanceDuVisiteur+this.noteDuVisteur; }
+    public String toString(){ return this.nomDuVisiteur+" "+this.dateDeNaissanceDuVisiteur+" "+this.noteDuVisteur; }
     
 }

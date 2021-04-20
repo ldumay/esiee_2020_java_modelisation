@@ -5,9 +5,12 @@
  */
 package fr.ldumay;
 
+import fr.ldumay.others.DateConversion;
 import java.util.Date;
 import java.util.Locale;
+import tools.Calcul;
 import tools.MesDates;
+import tools.Planning;
 
 /**
  *
@@ -61,6 +64,27 @@ public class Main {
         DateConversion d1 = new DateConversion();
         affiche("\n"+d1.dateConvert("22/04/2021", null, "US"));
         */
+        
+        Planning p1 = new Planning();
+        affiche(p1.toString());
+        Visite vA = new Visite("Georges DuPont", "1992/10/03", 20);
+        Visite vB = new Visite("Georges DuPont", "2002/03/04", 15);
+        Visite vC = new Visite("Georges DuPont", "1992/11/14", 14);
+        Visite vD = new Visite("Georges DuPont", "1986/05/31", 18);
+        p1.addVisite(vA);
+        p1.addVisite(vB);
+        p1.addVisite(vC);
+        p1.addVisite(vD);
+        affiche(p1.toString());
+        
+        Calcul calcul = new Calcul();
+        calcul.setVarA(21);
+        calcul.setVarB(35);
+        affiche("\nA & B : "+calcul.toString());
+        affiche("addition : "+calcul.addition());
+        affiche("soustraction : "+calcul.soustraction());
+        affiche("multiplication : "+calcul.multiplication());
+        affiche("division : "+calcul.division());
         
     }
     

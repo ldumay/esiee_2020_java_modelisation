@@ -1,4 +1,4 @@
-package fr.ldumay;
+package fr.ldumay.others;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -14,14 +14,40 @@ import java.util.Locale;
  *
  * @author ldumay
  */
+
+/**
+ * Class - DateConversion
+ * <br/>
+ * <br/>- public String year
+ * <br/>- public String month
+ * <br/>- public String day
+ * <br/>Constructor :
+ * <br/>- DateConversion()
+ * <br/>
+ * <br/>Functions :
+ * <br/>- DateConversion.dateConvertTypeDate(Date date, Locale localeSelected)
+ * <br/>  |--> Return String
+ * <br/>
+ * <br/>End.
+ */
 public class DateConversion {
     
     private String year = null;
     private String month = null;
     private String day = null;
     
+    /**
+     * Constructor
+     */
     public DateConversion(){}
     
+    /**
+     * Conversion Date to String.
+     * 
+     * @param date String
+     * @param localeSelected Locale
+     * @return newDate type String
+     */
     public String dateConvertTypeDate(Date date, Locale localeSelected){
         //-
         if(date==null){ date = new Date(); }
