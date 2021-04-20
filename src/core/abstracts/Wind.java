@@ -6,7 +6,7 @@
 package core.abstracts;
 
 import core.interfaces.Instrument;
-import fr.ldumay.others.LogPrint;
+import fr.ldumay.others.Console;
 
 /**
  *
@@ -15,7 +15,7 @@ import fr.ldumay.others.LogPrint;
 public class Wind implements Instrument{
     
     @Override
-    public void play(){ LogPrint.affiche("Fiouuuuuuu"); }
+    public void play(){ Console.print("Fiouuuuuuu"); }
     
     @Override
     public String what(){ return null; }

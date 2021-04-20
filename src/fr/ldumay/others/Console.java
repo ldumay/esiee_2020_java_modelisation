@@ -11,33 +11,33 @@ package fr.ldumay.others;
  */
 
 /**
- * Class - LogPrint
- * <br>
+ * Class - Console
+ <br>
  * <br>Constructor :
- * <br>- LogPrint()
- * <br>
+ * <br>- Console()
+ <br>
  * <br>Functions :
- * <br>- LogPrint.affiche(String text)
- * <br>  |--> void
+ * <br>- Console.print(String text)
+ <br>  |--> void
  * <br>
  * <br>End.
  */
-public class LogPrint {
+public class Console {
     
     /**
      * Constructor
      * 
      * SystemPrint()
      */
-    public LogPrint(){}
+    public Console(){}
     
     /**
      * Constructor
-     * 
-     * affiche(String text)
+ 
+ print(String text)
      * @param text
      */
-    public static void affiche(String text){
+    public static void print(String text){
         System.out.println(text);
     }
     

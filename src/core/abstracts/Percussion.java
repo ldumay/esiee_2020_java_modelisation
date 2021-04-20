@@ -6,7 +6,7 @@
 package core.abstracts;
 
 import core.interfaces.Instrument;
-import fr.ldumay.others.LogPrint;
+import fr.ldumay.others.Console;
 
 /**
  *
@@ -15,7 +15,7 @@ import fr.ldumay.others.LogPrint;
 public class Percussion implements Instrument{
     
     @Override
-    public void play(){ LogPrint.affiche("Poum"); }
+    public void play(){ Console.print("Poum"); }
     
     @Override
     public String what(){ return null; }

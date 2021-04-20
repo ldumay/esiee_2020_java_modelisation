@@ -10,12 +10,14 @@ import core.abstracts.Wind;
 import core.abstracts.Woodwind;
 import core.tools.Visite;
 import fr.ldumay.others.DateConversion;
-import fr.ldumay.others.LogPrint;
+import fr.ldumay.others.Console;
 import java.util.Date;
 import java.util.Locale;
 import core.tools.Calcul;
+import core.tools.Fichiers;
 import core.tools.MesDates;
 import core.tools.Planning;
+import java.io.IOException;
 
 /**
  *
@@ -26,27 +28,27 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         int x = 1;
         
         Visite v1 = new Visite();
         //-
-        LogPrint.affiche("\nVisite "+x+" : "+v1);
-        LogPrint.affiche("Nom du visiteur : "+v1.nomDuVisiteur);
-        LogPrint.affiche("Date de naissance du visiteur : "+v1.dateDeNaissanceDuVisiteur);
-        LogPrint.affiche("Note du visiteur : "+v1.noteDuVisteur);
+        Console.print("\nVisite "+x+" : "+v1);
+        Console.print("Nom du visiteur : "+v1.nomDuVisiteur);
+        Console.print("Date de naissance du visiteur : "+v1.dateDeNaissanceDuVisiteur);
+        Console.print("Note du visiteur : "+v1.noteDuVisteur);
         
         x++;
         
         Visite v2 = new Visite("Georges","1990-10-10",15);
         //-
-        LogPrint.affiche("\nVisite "+x+" : "+v2);
-        LogPrint.affiche("Nom du visiteur : "+v2.getNomDuVisiteur());
-        LogPrint.affiche("Date de naissance du visiteur : "+v2.getDateDeNaissanceDuVisiteur());
-        LogPrint.affiche("Note du visiteur : "+v2.getNoteDuVisteur());
+        Console.print("\nVisite "+x+" : "+v2);
+        Console.print("Nom du visiteur : "+v2.getNomDuVisiteur());
+        Console.print("Date de naissance du visiteur : "+v2.getDateDeNaissanceDuVisiteur());
+        Console.print("Note du visiteur : "+v2.getNoteDuVisteur());
         
-        LogPrint.affiche("\ncharAt : "+v2.nomDuVisiteur.charAt(1));
+        Console.print("\ncharAt : "+v2.nomDuVisiteur.charAt(1));
         
         Integer a = 10;
         String b = a.toString();// integer a to string b
@@ -58,21 +60,21 @@ public class Main {
         MesDates mesDates = new MesDates();
         String date2 = mesDates.dateUStoFR(date1);
         String date3 = mesDates.dateFRtoUS(date2);
-        LogPrint.affiche("\ndate start : "+date1);
-        LogPrint.affiche("dateUStoFR : "+date2);
-        LogPrint.affiche("dateFRtoUS : "+date3);
+        Console.print("\ndate start : "+date1);
+        Console.print("dateUStoFR : "+date2);
+        Console.print("dateFRtoUS : "+date3);
         //-
         DateConversion dateConversion = new DateConversion();
-        LogPrint.affiche("\nconvert to US : "+dateConversion.dateConvertTypeDate(new Date(), Locale.FRANCE));
-        LogPrint.affiche("convert to FR : "+dateConversion.dateConvertTypeDate(new Date(), Locale.ENGLISH));
+        Console.print("\nconvert to US : "+dateConversion.dateConvertTypeDate(new Date(), Locale.FRANCE));
+        Console.print("convert to FR : "+dateConversion.dateConvertTypeDate(new Date(), Locale.ENGLISH));
         
         /*
         DateConversion d1 = new DateConversion();
-        LogPrint.affiche("\n"+d1.dateConvert("22/04/2021", null, "US"));
+        Console.print("\n"+d1.dateConvert("22/04/2021", null, "US"));
         */
         
         Planning p1 = new Planning();
-        LogPrint.affiche(p1.toString());
+        Console.print(p1.toString());
         Visite vA = new Visite("Georges DuPont", "1992/10/03", 20);
         Visite vB = new Visite("Georges DuPont", "2002/03/04", 15);
         Visite vC = new Visite("Georges DuPont", "1992/11/14", 14);
@@ -81,26 +83,30 @@ public class Main {
         p1.addVisite(vB);
         p1.addVisite(vC);
         p1.addVisite(vD);
-        LogPrint.affiche(p1.toString());
+        Console.print(p1.toString());
         
         Calcul calcul = new Calcul();
         calcul.setVarA(21);
         calcul.setVarB(35);
-        LogPrint.affiche("\nA & B : "+calcul.toString());
-        LogPrint.affiche("addition : "+calcul.addition());
-        LogPrint.affiche("soustraction : "+calcul.soustraction());
-        LogPrint.affiche("multiplication : "+calcul.multiplication());
-        LogPrint.affiche("division : "+calcul.division());
+        Console.print("\nA & B : "+calcul.toString());
+        Console.print("addition : "+calcul.addition());
+        Console.print("soustraction : "+calcul.soustraction());
+        Console.print("multiplication : "+calcul.multiplication());
+        Console.print("division : "+calcul.division());
         
-        LogPrint.affiche("\nWind : ");
+        Console.print("\nWind : ");
         Wind wind = new Wind();
         wind.play();
-        LogPrint.affiche("Percussion : ");
+        Console.print("Percussion : ");
         Percussion percussion = new Percussion();
         percussion.play();
-        LogPrint.affiche("Woodwind : ");
+        Console.print("Woodwind : ");
         Woodwind woodwind = new Woodwind();
         woodwind.play();
+        
+        Console.print("\nFichier :");
+        Fichiers fichier = new Fichiers();
+        Console.print(fichier.getContentFile());
         
     }
     
