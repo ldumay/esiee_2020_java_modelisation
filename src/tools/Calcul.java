@@ -131,9 +131,7 @@ public class Calcul {
      * @return
      */
     public double division(){
-        if(this.varA==0 || this.varB==0){
-            return 0;
-        } else { return (double) this.varA/this.varB; }
+        return this.varA==0 || this.varB==0 ? 0 : this.varA/this.varB;
     }
     
     /**
@@ -144,20 +142,8 @@ public class Calcul {
      * @return
      */
     public double division(int varA, int varB){
-        if(varA==0 || varB==0){
-            return 0;
-        } else { return (double) varA/varB; }
+        return (varA==0||varB==0)? 0: varA/varB;
     }
-    
-    
-    /* = = = [ Opérations ternaires non fonctionnelle ] = = =
-    public int division(){
-        this.varA==0 || this.varB==0 ? return 0  : return this.varA/this.varB;
-    }
-    public int division(int varA, int varB){
-        varA==0 || varB==0 ? return 0 : return varA/varB;
-    }
-    */
     
     @Override
     public String toString(){ return this.varA+" / "+this.varB; }
