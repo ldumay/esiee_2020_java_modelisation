@@ -5,6 +5,10 @@
  */
 package fr.ldumay;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  *
  * @author ldumay
@@ -33,4 +37,18 @@ public class Visite {
     
     @Override
     public String toString(){ return this.nomDuVisiteur+this.dateDeNaissanceDuVisiteur+this.noteDuVisteur; }
+    
+    public String convertUS(Date date, Locale localeSelected){
+        //-
+        if(date==null){ date = new Date(); }
+        if(localeSelected==null){ localeSelected = Locale.getDefault(); }
+        //-
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+            DateFormat.SHORT,
+            DateFormat.SHORT,
+            localeSelected
+        );
+        String newDate = shortDateFormat.format(date);
+        return newDate;
+    }
 }

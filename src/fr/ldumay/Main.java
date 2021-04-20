@@ -5,6 +5,9 @@
  */
 package fr.ldumay;
 
+import java.util.Date;
+import java.util.Locale;
+
 /**
  *
  * @author ldumay
@@ -32,6 +35,21 @@ public class Main {
         affiche("Nom du visiteur : "+v2.getNomDuVisiteur());
         affiche("Date de naissance du visiteur : "+v2.getDateDeNaissanceDuVisiteur());
         affiche("Note du visiteur : "+v2.getNoteDuVisteur());
+        
+        affiche("\ncharAt : "+v2.nomDuVisiteur.charAt(1));
+        
+        Integer a = 10;
+        String b = a.toString();// integer a to string b
+        Integer c = a.intValue();// integer a to integer c
+        
+        //-
+        affiche("\nconvert to US : "+v1.convert(new Date(), Locale.FRANCE));
+        affiche("\nconvert to FR : "+v1.convert(new Date(), Locale.ENGLISH));
+        
+        /*
+        DateConversion d1 = new DateConversion();
+        affiche("\n"+d1.dateConvert("22/04/2021", null, "US"));
+        */
         
     }
     
