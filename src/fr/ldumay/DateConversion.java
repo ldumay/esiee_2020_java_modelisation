@@ -1,5 +1,7 @@
 package fr.ldumay;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /*
@@ -20,7 +22,21 @@ public class DateConversion {
     
     public DateConversion(){}
     
-    public String dateConvert(String date,String local, String localResult){
+    public String dateConvertTypeDate(Date date, Locale localeSelected){
+        //-
+        if(date==null){ date = new Date(); }
+        if(localeSelected==null){ localeSelected = Locale.getDefault(); }
+        //-
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+            DateFormat.SHORT,
+            DateFormat.SHORT,
+            localeSelected
+        );
+        String newDate = shortDateFormat.format(date);
+        return newDate;
+    }
+    
+    public String dateConvertTypeString(String date,String local, String localResult){
         String language = null;
         String newDate = null;
         //-

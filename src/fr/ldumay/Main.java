@@ -7,6 +7,7 @@ package fr.ldumay;
 
 import java.util.Date;
 import java.util.Locale;
+import tools.MesDates;
 
 /**
  *
@@ -43,8 +44,18 @@ public class Main {
         Integer c = a.intValue();// integer a to integer c
         
         //-
-        affiche("\nconvert to US : "+v1.convert(new Date(), Locale.FRANCE));
-        affiche("\nconvert to FR : "+v1.convert(new Date(), Locale.ENGLISH));
+        String date1 = "2021-05-10";
+        //-
+        MesDates mesDates = new MesDates();
+        String date2 = mesDates.dateUStoFR(date1);
+        String date3 = mesDates.dateFRtoUS(date2);
+        affiche("\ndate start : "+date1);
+        affiche("dateUStoFR : "+date2);
+        affiche("dateFRtoUS : "+date3);
+        //-
+        DateConversion dateConversion = new DateConversion();
+        affiche("\nconvert to US : "+dateConversion.dateConvertTypeDate(new Date(), Locale.FRANCE));
+        affiche("convert to FR : "+dateConversion.dateConvertTypeDate(new Date(), Locale.ENGLISH));
         
         /*
         DateConversion d1 = new DateConversion();
