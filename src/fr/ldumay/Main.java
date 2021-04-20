@@ -7,7 +7,7 @@ package fr.ldumay;
 
 /**
  *
- * @author mtl
+ * @author ldumay
  */
 public class Main {
     
@@ -16,11 +16,17 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        Visite nouvelleVisite = new Visite();
+        Visite nouvelleVisite1 = new Visite();
         //-
-        System.out.println("visite A - date : "+nouvelleVisite.date);
-        System.out.println("visite A - name : "+nouvelleVisite.name);
-        System.out.println("visite A - note de Maths : "+nouvelleVisite.noteMaths);
+        System.out.println("Nom du visiteur : "+nouvelleVisite1.nomDuVisiteur);
+        System.out.println("Date de naissance du visiteur : "+nouvelleVisite1.dateDeNaissanceDuVisiteur);
+        System.out.println("Note du visiteur : "+nouvelleVisite1.noteDuVisteur);
+        
+        Visite nouvelleVisite2 = new Visite("Georges","1990-10-10",15);
+        //-
+        System.out.println("\nNom du visiteur : "+nouvelleVisite2.nomDuVisiteur);
+        System.out.println("Date de naissance du visiteur : "+nouvelleVisite2.dateDeNaissanceDuVisiteur);
+        System.out.println("Note du visiteur : "+nouvelleVisite2.noteDuVisteur);
     }
     
 }

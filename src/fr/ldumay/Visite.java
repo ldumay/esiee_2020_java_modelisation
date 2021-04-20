@@ -7,19 +7,22 @@ package fr.ldumay;
 
 /**
  *
- * @author mtl
+ * @author ldumay
  */
 public class Visite {
 
-    String name = "Brian";
-    String date = "2020-10-05";
-    int noteMaths = 20;
+    String nomDuVisiteur = "Brian";
+    String dateDeNaissanceDuVisiteur = "1987-10-05";
+    int noteDuVisteur = 20;
 
     public Visite(){}
     
-    public Visite(String name, String date, int noteMaths) {
-        this.name = name;
-        this.date = date;
-        this.noteMaths = noteMaths;
+    public Visite(
+            String nomDuVisiteur,
+            String dateDeNaissanceDuVisiteur,
+            int noteDuVisteur) {
+        this.nomDuVisiteur = nomDuVisiteur;
+        this.dateDeNaissanceDuVisiteur = dateDeNaissanceDuVisiteur;
+        this.noteDuVisteur = noteDuVisteur;
     }
 }
