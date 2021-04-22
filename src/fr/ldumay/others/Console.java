@@ -5,6 +5,8 @@
  */
 package fr.ldumay.others;
 
+import java.util.Scanner;
+
 /**
  *
  * @author ldumay
@@ -32,13 +34,20 @@ public class Console {
     public Console(){}
     
     /**
-     * Constructor
- 
- print(String text)
+     * print()
+     * 
+     * print(String text)
      * @param text
      */
     public static void print(String text){
         System.out.println(text);
+    }
+    
+    public static Object input(String title){
+        Scanner inputString = new Scanner(System.in);
+        print(title+" : ");
+        Object data =  inputString.next();
+        return data;
     }
     
 }

@@ -17,8 +17,19 @@ import core.tools.Calcul;
 import core.tools.Fichiers;
 import core.tools.MesDates;
 import core.tools.Planning;
+import exos.starwars.Acteur;
+import exos.starwars.Film;
+import exos.starwars.Personnage;
+import static fr.ldumay.others.Console.print;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -30,7 +41,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         
         int x = 1;
         
@@ -156,7 +167,106 @@ public class Main {
             Console.print("- "+element);
         }
         Console.print("Peek element : "+listeChainee.peek());
-
+        
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        
+        Console.print("\nStar wars : ");
+        
+        Film filmA = new Film("Star wars I","1977", 1, 1234.123, 6443.123);
+        Film filmB = new Film("Star wars II","1980", 2, 1234.123, 6443.123);
+        Film filmC = new Film("Star wars III","1983", 3, 1234.123, 6443.123);
+        //Film filmD = new Film(true);
+        
+        ArrayList<Film> films = new ArrayList();
+        films.add(filmA);
+        films.add(filmB);
+        films.add(filmC);
+        //films.add(filmD);
+        
+        int y = 1;
+        for(Film film : films){
+            Console.print("[Film "+y+"]"+film.toString());
+            y++;
+        }
+        
+        Personnage persoA = new Personnage("Skywalker", "Anakin");
+        Personnage persoB = new Personnage("Skywalker", "Luke");
+        Personnage persoC = new Personnage("Skywalker", "Shmi");
+        Personnage persoD = new Personnage("Skywalker", "Ben");
+        /*
+        Personnage persoE = new Personnage("Skywalker", "Nat");
+        Personnage persoF = new Personnage("Skywalker", "Kol");
+        Personnage persoG = new Personnage("Skywalker", "Cade");
+        Personnage persoH = new Personnage("Solo", "Allana");
+        Personnage persoI = new Personnage("Solo", "Anakin");
+        Personnage persoJ = new Personnage("Solo", "Ania");
+        Personnage persoK = new Personnage("Solo", "Jacen");
+        Personnage persoL = new Personnage("Solo", "Jaina");
+        */
+        
+        Acteur acteur1 = new Acteur("Ford", "Harrison");
+        Acteur acteur2 = new Acteur("Hamill", "Mark");
+        Acteur acteur3 = new Acteur("Fisher", "Carrie");
+        Acteur acteur4 = new Acteur("Guinness", "Alec");
+        
+        ArrayList<Personnage> personnagesActeurA = new ArrayList(1);
+        personnagesActeurA.add(persoA);
+        personnagesActeurA.add(persoB);
+        acteur1.setDuetPersonnages(personnagesActeurA);
+        //Console.print("\n[Acteur 1] "+acteur1.toString());
+        ArrayList<Personnage> personnagesActeurB = new ArrayList(1);
+        personnagesActeurB.add(persoC);
+        personnagesActeurB.add(persoD);
+        acteur2.setDuetPersonnages(personnagesActeurB);
+        //Console.print("\n[Acteur 2] "+acteur2.toString());
+        ArrayList<Personnage> personnagesActeurC = new ArrayList(1);
+        personnagesActeurC.add(persoC);
+        personnagesActeurC.add(persoD);
+        acteur3.setDuetPersonnages(personnagesActeurC);
+        //Console.print("\n[Acteur 3] "+acteur3.toString());
+        ArrayList<Personnage> personnagesActeurD = new ArrayList(1);
+        personnagesActeurD.add(persoC);
+        personnagesActeurD.add(persoD);
+        acteur4.setDuetPersonnages(personnagesActeurD);
+        //Console.print("\n[Acteur 4] "+acteur4.toString());
+        
+        ArrayList<Acteur> acteursList1 = new ArrayList();
+        acteursList1.add(acteur1);
+        acteursList1.add(acteur2);
+        acteursList1.add(acteur3);
+        acteursList1.add(acteur4);
+        filmA.setActeurs(acteursList1);
+        Console.print("\n"+filmA.toString());
+        
+        boolean isBefore = filmA.isBefore("2020");
+        Console.print("\n isBefore : "+isBefore);
+        
+        Console.print("\n"+filmA.getActeurs());
+        filmA.tri();
+        Console.print("\n"+filmA.getActeurs());
+        
+        Console.print("\nHashMap Dico");
+        HashMap<String,Film> dicoFilms = new HashMap();
+        dicoFilms.put(filmA.getAnneeDeSortie(), filmA);
+        dicoFilms.put(filmB.getAnneeDeSortie(), filmB);
+        dicoFilms.put(filmC.getAnneeDeSortie(), filmC);
+        //dicoFilms.put(filmD.getAnneeDeSortie(), filmD);
+        
+        makeBackUp(dicoFilms);
+        
+    }
+    
+    public static void makeBackUp(HashMap dicoFilms){
+        Set dicoFilmsSetIterator = dicoFilms.entrySet();
+        Iterator dicoFilmsList = dicoFilmsSetIterator.iterator();
+        while(dicoFilmsList.hasNext()) {
+            Map.Entry film = (Map.Entry)dicoFilmsList.next();
+            String filmKey = (String) film.getKey();
+            Film filmValue = (Film) film.getValue();
+            String filmTitre = filmValue.getTitre();
+            String filmBenefice = filmValue.calculBenefice().get(1).toString();
+            Console.print(""+filmKey+" - "+filmTitre+" - "+filmBenefice);
+        }
     }
     
 }

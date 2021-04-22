@@ -5,6 +5,8 @@
  */
 package exos.starwars;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -37,6 +39,7 @@ public class Acteur {
     
     private String nom;
     private String prenom;
+    private ArrayList<Personnage> duetPersonnages = new ArrayList(1);
     
     /**
      * Constructor
@@ -57,16 +60,28 @@ public class Acteur {
         this.prenom = prenom;
     }
     
+    /**
+     * Récupération du nombre de personnages
+     * 
+     * @return int
+     */
+    public int getNombrePersonnages(){ return this.duetPersonnages.size(); }
+    
     // The methods of basic getter below.
     public String getNom(){ return this.nom; }
     public String getPrenom(){ return this.prenom; }
-    
+    public ArrayList getDuetPersonnages() { return duetPersonnages; }
+
     // The methods of basic setter below.
     public void setNom(String nom){ this.nom = nom; }
     public void setPrenom(String prenom){ this.prenom = prenom; }
+    public void setDuetPersonnages(ArrayList duetPersonnages) { this.duetPersonnages = duetPersonnages; }
     
     @Override
     public String toString(){
-        return "Acteur : "+this.nom+" "+this.prenom;
+        return "\n[Acteur]"
+            +"\n- nom de l'acteur : "+this.getNom()
+            +"\n- prénom de l'acteur : "+this.getPrenom()
+            +"\n- nombre de personnages : "+this.getNombrePersonnages();
     }
 }

@@ -5,6 +5,18 @@
  */
 package exos.starwars;
 
+import fr.ldumay.others.Console;
+import static fr.ldumay.others.Console.print;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.ListIterator;
+import java.util.Locale;
+import java.util.Scanner;
+
 /**
  *
  * @author ldumay
@@ -21,9 +33,14 @@ package exos.starwars;
  * <br>
  * <br>Constructor :
  * <br>- Film()
+ * <br>- Film(boolean nouveaFilm)
  * <br>- Film(String titre, String anneeDeSortie, String numeroEpisode, String cout, String recette)
  * <br>
  * <br>Functions :
+ * <br>- getNombreActeurs()
+ * <br>- getNombrePersonnages()
+ * <br>- calculBenefice()
+ * <br>- isBefore()
  * <br>
  * <br>Basic getter :
  * <br>- getTitre()
@@ -45,9 +62,10 @@ public class Film {
 
     private String titre;
     private String anneeDeSortie;
-    private String numeroEpisode;
+    private int numeroEpisode;
     private double cout;
     private double recette;
+    private ArrayList<Acteur> acteurs;
     
     /**
      * Constructor
@@ -59,6 +77,44 @@ public class Film {
     /**
      * Constructor
      * 
+     * Film(boolean nouveaFilm)
+     * @param nouveaFilm
+     */
+    public Film(boolean nouveaFilm){
+        if(nouveaFilm==true){
+            print("[Nouveau film]");
+            //-
+            Scanner scan = new Scanner(System.in);
+            //-
+            print("- (string) titre du film : ");
+            String titreFilm = scan.nextLine();
+            this.titre = titreFilm;
+            //-
+            print("- (string) année du film : ");
+            String anneeDeSortieFilm = scan.next();
+            this.anneeDeSortie = anneeDeSortieFilm;
+            //-
+            print("- (int) numéro du film : ");
+            int numeroEpisodeFilm = scan.nextInt();
+            this.numeroEpisode = numeroEpisodeFilm;
+            //-
+            print("- (double) coût du film : ");
+            double coutFilm = scan.nextDouble();
+            this.cout = coutFilm;
+            //-
+            print("- (double) recette du film : ");
+            double recetteFilm = scan.nextDouble();
+            this.recette = recetteFilm;
+            //-
+            this.acteurs = new ArrayList();
+            //-
+            print("[Nouveau film enregistré]");
+        }
+    }
+    
+    /**
+     * Constructor
+     * 
      * Film(String titre, String anneeDeSortie, String numeroEpisode, String cout, String recette)
      * @param titre
      * @param anneeDeSortie
@@ -66,31 +122,119 @@ public class Film {
      * @param cout
      * @param recette
      */
-    public Film(String titre, String anneeDeSortie, String numeroEpisode, double cout, double recette) { this.titre = titre;
+    public Film(String titre, String anneeDeSortie, int numeroEpisode, double cout, double recette) {
+        this.titre = titre;
         this.anneeDeSortie = anneeDeSortie;
         this.numeroEpisode = numeroEpisode;
         this.cout = cout;
         this.recette = recette;
+        this.acteurs = new ArrayList();
+    }
+    
+    /**
+     * Récupération du nombre d'acteurs
+     * 
+     * @return int
+     */
+    public int getNombreActeurs(){ return !this.acteurs.isEmpty() && this.acteurs.size()>0 ? this.acteurs.size() : 0 ; }
+    
+    /**
+     * Récupération du nombre de personnages
+     * 
+     * @return int
+     */
+    public int getNombrePersonnages(){
+        int i = 0;
+        for(Acteur acteur : this.acteurs){
+            i +=acteur.getNombrePersonnages();
+        }
+        return i;
+    }
+    
+    /**
+     * Calcule du bénéfice du film
+     * 
+     * @return double
+     */
+    public ArrayList calculBenefice(){
+        double x = this.recette-this.cout;
+        ArrayList result = new ArrayList();
+        if(x >= 0){
+            result.add(true);
+            result.add(x);
+        } else {
+            result.add(false);
+            result.add(x);
+        }
+        return result;
+    }
+    
+    /**
+     * Récupération du nombre de personnages
+     * 
+     * @param anneeInserted
+     * @return boolean
+     * @throws java.text.ParseException
+     */
+    public boolean isBefore(String anneeInserted) throws ParseException{
+        DateFormat format = new SimpleDateFormat("YYYY", Locale.FRANCE);
+        Date anneeDeSortieToDate = format.parse(this.anneeDeSortie);
+        Date anneeInsertedToDate = format.parse(anneeInserted);
+        return anneeDeSortieToDate.compareTo(anneeInsertedToDate) < 0;
+    }
+    
+     /**
+     * Triage des acteurs de la collection
+     * 
+     * @return ArrayList
+     */
+    public ArrayList tri(){
+        ArrayList acteurs = null;
+        ArrayList<Acteur> acteursTries = new ArrayList();
+        if(this.acteurs!=null && !this.acteurs.isEmpty() && this.acteurs.size()>0){
+            /*
+            ListIterator acteursListIterator = this.acteurs.listIterator();
+            while(acteursListIterator.hasNext()){
+                acteurs.add(acteursListIterator.next());
+            }
+            */
+            acteurs.addAll(this.acteurs);
+            Collections.sort(acteurs);
+            acteursTries.addAll(acteurs);
+            Console.print("\n[Trie effectué]");
+        } else{
+            acteursTries = null;
+            Console.print("\n[Trie non effectué]");
+        }
+        return acteursTries;
     }
 
     // The methods of basic getter below.
-    public String getTitre() {
-        return titre;
-    }
+    public String getTitre() { return titre; }
     public String getAnneeDeSortie() { return anneeDeSortie; }
-    public String getNumeroEpisode() { return numeroEpisode; }
+    public int getNumeroEpisode() { return numeroEpisode; }
     public double getCout() { return cout; }
     public double getRecette() { return recette; }
+    public ArrayList<Acteur> getActeurs() { return acteurs; }
 
     // The methods of basic setter below.
     public void setTitre(String titre) { this.titre = titre; }
     public void setAnneeDeSortie(String anneeDeSortie) { this.anneeDeSortie = anneeDeSortie; }
-    public void setNumeroEpisode(String numeroEpisode) { this.numeroEpisode = numeroEpisode; }
+    public void setNumeroEpisode(int numeroEpisode) { this.numeroEpisode = numeroEpisode; }
     public void setCout(double cout) { this.cout = cout;}
     public void setRecette(double recette) { this.recette = recette; }
+    public void setActeurs(ArrayList<Acteur> acteurs) { this.acteurs = acteurs; }
     
     @Override
     public String toString(){
-        return "Film : "+this.titre+" "+this.anneeDeSortie+" "+this.numeroEpisode+" "+this.cout+" "+this.recette;
+        return "[Film]"+
+            "\n- titre du film : "+this.getTitre()
+            +"\n- année de sortie du film : "+this.getAnneeDeSortie()
+            +"\n- numéro de l'épisode du film : "+this.getNumeroEpisode()
+            +"\n- coût du film : "+this.getCout()
+            +"\n- recette du film : "+this.getRecette()
+            +"\n- bénéfice : "+this.calculBenefice()
+            +"\n- nb acteurs : "+this.getNombreActeurs()
+            +"\n- nb personnages : "+this.getNombrePersonnages();
     }
 }

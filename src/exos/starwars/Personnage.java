@@ -66,6 +66,8 @@ public class Personnage {
     
     @Override
     public String toString(){
-        return "Personnage : "+this.nom+" "+this.prenom;
+        return "[Personnage]\n"
+            +"\n- nom de l'acteur : "+this.getNom()
+            +"\n- prénom de l'acteur : "+this.getPrenom();
     }
 }
