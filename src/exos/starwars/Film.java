@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.ListIterator;
 import java.util.Locale;
@@ -189,18 +190,13 @@ public class Film {
      * @return ArrayList
      */
     public ArrayList tri(){
-        ArrayList acteurs = null;
         ArrayList<Acteur> acteursTries = new ArrayList();
         if(this.acteurs!=null && !this.acteurs.isEmpty() && this.acteurs.size()>0){
-            /*
-            ListIterator acteursListIterator = this.acteurs.listIterator();
-            while(acteursListIterator.hasNext()){
-                acteurs.add(acteursListIterator.next());
-            }
-            */
-            acteurs.addAll(this.acteurs);
-            Collections.sort(acteurs);
-            acteursTries.addAll(acteurs);
+            Collections.sort(this.acteurs, new Comparator<Acteur>() {
+                @Override
+                public int compare(Acteur acteur1, Acteur acteur2){ return  acteur1.getNom().compareTo(acteur2.getNom()); }
+            });
+            acteursTries.addAll(this.acteurs);
             Console.print("\n[Trie effectué]");
         } else{
             acteursTries = null;
