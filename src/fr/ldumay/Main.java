@@ -19,6 +19,7 @@ import core.tools.MesDates;
 import core.tools.Planning;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Stack;
 
 /**
  *
@@ -142,6 +143,19 @@ public class Main {
         if(listeChaineeIterator.hasNext()){
             Console.print("-> toString fo next element : "+listeChaineeIterator.next());
         }
+        
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        
+        Console.print("\nStack : ");
+        //-
+        Stack listeLIFO = new Stack();
+        listeLIFO.push("Vélo");
+        listeLIFO.push("Voiture");
+        listeLIFO.push("Bus");
+        for(Object element : listeLIFO){
+            Console.print("- "+element);
+        }
+        Console.print("Peek element : "+listeChainee.peek());
 
     }
     
