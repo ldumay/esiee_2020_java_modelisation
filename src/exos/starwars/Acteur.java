@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core.tools;
+package exos.starwars;
+
 
 /**
  *
@@ -11,7 +12,7 @@ package core.tools;
  */
 
 /**
- * Class - Personnage
+ * Class - Acteur
  * <br>
  * <br>private String nom;
  * <br>private String prenom;
@@ -32,7 +33,7 @@ package core.tools;
  * <br>
  * <br>End.
  */
-public class Personnage {
+public class Acteur {
     
     private String nom;
     private String prenom;
@@ -42,7 +43,7 @@ public class Personnage {
      * 
      * Personnage()
      */
-    public Personnage(){}
+    public Acteur(){}
     
     /**
      * Constructor
@@ -51,7 +52,7 @@ public class Personnage {
      * @param nom
      * @param prenom
      */
-    public Personnage(String nom, String prenom){
+    public Acteur(String nom, String prenom){
         this.nom = nom;
         this.prenom = prenom;
     }
@@ -66,6 +67,6 @@ public class Personnage {
     
     @Override
     public String toString(){
-        return "Personnage : "+this.nom+" "+this.prenom;
+        return "Acteur : "+this.nom+" "+this.prenom;
     }
 }
