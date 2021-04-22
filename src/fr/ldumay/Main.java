@@ -17,7 +17,8 @@ import core.tools.Calcul;
 import core.tools.Fichiers;
 import core.tools.MesDates;
 import core.tools.Planning;
-import java.io.IOException;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  *
@@ -28,7 +29,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         
         int x = 1;
         
@@ -49,6 +50,8 @@ public class Main {
         Console.print("Note du visiteur : "+v2.getNoteDuVisteur());
         
         Console.print("\ncharAt : "+v2.nomDuVisiteur.charAt(1));
+        
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
         Integer a = 10;
         String b = a.toString();// integer a to string b
@@ -73,6 +76,8 @@ public class Main {
         Console.print("\n"+d1.dateConvert("22/04/2021", null, "US"));
         */
         
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        
         Planning p1 = new Planning();
         Console.print(p1.toString());
         Visite vA = new Visite("Georges DuPont", "1992/10/03", 20);
@@ -84,6 +89,8 @@ public class Main {
         p1.addVisite(vC);
         p1.addVisite(vD);
         Console.print(p1.toString());
+        
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
         Calcul calcul = new Calcul();
         calcul.setVarA(21);
@@ -108,6 +115,34 @@ public class Main {
         Fichiers fichier = new Fichiers();
         Console.print(fichier.getContentFile());
         
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        
+        Console.print("\nListes Chaînées & itération : ");
+        //-
+        LinkedList<String> listeChainee = new LinkedList();
+        listeChainee.add("Brian");
+        listeChainee.addLast("Edouard");
+        listeChainee.add("Paul");
+        listeChainee.addFirst("Pierre");
+        for(String element : listeChainee){
+            Console.print("- "+element);
+        }
+        Console.print("listechainee - size : "+listeChainee.size());
+        //-
+        listeChainee.clear();
+        listeChainee.add("Georges");
+        listeChainee.add("Claire");
+        listeChainee.addFirst("Pierre");
+        for(String element : listeChainee){
+            Console.print("- "+element);
+        }
+        Console.print("listechainee - size : "+listeChainee.size());
+        //-
+        ListIterator<String> listeChaineeIterator = listeChainee.listIterator();
+        if(listeChaineeIterator.hasNext()){
+            Console.print("-> toString fo next element : "+listeChaineeIterator.next());
+        }
+
     }
     
 }
