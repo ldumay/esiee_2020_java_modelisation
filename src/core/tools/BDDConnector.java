@@ -251,10 +251,10 @@ public class BDDConnector {
         try {
             Class.forName(this.strClassName);
             Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
-            Statement datasAdd = (Statement) conn.createStatement();
+            Statement datasUpdate = (Statement) conn.createStatement();
             String sql = "UPDATE `"+tableBDD+"` SET `titre`=\""+nouveauTitre+"\" WHERE id="+datasId+";";
             Console.print(sql);
-            datasAdd.executeUpdate(sql);
+            datasUpdate.executeUpdate(sql);
             conn.close();
             Console.print("->Update des datas dans la ["+tableBDD+"] OK");
         } catch (ClassNotFoundException e) {
@@ -277,10 +277,10 @@ public class BDDConnector {
         try {
             Class.forName(this.strClassName);
             Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
-            Statement datasAdd = (Statement) conn.createStatement();
+            Statement datasDelete = (Statement) conn.createStatement();
             String sql = "DELETE FROM `"+tableBDD+"` WHERE id="+datasId+";";
             Console.print(sql);
-            datasAdd.executeUpdate(sql);
+            datasDelete.executeUpdate(sql);
             conn.close();
             Console.print("->Suppression de la ligne "+datasId+" dans la table ["+tableBDD+"] OK");
         } catch (ClassNotFoundException e) {
