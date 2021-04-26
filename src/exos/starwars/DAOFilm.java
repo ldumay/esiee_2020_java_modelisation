@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -71,7 +72,7 @@ public class DAOFilm {
     private Connection conn;
     
     /**
-     * Requète d'insertion dans une base de donnée
+     * Constructor
      * 
      * DAOFilm()
      */
@@ -93,11 +94,11 @@ public class DAOFilm {
     /**
      * Requète de lecture des films dans une base de donnée
      * 
-     * listReading(String typeElement, String sqlQuery)
+     * listReadingConsole(String sqlQuery)
      * @param sqlQuery
      * @throws java.sql.SQLException
      */
-    public void listReading(String sqlQuery) throws SQLException{
+    public void listReadingConsole(String sqlQuery) throws SQLException{
         try{
             ResultSet datas = this.statement.executeQuery(sqlQuery);
             Console.print("->Sélection des datas OK");
@@ -114,6 +115,33 @@ public class DAOFilm {
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète de lecture des films dans une base de donnée
+     * 
+     * listReadingArrayList(String sqlQuery)
+     * @param sqlQuery
+     * @return 
+     * @throws java.sql.SQLException
+     */
+    public ArrayList listReadingArrayList(String sqlQuery) throws SQLException{
+        try{
+            ResultSet datas = this.statement.executeQuery(sqlQuery);
+            ArrayList resultDatas = new ArrayList();
+                while (datas.next()) {
+                    Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
+                            datas.getInt(4), datas.getDouble(5), datas.getDouble(6));
+                    resultDatas.add(newFilm);
+                }
+                conn.close();
+                Console.print("->Sélection des datas OK");
+                return resultDatas;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return null;
         }
     }
     
@@ -159,6 +187,26 @@ public class DAOFilm {
             Console.print(sql);
             statement.executeUpdate(sql);
             Console.print("->Suppression de la ligne "+datasId+" dans la table ["+tableBDD+"] OK");
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète de suppression d'un film dans une base de donnée
+     * 
+     * datasDelete(String table, int datasId)
+     * @param tableBDD
+     * @param film
+     * @throws java.sql.SQLException
+     */
+    public void deleteFilm(String tableBDD, Film film) throws SQLException{
+        try{
+            String sql = "DELETE FROM "+tableBDD+" WHERE id="+film.getId()+";";
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Suppression de la ligne "+film.getId()+" dans la table ["+tableBDD+"] OK");
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
