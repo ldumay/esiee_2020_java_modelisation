@@ -11,7 +11,6 @@ import core.abstracts.Woodwind;
 import core.tools.BDDConnector;
 import core.tools.Visite;
 import fr.ldumay.others.DateConversion;
-import fr.ldumay.others.Console;
 import java.util.Date;
 import java.util.Locale;
 import core.tools.Calcul;
@@ -21,6 +20,7 @@ import core.tools.Planning;
 import exos.starwars.Acteur;
 import exos.starwars.Film;
 import exos.starwars.Personnage;
+import static fr.ldumay.others.Console.print;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
@@ -47,21 +48,21 @@ public class Main {
         
         Visite v1 = new Visite();
         //-
-        Console.print("\nVisite "+x+" : "+v1);
-        Console.print("Nom du visiteur : "+v1.nomDuVisiteur);
-        Console.print("Date de naissance du visiteur : "+v1.dateDeNaissanceDuVisiteur);
-        Console.print("Note du visiteur : "+v1.noteDuVisteur);
+        print("\nVisite "+x+" : "+v1);
+        print("Nom du visiteur : "+v1.nomDuVisiteur);
+        print("Date de naissance du visiteur : "+v1.dateDeNaissanceDuVisiteur);
+        print("Note du visiteur : "+v1.noteDuVisteur);
         
         x++;
         
         Visite v2 = new Visite("Georges","1990-10-10",15);
         //-
-        Console.print("\nVisite "+x+" : "+v2);
-        Console.print("Nom du visiteur : "+v2.getNomDuVisiteur());
-        Console.print("Date de naissance du visiteur : "+v2.getDateDeNaissanceDuVisiteur());
-        Console.print("Note du visiteur : "+v2.getNoteDuVisteur());
+        print("\nVisite "+x+" : "+v2);
+        print("Nom du visiteur : "+v2.getNomDuVisiteur());
+        print("Date de naissance du visiteur : "+v2.getDateDeNaissanceDuVisiteur());
+        print("Note du visiteur : "+v2.getNoteDuVisteur());
         
-        Console.print("\ncharAt : "+v2.nomDuVisiteur.charAt(1));
+        print("\ncharAt : "+v2.nomDuVisiteur.charAt(1));
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
@@ -75,23 +76,23 @@ public class Main {
         MesDates mesDates = new MesDates();
         String date2 = mesDates.dateUStoFR(date1);
         String date3 = mesDates.dateFRtoUS(date2);
-        Console.print("\ndate start : "+date1);
-        Console.print("dateUStoFR : "+date2);
-        Console.print("dateFRtoUS : "+date3);
+        print("\ndate start : "+date1);
+        print("dateUStoFR : "+date2);
+        print("dateFRtoUS : "+date3);
         //-
         DateConversion dateConversion = new DateConversion();
-        Console.print("\nconvert to US : "+dateConversion.dateConvertTypeDate(new Date(), Locale.FRANCE));
-        Console.print("convert to FR : "+dateConversion.dateConvertTypeDate(new Date(), Locale.ENGLISH));
+        print("\nconvert to US : "+dateConversion.dateConvertTypeDate(new Date(), Locale.FRANCE));
+        print("convert to FR : "+dateConversion.dateConvertTypeDate(new Date(), Locale.ENGLISH));
         
         /*
         DateConversion d1 = new DateConversion();
-        Console.print("\n"+d1.dateConvert("22/04/2021", null, "US"));
+        print("\n"+d1.dateConvert("22/04/2021", null, "US"));
         */
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
         Planning p1 = new Planning();
-        Console.print(p1.toString());
+        print(p1.toString());
         Visite vA = new Visite("Georges DuPont", "1992/10/03", 20);
         Visite vB = new Visite("Georges DuPont", "2002/03/04", 15);
         Visite vC = new Visite("Georges DuPont", "1992/11/14", 14);
@@ -100,36 +101,36 @@ public class Main {
         p1.addVisite(vB);
         p1.addVisite(vC);
         p1.addVisite(vD);
-        Console.print(p1.toString());
+        print(p1.toString());
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
         Calcul calcul = new Calcul();
         calcul.setVarA(21);
         calcul.setVarB(35);
-        Console.print("\nA & B : "+calcul.toString());
-        Console.print("addition : "+calcul.addition());
-        Console.print("soustraction : "+calcul.soustraction());
-        Console.print("multiplication : "+calcul.multiplication());
-        Console.print("division : "+calcul.division());
+        print("\nA & B : "+calcul.toString());
+        print("addition : "+calcul.addition());
+        print("soustraction : "+calcul.soustraction());
+        print("multiplication : "+calcul.multiplication());
+        print("division : "+calcul.division());
         
-        Console.print("\nWind : ");
+        print("\nWind : ");
         Wind wind = new Wind();
         wind.play();
-        Console.print("Percussion : ");
+        print("Percussion : ");
         Percussion percussion = new Percussion();
         percussion.play();
-        Console.print("Woodwind : ");
+        print("Woodwind : ");
         Woodwind woodwind = new Woodwind();
         woodwind.play();
         
-        Console.print("\nFichier :");
+        print("\nFichier :");
         Fichiers fichier = new Fichiers();
-        Console.print(fichier.getContentFile());
+        print(fichier.getContentFile());
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
-        Console.print("\nListes Chaînées & itération : ");
+        print("\nListes Chaînées & itération : ");
         //-
         LinkedList<String> listeChainee = new LinkedList();
         listeChainee.add("Brian");
@@ -137,40 +138,40 @@ public class Main {
         listeChainee.add("Paul");
         listeChainee.addFirst("Pierre");
         for(String element : listeChainee){
-            Console.print("- "+element);
+            print("- "+element);
         }
-        Console.print("listechainee - size : "+listeChainee.size());
+        print("listechainee - size : "+listeChainee.size());
         //-
         listeChainee.clear();
         listeChainee.add("Georges");
         listeChainee.add("Claire");
         listeChainee.addFirst("Pierre");
         for(String element : listeChainee){
-            Console.print("- "+element);
+            print("- "+element);
         }
-        Console.print("listechainee - size : "+listeChainee.size());
+        print("listechainee - size : "+listeChainee.size());
         //-
         ListIterator<String> listeChaineeIterator = listeChainee.listIterator();
         if(listeChaineeIterator.hasNext()){
-            Console.print("-> toString fo next element : "+listeChaineeIterator.next());
+            print("-> toString fo next element : "+listeChaineeIterator.next());
         }
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
-        Console.print("\nStack : ");
+        print("\nStack : ");
         //-
         Stack listeLIFO = new Stack();
         listeLIFO.push("Vélo");
         listeLIFO.push("Voiture");
         listeLIFO.push("Bus");
         for(Object element : listeLIFO){
-            Console.print("- "+element);
+            print("- "+element);
         }
-        Console.print("Peek element : "+listeChainee.peek());
+        print("Peek element : "+listeChainee.peek());
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
-        Console.print("\nStar wars : ");
+        print("\nStar wars : ");
         
         Film filmA = new Film(0, "Star wars I","1977", 1, 1234.123, 6443.123);
         Film filmB = new Film(0, "Star wars II","1980", 2, 1234.123, 6443.123);
@@ -185,7 +186,7 @@ public class Main {
         
         int y = 1;
         for(Film film : films){
-            Console.print("[Film "+y+"]"+film.toString());
+            print("[Film "+y+"]"+film.toString());
             y++;
         }
         
@@ -213,22 +214,22 @@ public class Main {
         personnagesActeurA.add(persoA);
         personnagesActeurA.add(persoB);
         acteur1.setDuetPersonnages(personnagesActeurA);
-        //Console.print("\n[Acteur 1] "+acteur1.toString());
+        //print("\n[Acteur 1] "+acteur1.toString());
         ArrayList<Personnage> personnagesActeurB = new ArrayList(1);
         personnagesActeurB.add(persoC);
         personnagesActeurB.add(persoD);
         acteur2.setDuetPersonnages(personnagesActeurB);
-        //Console.print("\n[Acteur 2] "+acteur2.toString());
+        //print("\n[Acteur 2] "+acteur2.toString());
         ArrayList<Personnage> personnagesActeurC = new ArrayList(1);
         personnagesActeurC.add(persoC);
         personnagesActeurC.add(persoD);
         acteur3.setDuetPersonnages(personnagesActeurC);
-        //Console.print("\n[Acteur 3] "+acteur3.toString());
+        //print("\n[Acteur 3] "+acteur3.toString());
         ArrayList<Personnage> personnagesActeurD = new ArrayList(1);
         personnagesActeurD.add(persoC);
         personnagesActeurD.add(persoD);
         acteur4.setDuetPersonnages(personnagesActeurD);
-        //Console.print("\n[Acteur 4] "+acteur4.toString());
+        //print("\n[Acteur 4] "+acteur4.toString());
         
         ArrayList<Acteur> acteursList1 = new ArrayList();
         acteursList1.add(acteur1);
@@ -236,16 +237,16 @@ public class Main {
         acteursList1.add(acteur3);
         acteursList1.add(acteur4);
         filmA.setActeurs(acteursList1);
-        Console.print("\n"+filmA.toString());
+        print("\n"+filmA.toString());
         
         boolean isBefore = filmA.isBefore("2020");
-        Console.print("\n isBefore : "+isBefore);
+        print("\n isBefore : "+isBefore);
         
-        Console.print("\n"+filmA.getActeurs());
+        print("\n"+filmA.getActeurs());
         filmA.tri();
-        Console.print("\n"+filmA.getActeurs());
+        print("\n"+filmA.getActeurs());
         
-        Console.print("\nHashMap Dico");
+        print("\nHashMap Dico");
         HashMap<String,Film> dicoFilms = new HashMap();
         dicoFilms.put(filmA.getAnneeDeSortie(), filmA);
         dicoFilms.put(filmB.getAnneeDeSortie(), filmB);
@@ -257,10 +258,10 @@ public class Main {
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
-        Console.print("\nStar wars [Part 2] : ");
+        print("\nStar wars [Part 2] : ");
         
         BDDConnector connect = new BDDConnector();
-        Console.print("\nAcces : ");
+        print("\nAcces : ");
         connect.datasSelect(null, "SELECT * FROM Acces");
         //-
         Film filmE = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
@@ -269,20 +270,23 @@ public class Main {
         Film filmG = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
         connect.datasInsert("Film", "Films", filmG);
         //-
-        connect.datasDelete("Films", 5);
+        Scanner scan = new Scanner(System.in);
+        print("- (id) id du film à supprimer : ");
+        int idFilmSuppr = Integer.parseInt(scan.nextLine());
+        connect.datasDelete("Films", idFilmSuppr);
         //-
         connect.datasInsert("Film", "Films", films);
-        Console.print("\nFilms : ");
+        print("\nFilms : ");
         ArrayList filmsInBDD = connect.datasSelect("Film", "SELECT * FROM Films");
         for (Iterator it = filmsInBDD.iterator(); it.hasNext();) {
             Film film = (Film) it.next();
-            Console.print(film.toString());
+            print(film.toString());
         }
         
         /*
-        Console.print("\nActeurs : ");
+        print("\nActeurs : ");
         connect.datasSelect("nActeur", "SELECT * FROM Acteurs");
-        Console.print("\nPersonnages : ");
+        print("\nPersonnages : ");
         connect.datasSelect("Personnage", "SELECT * FROM Personnages");
          */
         
@@ -297,7 +301,7 @@ public class Main {
             Film filmValue = (Film) film.getValue();
             String filmTitre = filmValue.getTitre();
             String filmBenefice = filmValue.calculBenefice().get(1).toString();
-            Console.print(""+filmKey+" - "+filmTitre+" - "+filmBenefice);
+            print(""+filmKey+" - "+filmTitre+" - "+filmBenefice);
         }
     }
     

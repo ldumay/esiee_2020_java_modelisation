@@ -25,13 +25,23 @@ import java.util.Iterator;
  <br>
  * <br>Constructor :
  * <br>- BDDConnector()
- <br>
+ * <br>- BDDConnector(String bddName, String bddLogin, String bddPassword, String bddIP, String bddPort)
+ * <br>
  * <br>Functions :
- * <br>- Console.datasInsert(data)
+ * <br>- BDDConnector.datasInsert(String sqlQuery)
  * <br> |--> void
  * <br>
- * <br>- Console.datasSelect()
- * <br>  |--> void
+ * <br>- BDDConnector.datasInsert(String typeElement, String tableBDD, ArrayList elementArrayList)
+ * <br> |--> void
+ * <br>
+ * <br>- BDDConnector.datasInsert(String typeElement, String tableBDD, Film film)
+ * <br> |--> void
+ * <br>
+ * <br>- BDDConnectordatasSelect(String typeElement, String sqlQuery)
+ * <br> |--> ArrayList
+ * <br>
+ * <br>- BDDConnector.datasDelete(String table, int datasId)
+ * <br> |--> void
  * <br>
  * <br>End.
  */
@@ -183,7 +193,7 @@ public class BDDConnector {
     /**
      * Requète de lecture dans une base de donnée
      * 
-     * datasSelect()
+     * datasSelect(String typeElement, String sqlQuery)
      * @param typeElement
      * @param sqlQuery
      * @return resultDatas;
@@ -226,6 +236,13 @@ public class BDDConnector {
         }
     }
     
+    /**
+     * Requète de suppression d'un film dans une base de donnée
+     * 
+     * datasDelete(String table, int datasId)
+     * @param table
+     * @param datasId
+     */
     public void datasDelete(String table, int datasId){
         try {
             Class.forName(this.strClassName);
