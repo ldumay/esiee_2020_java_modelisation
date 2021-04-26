@@ -41,7 +41,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ParseException, SQLException {
+    public static void main(String[] args) throws ParseException, SQLException, ClassNotFoundException {
         
         int x = 1;
         
@@ -172,9 +172,9 @@ public class Main {
         
         Console.print("\nStar wars : ");
         
-        Film filmA = new Film("Star wars I","1977", 1, 1234.123, 6443.123);
-        Film filmB = new Film("Star wars II","1980", 2, 1234.123, 6443.123);
-        Film filmC = new Film("Star wars III","1983", 3, 1234.123, 6443.123);
+        Film filmA = new Film(0, "Star wars I","1977", 1, 1234.123, 6443.123);
+        Film filmB = new Film(0, "Star wars II","1980", 2, 1234.123, 6443.123);
+        Film filmC = new Film(0, "Star wars III","1983", 3, 1234.123, 6443.123);
         //Film filmD = new Film(true);
         
         ArrayList<Film> films = new ArrayList();
@@ -189,10 +189,10 @@ public class Main {
             y++;
         }
         
-        Personnage persoA = new Personnage("Skywalker", "Anakin");
-        Personnage persoB = new Personnage("Skywalker", "Luke");
-        Personnage persoC = new Personnage("Skywalker", "Shmi");
-        Personnage persoD = new Personnage("Skywalker", "Ben");
+        Personnage persoA = new Personnage(0, "Skywalker", "Anakin");
+        Personnage persoB = new Personnage(0, "Skywalker", "Luke");
+        Personnage persoC = new Personnage(0, "Skywalker", "Shmi");
+        Personnage persoD = new Personnage(0, "Skywalker", "Ben");
         /*
         Personnage persoE = new Personnage("Skywalker", "Nat");
         Personnage persoF = new Personnage("Skywalker", "Kol");
@@ -204,10 +204,10 @@ public class Main {
         Personnage persoL = new Personnage("Solo", "Jaina");
         */
         
-        Acteur acteur1 = new Acteur("Ford", "Harrison");
-        Acteur acteur2 = new Acteur("Hamill", "Mark");
-        Acteur acteur3 = new Acteur("Fisher", "Carrie");
-        Acteur acteur4 = new Acteur("Guinness", "Alec");
+        Acteur acteur1 = new Acteur(0, "Ford", "Harrison");
+        Acteur acteur2 = new Acteur(0, "Hamill", "Mark");
+        Acteur acteur3 = new Acteur(0, "Fisher", "Carrie");
+        Acteur acteur4 = new Acteur(0, "Guinness", "Alec");
         
         ArrayList<Personnage> personnagesActeurA = new ArrayList(1);
         personnagesActeurA.add(persoA);
@@ -257,11 +257,34 @@ public class Main {
         
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         
-        Console.print("\nStar wars [PArt 2] : ");
+        Console.print("\nStar wars [Part 2] : ");
         
         BDDConnector connect = new BDDConnector();
-        connect.datasInsert();
-        connect.datasSelect();
+        Console.print("\nAcces : ");
+        connect.datasSelect(null, "SELECT * FROM Acces");
+        //-
+        Film filmE = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
+        connect.datasInsert("Film", "Films", filmE);
+        //-
+        Film filmG = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
+        connect.datasInsert("Film", "Films", filmG);
+        //-
+        connect.datasDelete("Films", 5);
+        //-
+        connect.datasInsert("Film", "Films", films);
+        Console.print("\nFilms : ");
+        ArrayList filmsInBDD = connect.datasSelect("Film", "SELECT * FROM Films");
+        for (Iterator it = filmsInBDD.iterator(); it.hasNext();) {
+            Film film = (Film) it.next();
+            Console.print(film.toString());
+        }
+        
+        /*
+        Console.print("\nActeurs : ");
+        connect.datasSelect("nActeur", "SELECT * FROM Acteurs");
+        Console.print("\nPersonnages : ");
+        connect.datasSelect("Personnage", "SELECT * FROM Personnages");
+         */
         
     }
     

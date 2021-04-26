@@ -25,11 +25,12 @@ import java.util.Scanner;
 /**
  * Class - Film
  * <br>
- * <br>private String titre;
- * <br>private String anneeDeSortie;
- * <br>private String numeroEpisode;
- * <br>private String cout;
- * <br>private String Recette;
+ * <br>private int id
+ * <br>private String titre
+ * <br>private String anneeDeSortie
+ * <br>private String numeroEpisode
+ * <br>private String cout
+ * <br>private String Recette
  * <br>
  * <br>Constructor :
  * <br>- Film()
@@ -60,6 +61,7 @@ import java.util.Scanner;
  */
 public class Film {
 
+    private int id;
     private String titre;
     private String anneeDeSortie;
     private int numeroEpisode;
@@ -106,6 +108,7 @@ public class Film {
             double recetteFilm = scan.nextDouble();
             this.recette = recetteFilm;
             //-
+            this.id = 0;
             this.acteurs = new ArrayList();
             //-
             print("[Nouveau film enregistré]");
@@ -116,13 +119,15 @@ public class Film {
      * Constructor
      * 
      * Film(String titre, String anneeDeSortie, String numeroEpisode, String cout, String recette)
+     * @param id
      * @param titre
      * @param anneeDeSortie
      * @param numeroEpisode
      * @param cout
      * @param recette
      */
-    public Film(String titre, String anneeDeSortie, int numeroEpisode, double cout, double recette) {
+    public Film(int id, String titre, String anneeDeSortie, int numeroEpisode, double cout, double recette) {
+        this.id = id;
         this.titre = titre;
         this.anneeDeSortie = anneeDeSortie;
         this.numeroEpisode = numeroEpisode;
@@ -205,6 +210,7 @@ public class Film {
     }
 
     // The methods of basic getter below.
+    public int getId(){ return this.id; }
     public String getTitre() { return titre; }
     public String getAnneeDeSortie() { return anneeDeSortie; }
     public int getNumeroEpisode() { return numeroEpisode; }
@@ -213,6 +219,7 @@ public class Film {
     public ArrayList<Acteur> getActeurs() { return acteurs; }
 
     // The methods of basic setter below.
+    public void setId(int id){ this.id = id; }
     public void setTitre(String titre) { this.titre = titre; }
     public void setAnneeDeSortie(String anneeDeSortie) { this.anneeDeSortie = anneeDeSortie; }
     public void setNumeroEpisode(int numeroEpisode) { this.numeroEpisode = numeroEpisode; }
@@ -223,7 +230,8 @@ public class Film {
     @Override
     public String toString(){
         return "[Film]"+
-            "\n- titre du film : "+this.getTitre()
+            "\n"+this.getId()
+            +"\n- titre du film : "+this.getTitre()
             +"\n- année de sortie du film : "+this.getAnneeDeSortie()
             +"\n- numéro de l'épisode du film : "+this.getNumeroEpisode()
             +"\n- coût du film : "+this.getCout()

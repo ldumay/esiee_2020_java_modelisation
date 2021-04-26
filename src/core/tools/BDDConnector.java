@@ -5,11 +5,15 @@
  */
 package core.tools;
 
+import exos.starwars.Film;
+import fr.ldumay.others.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -70,14 +74,102 @@ public class BDDConnector {
      * Requète d'insertion dans une base de donnée
      * 
      * SystemPrint()
+     * @param sqlQuery
      * @throws java.sql.SQLException
      */
     public void datasInsert(String sqlQuery) throws SQLException {
         try {
             Class.forName(this.strClassName);
             Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
-            Statement stAddUser = (Statement) conn.createStatement();
-            stAddUser.executeUpdate(sqlQuery);
+            Statement datasAdd = (Statement) conn.createStatement();
+            datasAdd.executeUpdate(sqlQuery);
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver non chargé !");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète d'insertion dans une base de donnée
+     * 
+     * SystemPrint()
+     * @param typeElement
+     * @param tableBDD
+     * @param elementArrayList
+     * @throws java.sql.SQLException
+     */
+    public void datasInsert(String typeElement, String tableBDD, ArrayList elementArrayList) throws SQLException {
+        try {
+            Class.forName(this.strClassName);
+            Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
+            String sql = "INSERT INTO "+tableBDD+" (`titre`, `anneeDeSortie`, `numeroEpisode`, `cout`, `recette`) VALUES ";
+            if("Film".equals(typeElement)){
+                int x = 1;
+                String sqlElements = "";
+                for (Iterator it = elementArrayList.iterator(); it.hasNext();) {
+                    Film film = (Film) it.next();
+                    sqlElements += "("
+                            +"\""+film.getTitre()+"\""+","
+                            +"\""+film.getAnneeDeSortie()+"\""+","
+                            +film.getNumeroEpisode()+","
+                            +film.getCout()+","
+                            +film.getRecette()
+                            +")";
+                    if(x<elementArrayList.size()){ sqlElements += ","; }
+                    x++;
+                }
+                sql += sqlElements;
+                Console.print(sql);
+                Statement datasAdd = (Statement) conn.createStatement();
+                datasAdd.executeUpdate(sql);
+                Console.print("->Insertion des datas dans la ["+tableBDD+"] OK");
+            } else {
+                Console.print("Type d'élément non reconnu.");
+            }
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver non chargé !");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète d'insertion dans une base de donnée
+     * 
+     * SystemPrint()
+     * @param typeElement
+     * @param tableBDD
+     * @param film
+     * @throws java.sql.SQLException
+     */
+    public void datasInsert(String typeElement, String tableBDD, Film film) throws SQLException {
+        try {
+            Class.forName(this.strClassName);
+            Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
+            String sql = "INSERT INTO "+tableBDD+" (`titre`, `anneeDeSortie`, `numeroEpisode`, `cout`, `recette`) VALUES ";
+            if("Film".equals(typeElement)){
+                String sqlElements = "("
+                                +"\""+film.getTitre()+"\""+","
+                                +"\""+film.getAnneeDeSortie()+"\""+","
+                                +film.getNumeroEpisode()+","
+                                +film.getCout()+","
+                                +film.getRecette()
+                                +")";
+                sql += sqlElements;
+                Console.print(sql);
+                Statement datasAdd = (Statement) conn.createStatement();
+                datasAdd.executeUpdate(sql);
+                Console.print("->Insertion des datas dans la ["+tableBDD+"] OK");
+            } else {
+                Console.print("Type d'élément non reconnu.");
+            }
             conn.close();
         } catch (ClassNotFoundException e) {
             System.err.println("Driver non chargé !");
@@ -92,19 +184,54 @@ public class BDDConnector {
      * Requète de lecture dans une base de donnée
      * 
      * datasSelect()
+     * @param typeElement
+     * @param sqlQuery
+     * @return resultDatas;
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
-    public void datasSelect() {
+    public ArrayList datasSelect(String typeElement, String sqlQuery) throws ClassNotFoundException, SQLException {
         try {
             Class.forName(this.strClassName);
             Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
-            Statement stUsers = (Statement) conn.createStatement();
-            ResultSet rsUsers = stUsers.executeQuery("select * from Acces");
-            while (rsUsers.next()) {
-                System.out.print("Id[" + rsUsers.getInt(1) + "]"
-                        + rsUsers.getString(2)
-                        + "[" + rsUsers.getString("statut") + "] "
-                        + rsUsers.getInt("age") + "\n");
+            Statement datasSelect = (Statement) conn.createStatement();
+            ResultSet datas = datasSelect.executeQuery(sqlQuery);
+            if("Film".equals(typeElement)){
+                ArrayList resultDatas = new ArrayList();
+                while (datas.next()) {
+                    Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
+                            datas.getInt(4), datas.getDouble(5), datas.getDouble(6));
+                    resultDatas.add(newFilm);
+                }
+                conn.close();
+                return resultDatas;
+            } else {
+                while (datas.next()) {
+                    Console.print("Id["+datas.getInt(1)+"]"
+                        +" - titre : "+datas.getString(2)
+                        +" - statut : "+datas.getString("statut")
+                        +" - age : "+datas.getInt("age"));
+                }
+                conn.close();
+                return null;
             }
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver non chargé !");
+            e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public void datasDelete(String table, int datasId){
+        try {
+            Class.forName(this.strClassName);
+            Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
+            Statement datasAdd = (Statement) conn.createStatement();
+            datasAdd.executeUpdate("DELETE FROM `"+table+"` WHERE id="+datasId+";");
             conn.close();
         } catch (ClassNotFoundException e) {
             System.err.println("Driver non chargé !");
