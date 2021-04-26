@@ -260,7 +260,6 @@ public class Main {
         Console.print("\nStar wars [PArt 2] : ");
         
         BDDConnector connect = new BDDConnector();
-        Console.print(connect.bddUrl);
         connect.datasInsert();
         connect.datasSelect();
         

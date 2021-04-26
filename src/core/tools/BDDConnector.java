@@ -39,7 +39,7 @@ public class BDDConnector {
     private String bddPassword = "root";
     private String bddIP = "localhost";
     private String bddPort = "3306";
-    public String bddUrl = "jdbc:mysql://"+this.bddIP+":"+this.bddPort+"/"+this.bddName;
+    private String bddUrl = "jdbc:mysql://"+this.bddIP+":"+this.bddPort+"/"+this.bddName;
 
     /**
      * Constructor
