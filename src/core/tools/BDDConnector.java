@@ -94,6 +94,7 @@ public class BDDConnector {
             Statement datasAdd = (Statement) conn.createStatement();
             datasAdd.executeUpdate(sqlQuery);
             conn.close();
+            Console.print("->Insertion des datas OK");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver non chargé !");
             e.printStackTrace();
@@ -205,6 +206,7 @@ public class BDDConnector {
             Class.forName(this.strClassName);
             Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
             Statement datasSelect = (Statement) conn.createStatement();
+            Console.print(sqlQuery);
             ResultSet datas = datasSelect.executeQuery(sqlQuery);
             if("Film".equals(typeElement)){
                 ArrayList resultDatas = new ArrayList();
@@ -214,6 +216,7 @@ public class BDDConnector {
                     resultDatas.add(newFilm);
                 }
                 conn.close();
+                Console.print("->Sélection des datas OK");
                 return resultDatas;
             } else {
                 while (datas.next()) {
@@ -237,19 +240,49 @@ public class BDDConnector {
     }
     
     /**
-     * Requète de suppression d'un film dans une base de donnée
+     * Requète de mise à jour d'un film dans une base de donnée
      * 
-     * datasDelete(String table, int datasId)
-     * @param table
+     * datasUpdate(String table, int datasId)
+     * @param tableBDD
      * @param datasId
+     * @param nouveauTitre
      */
-    public void datasDelete(String table, int datasId){
+    public void datasUpdate(String tableBDD, int datasId, String nouveauTitre){
         try {
             Class.forName(this.strClassName);
             Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
             Statement datasAdd = (Statement) conn.createStatement();
-            datasAdd.executeUpdate("DELETE FROM `"+table+"` WHERE id="+datasId+";");
+            String sql = "UPDATE `"+tableBDD+"` SET `titre`=\""+nouveauTitre+"\" WHERE id="+datasId+";";
+            Console.print(sql);
+            datasAdd.executeUpdate(sql);
             conn.close();
+            Console.print("->Update des datas dans la ["+tableBDD+"] OK");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver non chargé !");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète de suppression d'un film dans une base de donnée
+     * 
+     * datasDelete(String table, int datasId)
+     * @param tableBDD
+     * @param datasId
+     */
+    public void datasDelete(String tableBDD, int datasId){
+        try {
+            Class.forName(this.strClassName);
+            Connection conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
+            Statement datasAdd = (Statement) conn.createStatement();
+            String sql = "DELETE FROM `"+tableBDD+"` WHERE id="+datasId+";";
+            Console.print(sql);
+            datasAdd.executeUpdate(sql);
+            conn.close();
+            Console.print("->Suppression de la ligne "+datasId+" dans la table ["+tableBDD+"] OK");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver non chargé !");
             e.printStackTrace();

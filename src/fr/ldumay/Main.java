@@ -270,12 +270,20 @@ public class Main {
         Film filmG = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
         connect.datasInsert("Film", "Films", filmG);
         //-
+        /*
         Scanner scan = new Scanner(System.in);
         print("- (id) id du film à supprimer : ");
         int idFilmSuppr = Integer.parseInt(scan.nextLine());
         connect.datasDelete("Films", idFilmSuppr);
+        */
         //-
         connect.datasInsert("Film", "Films", films);
+        //-
+        connect.datasUpdate("Films", 7, "Jumanji");
+        connect.datasUpdate("Films", 6, "Jumanji 2");
+        connect.datasUpdate("Films", 4, "Harry Potter");
+        connect.datasUpdate("Films", 11, "Godzilla");
+        //-
         print("\nFilms : ");
         ArrayList filmsInBDD = connect.datasSelect("Film", "SELECT * FROM Films");
         for (Iterator it = filmsInBDD.iterator(); it.hasNext();) {
