@@ -8,6 +8,7 @@ package fr.ldumay;
 import core.abstracts.Percussion;
 import core.abstracts.Wind;
 import core.abstracts.Woodwind;
+import core.tools.BDDConnector;
 import core.tools.Visite;
 import fr.ldumay.others.DateConversion;
 import fr.ldumay.others.Console;
@@ -20,7 +21,7 @@ import core.tools.Planning;
 import exos.starwars.Acteur;
 import exos.starwars.Film;
 import exos.starwars.Personnage;
-import static fr.ldumay.others.Console.print;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +29,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
@@ -41,7 +41,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, SQLException {
         
         int x = 1;
         
@@ -253,6 +253,16 @@ public class Main {
         //dicoFilms.put(filmD.getAnneeDeSortie(), filmD);
         
         makeBackUp(dicoFilms);
+        
+        
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        
+        Console.print("\nStar wars [PArt 2] : ");
+        
+        BDDConnector connect = new BDDConnector();
+        Console.print(connect.bddUrl);
+        connect.datasInsert();
+        connect.datasSelect();
         
     }
     
