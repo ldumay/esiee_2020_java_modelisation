@@ -18,6 +18,7 @@ import core.tools.Fichiers;
 import core.tools.MesDates;
 import core.tools.Planning;
 import exos.starwars.Acteur;
+import exos.starwars.DAOFilm;
 import exos.starwars.Film;
 import exos.starwars.Personnage;
 import static fr.ldumay.others.Console.print;
@@ -265,31 +266,38 @@ public class Main {
         connect.datasSelect(null, "SELECT * FROM Acces");
         //-
         Film filmE = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
-        connect.datasInsert("Film", "Films", filmE);
+        connect.datasInsert("Film", "films", filmE);
         //-
         Film filmG = new Film(0, "Batman","1989", 1, 1234.123, 6443.123);
-        connect.datasInsert("Film", "Films", filmG);
+        connect.datasInsert("Film", "films", filmG);
         //-
         /*
         Scanner scan = new Scanner(System.in);
         print("- (id) id du film à supprimer : ");
         int idFilmSuppr = Integer.parseInt(scan.nextLine());
-        connect.datasDelete("Films", idFilmSuppr);
+        connect.datasDelete("films", idFilmSuppr);
         */
         //-
-        connect.datasInsert("Film", "Films", films);
+        connect.datasInsert("Film", "films", films);
         //-
-        connect.datasUpdate("Films", 7, "Jumanji");
-        connect.datasUpdate("Films", 6, "Jumanji 2");
-        connect.datasUpdate("Films", 4, "Harry Potter");
-        connect.datasUpdate("Films", 11, "Godzilla");
+        connect.datasUpdate("films", 7, "Jumanji");
+        connect.datasUpdate("films", 6, "Jumanji 2");
+        connect.datasUpdate("films", 4, "Harry Potter");
+        connect.datasUpdate("films", 11, "Godzilla");
         //-
         print("\nFilms : ");
-        ArrayList filmsInBDD = connect.datasSelect("Film", "SELECT * FROM Films");
+        ArrayList filmsInBDD = connect.datasSelect("Film", "SELECT * FROM films");
         for (Iterator it = filmsInBDD.iterator(); it.hasNext();) {
             Film film = (Film) it.next();
             print(film.toString());
         }
+        
+        DAOFilm daoFilm = new DAOFilm();
+        Film filmH = new Film(0, "Là-Haut","2010", 1, 1234.123, 6443.123);
+        daoFilm.addFilm("films", filmH);
+        daoFilm.listReading("SELECT * FROM films");
+        daoFilm.deleteFilm("films", 67);
+        daoFilm.close();
         
         /*
         print("\nActeurs : ");

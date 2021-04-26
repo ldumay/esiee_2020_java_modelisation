@@ -43,6 +43,22 @@ import java.util.Iterator;
  * <br>- BDDConnector.datasDelete(String table, int datasId)
  * <br> |--> void
  * <br>
+ * <br>Basic getter :
+ * <br>- getBddName()
+ * <br>- getbddLogin()
+ * <br>- getbddPassword()
+ * <br>- getbddIP()
+ * <br>- getbddPort()
+ * <br>- getbddUrl()
+ * <br>
+ * <br>Basic setter :
+ * <br>- setBddName()
+ * <br>- setbddLogin()
+ * <br>- setbddPassword()
+ * <br>- setbddIP()
+ * <br>- setbddPort()
+ * <br>- setbddUrl()
+ * <br>
  * <br>End.
  */
 public class BDDConnector {
@@ -291,5 +307,21 @@ public class BDDConnector {
             e.printStackTrace();
         }
     }
+
+    // The methods of basic getter below.
+    public String getBddName() {  return bddName;  }
+    public String getBddLogin() { return bddLogin; }
+    public String getBddPassword() { return bddPassword; }
+    public String getBddIP() { return bddIP; }
+    public String getBddPort() { return bddPort; }
+    public String getBddUrl() { return bddUrl; }
+    
+    // The methods of basic setter below.
+    public void setBddName(String bddName) { this.bddName = bddName; }
+    public void setBddLogin(String bddLogin) { this.bddLogin = bddLogin; }
+    public void setBddPassword(String bddPassword) { this.bddPassword = bddPassword; }
+    public void setBddIP(String bddIP) { this.bddIP = bddIP; }
+    public void setBddPort(String bddPort) { this.bddPort = bddPort; }
+    public void setBddUrl(String bddUrl) {  this.bddUrl = bddUrl; }
 
 }
