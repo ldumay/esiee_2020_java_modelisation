@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mtl
  */
 @WebServlet(name = "FilmSaisiResultat", urlPatterns = {"/FilmSaisiResultat"})
-public class FilmSaisiResultat extends HttpServlet {
+public class FilmResultatRequete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +39,7 @@ public class FilmSaisiResultat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String result = "";
+            String result = "Aucun résultat.";
             String filmTitre = "";
             String filmAnneeDeSortie = "";
             int filmNumeroEpisode = 0;
@@ -47,19 +47,22 @@ public class FilmSaisiResultat extends HttpServlet {
             double filmRecette = 0;
             Film filmAAjouter = null;
             
-            if(!request.getParameter("submit").isEmpty() && "Valider".equals(request.getParameter("submit"))){
-                try {
-                    filmTitre = request.getParameter("FilmTitre");
-                    filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
-                    filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
-                    filmCout = Double.parseDouble(request.getParameter("FilmCout"));
-                    filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
-                } catch (Exception e) {}
-                filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
+            try {
+                if(!request.getParameter("submit").isEmpty() && "Valider".equals(request.getParameter("submit"))){
+                    try {
+                        filmTitre = request.getParameter("FilmTitre");
+                        filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
+                        filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
+                        filmCout = Double.parseDouble(request.getParameter("FilmCout"));
+                        filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
+                    } catch (Exception e) {}
+                    filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
+
+                    DAOFilm daoFilm = new DAOFilm();
+                    result = daoFilm.addFilm(filmAAjouter);
+                }
+            } catch (Exception e) {
             }
-            
-            DAOFilm daoFilm = new DAOFilm();
-            result = daoFilm.addFilm(filmAAjouter);
             
             out.println("<!DOCTYPE html>"
                     + "<html>"
@@ -98,7 +101,7 @@ public class FilmSaisiResultat extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(FilmSaisiResultat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FilmResultatRequete.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -115,7 +118,7 @@ public class FilmSaisiResultat extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(FilmSaisiResultat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FilmResultatRequete.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

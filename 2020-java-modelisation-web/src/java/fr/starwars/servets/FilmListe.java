@@ -66,16 +66,24 @@ public class FilmListe extends HttpServlet {
                     + "<th scope=\"col\">Id</th>"
                     + "<th scope=\"col\">Titre</th>"
                     + "<th scope=\"col\">Année</th>"
-                    + "<th scope=\"col\">Numéro de l'épisode</th>"
+                    + "<th scope=\"col\">Nb épisode</th>"
                     + "<th scope=\"col\">Coût</th>"
                     + "<th scope=\"col\">Recette</th>"
                     + "<th scope=\"col\">Bénéfice</th>"
+                    + "<th scope=\"col\">Modification</th>"
+                    + "<th scope=\"col\">Suppression</th>"
                     + "</tr>"
                     + "</thead>"
                     + "<tbody>");
             
             for (Iterator it = daoFilmList.iterator(); it.hasNext();) {
                 Film film = (Film) it.next();
+                //-
+                String benefice = "";
+                if(film.calculBenefice().get(0)=="true"){
+                    benefice += "En bénéfice";
+                } else { benefice += "En déficite"; }
+                benefice += " / "+film.calculBenefice().get(1)+"€";
                 out.println(""
                         + "<tr>"
                         + "<th scope=\"row\">"+film.getId()+"</th>"
@@ -84,7 +92,9 @@ public class FilmListe extends HttpServlet {
                         + "<td>"+film.getNumeroEpisode()+"</td>"
                         + "<td>"+film.getCout()+"</td>"
                         + "<td>"+film.getRecette()+"</td>"
-                        + "<td>"+film.calculBenefice()+"</td>"
+                        + "<td>"+benefice+"</td>"
+                        + "<td><a href=\"/2020-java-modelisation-web/FilmMiseAJour\" <img src=\"/2020-java-modelisation-web/img/crayon.png\" alt=\"Crayon\"/> Modifier</a></td>"
+                        + "<td><a href=\"/2020-java-modelisation-web/FilmMiseAJour\" <img src=\"/2020-java-modelisation-web/img/crayon.png\" alt=\"Crayon\"/> Supprimer</a></td>"
                         + "</tr>");
             }
             
