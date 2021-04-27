@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <display-name>2020 Java Modélisation | App Web</display-name>
+    <servlet>
+        <servlet-name>servletNumero1</servlet-name>
+        <servlet-class>fr.starwars.servets.servletNumero1</servlet-class>
+        <init-param>
+            <param-name>parametre1</param-name>
+            <param-value>valeur1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>parametre2</param-name>
+            <param-value>valeur2</param-value>
+        </init-param>
+    </servlet>
+</web-app>
