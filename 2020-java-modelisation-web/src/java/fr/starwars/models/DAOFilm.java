@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.bases.classes;
+package fr.starwars.models;
 
 import fr.bases.Console;
 import java.sql.Connection;
@@ -35,7 +35,10 @@ import java.util.ArrayList;
  * <br>- DAOFilm.addFilm(Film film)
  * <br> |--> String
  * <br>
- * <br>- DAOFilm.deleteFilm(String tableBDD, int datasId)
+ * <br>- DAOFilm.deleteFilm(int datasId)
+ * <br> |--> void
+ * <br>
+ * <br>- DAOFilm.deleteFilm(String tableBDD, Film film)
  * <br> |--> void
  * <br>
  * <br>- DAOFilm.close()
@@ -209,21 +212,23 @@ public class DAOFilm {
     /**
      * Requète de suppression d'un film dans une base de donnée
      * 
-     * datasDelete(String table, int datasId)
-     * @param tableBDD
+     * datasDelete(int datasId)
      * @param datasId
      * @throws java.sql.SQLException
      */
-    public void deleteFilm(String tableBDD, int datasId) throws SQLException{
+    public String deleteFilm(int datasId) throws SQLException{
+        String result = "Suppression du film non effectué.";
         try{
-            String sql = "DELETE FROM "+tableBDD+" WHERE id="+datasId+";";
+            String sql = "DELETE FROM films WHERE id="+datasId+";";
             Console.print(sql);
             statement.executeUpdate(sql);
-            Console.print("->Suppression de la ligne "+datasId+" dans la table ["+tableBDD+"] OK");
+            Console.print("->Suppression de la ligne "+datasId+" dans la table [films] OK");
+            result = "Suppression du film réussi.";
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
         }
+        return result;
     }
     
     /**

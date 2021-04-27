@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.bases.classes;
+package fr.starwars.models;
 
 /**
  *
@@ -11,13 +11,13 @@ package fr.bases.classes;
  */
 
 /**
- * Class - Gentil
+ * Class - Mechant
  * <br>
- * <br>private String force;
+ * <br>private String obscure;
  * <br>
  * <br>Constructor :
- * <br>- Gentil()
- * <br>- Gentil(boolean force)
+ * <br>- Mechant()
+ * <br>- Mechant(boolean obscure)
  * <br>
  * <br>Functions :
  * <br>
@@ -29,28 +29,29 @@ package fr.bases.classes;
  * <br>
  * <br>End.
  */
-public class Gentil {
+public class Mechant {
     
-    private Boolean force;
-    
-    /**
-     * Constructor
-     * 
-     * Gentil()
-     */
-    public Gentil(){}
+    private Boolean obscure;
     
     /**
      * Constructor
      * 
-     * Gentil(boolean force)
-     * @param force
+     * Mechant()
      */
-    public Gentil(boolean force){ this.force = force; }
+    public Mechant(){}
+    
+    /**
+     * Constructor
+     * 
+     * Mechant(boolean obscure)
+     * @param obscure
+     */
+    public Mechant(boolean obscure){ this.obscure = obscure; }
     
     // The methods of basic getter below.
-    public Boolean getForce(){ return this.force; }
+    public Boolean getObscure(){ return this.obscure; }
     
     // The methods of basic setter below.
-    public Boolean setForce(Boolean force){ return this.force; }
+    public Boolean setObscure(Boolean force){ return this.obscure; }
 }
+

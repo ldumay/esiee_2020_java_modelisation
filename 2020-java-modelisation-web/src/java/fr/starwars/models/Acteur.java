@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.bases.classes;
+package fr.starwars.models;
 
 import java.util.ArrayList;
 

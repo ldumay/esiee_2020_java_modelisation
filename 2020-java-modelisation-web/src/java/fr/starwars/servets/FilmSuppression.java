@@ -5,11 +5,12 @@
  */
 package fr.starwars.servets;
 
+import fr.bases.Console;
 import fr.starwars.models.DAOFilm;
-import fr.starwars.models.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,8 +23,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mtl
  */
-@WebServlet(name = "FilmSaisiResultat", urlPatterns = {"/FilmSaisiResultat"})
-public class FilmResultatRequete extends HttpServlet {
+@WebServlet(name = "FilmSuppression", urlPatterns = {"/FilmSuppression"})
+public class FilmSuppression extends HttpServlet {
+    
+    private int filmIdSelectionne = 0;
+    private String suppressionStatut = "";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,38 +38,26 @@ public class FilmResultatRequete extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        Console.print("[Suppression d'un film]");
+        if(!request.getParameter("supprimer").isEmpty() && "supprimer".equals(request.getParameter("supprimer"))){
+            try{
+                Console.print(request.getParameter("filmIdSelectionne"));
+                this.filmIdSelectionne = Integer.parseInt(request.getParameter("filmIdSelectionne"));
+                Console.print("id : "+this.filmIdSelectionne);
+                DAOFilm daoFilm = new DAOFilm();
+                suppressionStatut = daoFilm.deleteFilm(filmIdSelectionne);
+                //getServletContext().getRequestDispatcher("/2020-java-modelisation-web/FilmResultRequete").forward(request,response);
+            } catch (Exception e) {}
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String result = "Aucun résultat.";
-            String filmTitre = "";
-            String filmAnneeDeSortie = "";
-            int filmNumeroEpisode = 0;
-            double filmCout = 0;
-            double filmRecette = 0;
-            Film filmAAjouter = null;
-            
-            try {
-                if(!request.getParameter("submit").isEmpty() && "Valider".equals(request.getParameter("submit"))){
-                    try {
-                        filmTitre = request.getParameter("FilmTitre");
-                        filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
-                        filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
-                        filmCout = Double.parseDouble(request.getParameter("FilmCout"));
-                        filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
-                    } catch (Exception e) {}
-                    filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
-
-                    DAOFilm daoFilm = new DAOFilm();
-                    result = daoFilm.addFilm(filmAAjouter);
-                }
-            } catch (Exception e) {}
-            
             out.println("<!DOCTYPE html>"
                     + "<html>"
                     + "<head>"
-                    + "<title>Servlet FilmSaisiResultat</title>"
+                    + "<title>Servlet FilmSaisi</title>"
                     + "<link href=\"https://dev.ldumay.fr/resources/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\">"
                     + "<link href=\"https://dev.ldumay.fr/resources/bootstrap/4.1.3/css/bootstrap-grid.min.css\" rel=\"stylesheet\">"
                     + "</head>"
@@ -73,9 +65,11 @@ public class FilmResultatRequete extends HttpServlet {
                     + "<div class=\"container\">"
                     + "<div class=\"row\">"
                     + "<div class=\"col-12\">"
-                    + "<h1>Résultat de l'ajout d'un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
+                    + "<h1>Saisir un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
-                    +""+result+""
+                    + "[id] = "+this.filmIdSelectionne
+                    + "<br>"
+                    + "[Statut suppresions] = "+this.suppressionStatut
                     + "</div>"
                     + "</div>"
                     + "</div>"
@@ -96,11 +90,7 @@ public class FilmResultatRequete extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(FilmResultatRequete.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -113,11 +103,7 @@ public class FilmResultatRequete extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(FilmResultatRequete.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

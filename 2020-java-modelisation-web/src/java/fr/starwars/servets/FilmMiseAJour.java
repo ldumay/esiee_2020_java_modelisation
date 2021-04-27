@@ -5,6 +5,7 @@
  */
 package fr.starwars.servets;
 
+import fr.bases.Console;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "FilmMiseAJour", urlPatterns = {"/FilmMiseAJour"})
 public class FilmMiseAJour extends HttpServlet {
+    
+    private int filmIdSelectionne = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,8 +32,18 @@ public class FilmMiseAJour extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        Console.print("[Suppression d'un film]");
+        if(!request.getParameter("modifier").isEmpty() && "modifier".equals(request.getParameter("modifier"))){
+            try{
+                Console.print(request.getParameter("filmIdSelectionne"));
+                this.filmIdSelectionne = Integer.parseInt(request.getParameter("filmIdSelectionne"));
+                Console.print("id : "+this.filmIdSelectionne);
+                //getServletContext().getRequestDispatcher("/2020-java-modelisation-web/FilmResultRequete").forward(request,response);
+            } catch (Exception e) {}
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>"

@@ -5,9 +5,8 @@
  */
 package fr.starwars.servets;
 
-import static fr.bases.Console.print;
-import fr.bases.classes.DAOFilm;
-import fr.bases.classes.Film;
+import fr.starwars.models.DAOFilm;
+import fr.starwars.models.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "FilmListe", urlPatterns = {"/FilmListe"})
 public class FilmListe extends HttpServlet {
+    
+    private int filmIdSelectionne = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,7 +58,13 @@ public class FilmListe extends HttpServlet {
                     + "<div class=\"container\">"
                     + "<div class=\"row\">"
                     + "<div class=\"col-12\">"
-                    + "<h1>Liste des films <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
+                    //-
+                    + "<h1>Liste des films "
+                    + "<small style=\"font-size:16px;\">"
+                    + "<a href=\"/2020-java-modelisation-web/\">[accueil]</a>"
+                    + "<a href=\"/2020-java-modelisation-web/FilmSaisi\">[saisir nouveau film]</a>"
+                    + "</small>"
+                    + "</h1>"
                     + "<hr>"
                     //-
                     +"<table class=\"table\">"
@@ -93,8 +100,10 @@ public class FilmListe extends HttpServlet {
                         + "<td>"+film.getCout()+"</td>"
                         + "<td>"+film.getRecette()+"</td>"
                         + "<td>"+benefice+"</td>"
-                        + "<td><a href=\"/2020-java-modelisation-web/FilmMiseAJour\" <img src=\"/2020-java-modelisation-web/img/crayon.png\" alt=\"Crayon\"/> Modifier</a></td>"
-                        + "<td><a href=\"/2020-java-modelisation-web/FilmMiseAJour\" <img src=\"/2020-java-modelisation-web/img/crayon.png\" alt=\"Crayon\"/> Supprimer</a></td>"
+                        + "<td><form method=\"post\" action=\"FilmMiseAJour\"><input type=\"text\" name=\"filmIdSelectionne\" value=\""+film.getId()+"\" hidden/><input type=\"submit\" class=\"btn btn-primary\" name=\"modifier\" value=\"modifier\"/></form></td>"
+                        //+ "<td><a href=\"/2020-java-modelisation-web/FilmMiseAJour\" <img src=\"/2020-java-modelisation-web/img/crayon.png\" alt=\"Crayon\"/> Modifier</a></td>"
+                        + "<td><form method=\"post\" action=\"FilmSuppression\"><input type=\"text\" name=\"filmIdSelectionne\" value=\""+film.getId()+"\" hidden/><input type=\"submit\" class=\"btn btn-danger\" name=\"supprimer\" value=\"supprimer\"/></form></td>"
+                        //+ "<td><a href=\"/2020-java-modelisation-web/FilmSuppression?id="+film.getId()+"\" <img src=\"/2020-java-modelisation-web/img/crayon.png\" alt=\"Crayon\"/> Supprimer</a></td>"
                         + "</tr>");
             }
             

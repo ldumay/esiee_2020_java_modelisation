@@ -7,31 +7,6 @@
     <servlet>
         <servlet-name>FilmSaisi</servlet-name>
         <servlet-class>fr.starwars.servets.FilmSaisi</servlet-class>
-        <!-- Param - FilmTitre -->
-        <init-param>
-            <param-name>FilmTitre</param-name>
-            <param-value>0</param-value>
-        </init-param>
-        <!-- Param - FilmTitre -->
-        <init-param>
-            <param-name>FilmAnneeDeSortie</param-name>
-            <param-value>0</param-value>
-        </init-param>
-        <!-- Param - FilmTitre -->
-        <init-param>
-            <param-name>FilmNumeroEpisode</param-name>
-            <param-value>0</param-value>
-        </init-param>
-        <!-- Param - FilmTitre -->
-        <init-param>
-            <param-name>FilmCout</param-name>
-            <param-value>0</param-value>
-        </init-param>
-        <!-- Param - FilmTitre -->
-        <init-param>
-            <param-name>FilmRecette</param-name>
-            <param-value>0</param-value>
-        </init-param>
     </servlet>
     
     <!-- servlet-mapping - URI Accès -->
@@ -74,5 +49,17 @@
     <servlet-mapping>
         <servlet-name>FilmListe</servlet-name>
         <url-pattern>/FilmListe</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servelet - FilmSuppression -->
+    <!-- servlet - laison -->
+    <servlet>
+        <servlet-name>FilmSuppression</servlet-name>
+        <servlet-class>fr.starwars.servets.FilmSuppression</servlet-class>
+    </servlet>
+    <!-- servlet-mapping - URI Accès -->
+    <servlet-mapping>
+        <servlet-name>FilmSuppression</servlet-name>
+        <url-pattern>/FilmSuppression</url-pattern>
     </servlet-mapping>
 </web-app>
