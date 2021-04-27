@@ -11,6 +11,23 @@ CREATE TABLE `films` (
   `recette` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `films`(`id`,`titre`, `anneeDeSortie`, `numeroEpisode`, `cout`, `recette`) VALUES
+
+(1,"Star Wars IV","1977",4,1234589.12,122359.12),
+(2,"Star Wars V","1980",5,1234589.12,122359.12),
+(3,"Star Wars VI","1983",6,1234589.12,122359.12),
+(4,"Star Wars I","1999",1,1234589.12,122359.12),
+(5,"Star Wars II","2002",2,1234589.12,122359.12),
+(6,"Star Wars III","2005",3,1234589.12,122359.12),
+(7,"Star Wars VII","2015",4,1234589.12,122359.12),
+(8,"Star Wars VIII","2017",5,1234589.12,122359.12),
+(9,"Star Wars IX","2019",6,1234589.12,122359.12),
+(10,"Jurassic Park I","1993",6,1234589.12,122359.12),
+(11,"Jurassic Park II","1997",6,1234589.12,122359.12),
+(12,"Jurassic Park II","2001",6,1234589.12,122359.12),
+(13,"Jurassic World","2015",6,1234589.12,122359.12)
+;
+
 --
 -- Structure de la table `films_acteurs`
 --
