@@ -41,13 +41,8 @@ public class FilmListe extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            /*
-            Film filmH = new Film(0, "Là-Haut","2010", 1, 1234.123, 6443.123);
-            daoFilm.addFilm("films", filmH);
-             */
             String requetSQL = "SELECT * FROM films";
             DAOFilm daoFilm = new DAOFilm();
-            //daoFilm.deleteFilm("films", 67);
             ArrayList daoFilmList = new ArrayList();
             daoFilmList.addAll(daoFilm.listReadingArrayList(requetSQL));
 

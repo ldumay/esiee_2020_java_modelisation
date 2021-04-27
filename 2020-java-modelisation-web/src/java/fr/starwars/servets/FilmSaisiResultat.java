@@ -5,8 +5,14 @@
  */
 package fr.starwars.servets;
 
+import fr.bases.Console;
+import fr.bases.classes.DAOFilm;
+import fr.bases.classes.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,10 +35,32 @@ public class FilmSaisiResultat extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
+            String result = "";
+            String filmTitre = "";
+            String filmAnneeDeSortie = "";
+            int filmNumeroEpisode = 0;
+            double filmCout = 0;
+            double filmRecette = 0;
+            Film filmAAjouter = null;
+            
+            if(!request.getParameter("submit").isEmpty() && "Valider".equals(request.getParameter("submit"))){
+                try {
+                    filmTitre = request.getParameter("FilmTitre");
+                    filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
+                    filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
+                    filmCout = Double.parseDouble(request.getParameter("FilmCout"));
+                    filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
+                } catch (Exception e) {}
+                filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
+            }
+            
+            DAOFilm daoFilm = new DAOFilm();
+            result = daoFilm.addFilm(filmAAjouter);
+            
             out.println("<!DOCTYPE html>"
                     + "<html>"
                     + "<head>"
@@ -44,9 +72,9 @@ public class FilmSaisiResultat extends HttpServlet {
                     + "<div class=\"container\">"
                     + "<div class=\"row\">"
                     + "<div class=\"col-12\">"
-                    + "<h1>Saisir un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
+                    + "<h1>Résultat de l'ajout d'un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
-                    + "<i>Résultat de l'ajout d'un nouveau film.</i>"
+                    +""+result+""
                     + "</div>"
                     + "</div>"
                     + "</div>"
@@ -66,9 +94,12 @@ public class FilmSaisiResultat extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmSaisiResultat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,9 +111,12 @@ public class FilmSaisiResultat extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmSaisiResultat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

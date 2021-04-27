@@ -32,6 +32,9 @@ import java.util.ArrayList;
  * <br>- DAOFilm.addFilm(String tableBDD, Film film)
  * <br> |--> void
  * <br>
+ * <br>- DAOFilm.addFilm(Film film)
+ * <br> |--> String
+ * <br>
  * <br>- DAOFilm.deleteFilm(String tableBDD, int datasId)
  * <br> |--> void
  * <br>
@@ -171,6 +174,36 @@ public class DAOFilm {
             System.err.println("Autre erreur !");
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Requète d'ajout d'un film dans une base de donnée
+     * 
+     * addFilm(String tableBDD, Film film)
+     * @param film
+     * @throws java.sql.SQLException
+     */
+    public String addFilm(Film film) throws SQLException{
+        String result = "Ajout du film non effectué.";
+        try{
+            String sql = "INSERT INTO films (`titre`, `anneeDeSortie`, `numeroEpisode`, `cout`, `recette`) VALUES ";
+            String sqlElements = "("
+                            +"\""+film.getTitre()+"\""+","
+                            +"\""+film.getAnneeDeSortie()+"\""+","
+                            +film.getNumeroEpisode()+","
+                            +film.getCout()+","
+                            +film.getRecette()
+                            +")";
+            sql += sqlElements;
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Insertion des datas dans la [Films] OK");
+            result = "Ajout du film réussi.";
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+        return result;
     }
     
     /**

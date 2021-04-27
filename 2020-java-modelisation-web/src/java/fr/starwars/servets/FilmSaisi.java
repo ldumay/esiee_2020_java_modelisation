@@ -29,8 +29,7 @@ public class FilmSaisi extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>"
@@ -46,23 +45,23 @@ public class FilmSaisi extends HttpServlet {
                     + "<div class=\"col-12\">"
                     + "<h1>Saisir un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
-                    + "<form>"
+                    + "<form method=\"post\" action=\"FilmSaisiResultat\">"
                     + "<label for=\"basic-url\" class=\"form-label\">Nom du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmTitre\" placeholder=\"(String) - ["+request.getParameter("FilmTitre")+"]\"/>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmTitre\" placeholder=\"(String)\"/>"
                     + "<br>"
                     + "<label for=\"basic-url\" class=\"form-label\">Année de sortie du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmAnneeDeSortie\" placeholder=\"(String) - ["+request.getParameter("FilmAnneeDeSortie")+"]\"/>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmAnneeDeSortie\" placeholder=\"(String)\"/>"
                     + "<br>"
                     + "<label for=\"basic-url\" class=\"form-label\">Numéro du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmNumeroEpisode\" placeholder=\"(int) - ["+request.getParameter("FilmNumeroEpisode")+"]\"/>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmNumeroEpisode\" placeholder=\"(int)\"/>"
                     + "<br>"
                     + "<label for=\"basic-url\" class=\"form-label\">Coût du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmCout\" placeholder=\"(double) - ["+request.getParameter("FilmCout")+"]\"/>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmCout\" placeholder=\"(double)\"/>"
                     + "<br>"
                     + "<label for=\"basic-url\" class=\"form-label\">Recette du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmRecette\" placeholder=\"(double) - ["+request.getParameter("FilmRecette")+"]\"/>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmRecette\" placeholder=\"(double)\"/>"
                     + "<br>"
-                    + "<input type=\"submit\" class=\"btn btn-success\" value=\"Valider\"/>"
+                    + "<input type=\"submit\" class=\"btn btn-success\" name=\"submit\" value=\"Valider\"/>"
                     + "</form>"
                     + "</div>"
                     + "</div>"
@@ -83,8 +82,7 @@ public class FilmSaisi extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -97,8 +95,7 @@ public class FilmSaisi extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
