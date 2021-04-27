@@ -1,6 +1,6 @@
 #Projet d'apprentissage de Java JSE & JEE
 
-##Arboréscence du projet
+##Arborescence du projet
 
 ```
 .
