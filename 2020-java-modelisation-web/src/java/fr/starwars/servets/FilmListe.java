@@ -44,7 +44,7 @@ public class FilmListe extends HttpServlet {
                     + "<div class=\"container\">"
                     + "<div class=\"row\">"
                     + "<div class=\"col-12\">"
-                    + "<h1>Saisir un film</h1>"
+                    + "<h1>Saisir un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
                     + "<i>Liste des films.</i>"
                     + "</div>"
