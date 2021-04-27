@@ -8,15 +8,17 @@ package fr.starwars.servets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ldumay
+ * @author mtl
  */
-public class servletNumero1 extends HttpServlet {
+@WebServlet(name = "FilmSaisiResultat", urlPatterns = {"/FilmSaisiResultat"})
+public class FilmSaisiResultat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +33,26 @@ public class servletNumero1 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet servletNumero1</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet servletNumero1 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            out.println("<!DOCTYPE html>"
+                    + "<html>"
+                    + "<head>"
+                    + "<title>Servlet FilmSaisiResultat</title>"
+                    + "<link href=\"https://dev.ldumay.fr/resources/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\">"
+                    + "<link href=\"https://dev.ldumay.fr/resources/bootstrap/4.1.3/css/bootstrap-grid.min.css\" rel=\"stylesheet\">"
+                    + "</head>"
+                    + "<body>"
+                    + "<div class=\"container\">"
+                    + "<div class=\"row\">"
+                    + "<div class=\"col-12\">"
+                    + "<h1>Saisir un film</h1>"
+                    + "<hr>"
+                    + "<i>Résultat de l'ajout d'un nouveau film.</i>"
+                    + "</div>"
+                    + "</div>"
+                    + "</div>"
+                    + "</body>"
+                    + "</html>"
+                    + "");
         }
     }
 

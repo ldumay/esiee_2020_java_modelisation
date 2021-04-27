@@ -2,35 +2,77 @@
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>2020 Java Modélisation | App Web</display-name>
     
-    <!-- servletNumero1 -->
+    <!-- Servelet - FilmSaisi -->
+    <!-- servlet - laison -->
     <servlet>
-        <servlet-name>servletNumero1</servlet-name>
-        <servlet-class>fr.starwars.servets.servletNumero1</servlet-class>
+        <servlet-name>FilmSaisi</servlet-name>
+        <servlet-class>fr.starwars.servets.FilmSaisi</servlet-class>
+        <!-- Param - FilmTitre -->
         <init-param>
-            <param-name>parametre1</param-name>
-            <param-value>valeur1</param-value>
+            <param-name>FilmTitre</param-name> 
+            <param-value>0</param-value>
         </init-param>
+        <!-- Param - FilmTitre -->
         <init-param>
-            <param-name>parametre2</param-name>
-            <param-value>valeur2</param-value>
+            <param-name>FilmAnneeDeSortie</param-name> 
+            <param-value>0</param-value>
+        </init-param>
+        <!-- Param - FilmTitre -->
+        <init-param>
+            <param-name>FilmNumeroEpisode</param-name> 
+            <param-value>0</param-value>
+        </init-param>
+        <!-- Param - FilmTitre -->
+        <init-param>
+            <param-name>FilmCout</param-name> 
+            <param-value>0</param-value>
+        </init-param>
+        <!-- Param - FilmTitre -->
+        <init-param>
+            <param-name>FilmRecette</param-name> 
+            <param-value>0</param-value>
         </init-param>
     </servlet>
+    <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>
-        <servlet-name>servletNumero1</servlet-name>
-        <url-pattern>/servletNumero1</url-pattern>
+        <servlet-name>FilmSaisi</servlet-name>
+        <url-pattern>/FilmSaisi</url-pattern>
     </servlet-mapping>
     
-    <!-- servletNumero2 -->
+    <!-- Servelet - FilmSaisiResultat -->
+    <!-- servlet - laison -->
     <servlet>
-        <servlet-name>servletNumero2</servlet-name>
-        <servlet-class>fr.starwars.servets.servletNumero2</servlet-class>
-        <init-param>
-            <param-name>parametre1</param-name>
-            <param-value>valeur1</param-value>
-        </init-param>
+        <servlet-name>FilmSaisiResultat</servlet-name>
+        <servlet-class>fr.starwars.servets.FilmSaisiResultat</servlet-class>
     </servlet>
+    <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>
-        <servlet-name>servletNumero2</servlet-name>
-        <url-pattern>/servletNumero2</url-pattern>
+        <servlet-name>FilmSaisiResultat</servlet-name>
+        <url-pattern>/FilmSaisiResultat</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servelet - FilmSaisiMiseAJour -->
+    <!-- servlet - laison -->
+    <servlet>
+        <servlet-name>FilmMiseAJour</servlet-name>
+        <servlet-class>fr.starwars.servets.FilmMiseAJour</servlet-class>
+    </servlet>
+    <!-- servlet-mapping - URI Accès -->
+    <servlet-mapping>
+        <servlet-name>FilmMiseAJour</servlet-name>
+        <url-pattern>/FilmMiseAJour</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servelet - FilmSaisiResultat -->
+    <!-- servlet - laison -->
+    <servlet>
+        <servlet-name>FilmListe</servlet-name>
+        <servlet-class>fr.starwars.servets.FilmListe</servlet-class>
+    </servlet>
+    <!-- servlet-mapping - URI Accès -->
+    <servlet-mapping>
+        <servlet-name>FilmListe</servlet-name>
+        <url-pattern>/FilmListe</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
