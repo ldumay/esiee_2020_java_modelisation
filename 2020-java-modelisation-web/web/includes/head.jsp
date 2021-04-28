@@ -1,3 +1,9 @@
+<%-- 
+    Document   : foot
+    Created on : 28 avr. 2021, 21:03:59
+    Author     : ldumay
+--%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
@@ -12,9 +18,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="Description" content="Bonjour et Bienvenue à vous ! Je suis heureux de vous voir sur mon site Web personnel. Celui-ci regroupe tout ce dont vous avez besoin de savoir sur moi-même. Bonne visite.<br/>Pour plus de description, n'héistez pas à consulter directement mon site web https://ldumay.fr/. A bientôt !">
         <meta name="Subject" content="Site Vitrine Personnel">
-        <meta name="Copyright" content="Loïc Dumay (alias LDumay)">
-        <meta name="Author" content="Loïc Dumay (alias LDumay)">
-        <meta name="Publisher" content="Loïc Dumay (alias LDumay)">
+        <meta name="Copyright" content="Lo�c Dumay (alias LDumay)">
+        <meta name="Author" content="Lo�c Dumay (alias LDumay)">
+        <meta name="Publisher" content="Lo�c Dumay (alias LDumay)">
         <meta name="Identifier-Url" content="https://ldumay.fr">
         <meta name="Reply-To" content="hello@ldumay.fr">
         <meta name="Revisit-After" content="10 days">
@@ -53,45 +59,8 @@
         <!-- GoogleFonts -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poiret+One&family=Alatsi&family=Roboto&family=Righteous">
         <!-- ./GoogleFonts -->
-
+        
+        <!-- MyCSS -->
+        <link href="css/styles.css" rel="stylesheet">
+        <!-- ./MyCSS -->
     </head>
-    <!-- Body -->
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>The Star Wars Web Project !</h1>
-                    <hr>
-                    <h2>Site de démo de servlets.</h2>
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <ul>
-                        <li>Liste des films : <a href="/2020-java-modelisation-web/FilmListe">[liste des film]</a>
-                            <!--
-                            <ol>
-                                <li>Saisir un nouveau film : <a href="/2020-java-modelisation-web/FilmSaisi">[saisir nouveau film]</a></li>
-                                <li>Mettre à jour un film : <a href="/2020-java-modelisation-web/FilmMiseAJour">[mise à jour d'un film]</a></li>
-                                <li>Résultat de la saisie d'un nouveau film : <a href="/2020-java-modelisation-web/FilmSaisiResultat">[résultat nouveau film]</a></li>
-                            </lo>
-                            -->
-                        </li>
-                    </ul>
-                    <hr>
-                    <p>© Copyright 2020 - Créer par <a target="_blank" href="https://ldumay.fr/">Loïc Dumay</a></p>
-                </div>
-            </div>
-        </div>
-    </body>
-    <!-- ./Body -->
-    
-    <!-- Javascript -->
-        <!-- Javascript_And_JQuery_Importations -->
-        <script type="text/javascript">
-            //-
-        </script>
-        <!-- ./Javascript_And_JQuery_Importations -->
-    <!-- ./Javacsript -->
-</html>
