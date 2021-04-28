@@ -5,6 +5,7 @@
  */
 package fr.starwars.servets;
 
+import fr.bases.Console;
 import fr.starwars.models.DAOFilm;
 import fr.starwars.models.Film;
 import java.io.IOException;
@@ -39,6 +40,8 @@ public class FilmResultatRequete extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String result = "Aucun résultat.";
+            
+            int filmId = 0;
             String filmTitre = "";
             String filmAnneeDeSortie = "";
             int filmNumeroEpisode = 0;
@@ -48,6 +51,7 @@ public class FilmResultatRequete extends HttpServlet {
             
             try {
                 if(!request.getParameter("submit").isEmpty() && "Valider".equals(request.getParameter("submit"))){
+                    Console.print("Ajout d'un film demandé.");
                     try {
                         filmTitre = request.getParameter("FilmTitre");
                         filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
@@ -56,10 +60,26 @@ public class FilmResultatRequete extends HttpServlet {
                         filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
                     } catch (Exception e) {}
                     filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
-
                     DAOFilm daoFilm = new DAOFilm();
                     result = daoFilm.addFilm(filmAAjouter);
-                }
+                    Console.print(result);
+                } else { result = "Ajout non effectué."; }
+                //-
+                if(!request.getParameter("update").isEmpty() && "Update".equals(request.getParameter("update"))){
+                    Console.print("Mise à jour d'un film demandé.");
+                    try {
+                        filmId = Integer.parseInt(request.getParameter("FilmId"));
+                        filmTitre = request.getParameter("FilmTitre");
+                        filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
+                        filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
+                        filmCout = Double.parseDouble(request.getParameter("FilmCout"));
+                        filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
+                    } catch (Exception e) {}
+                    filmAAjouter = new Film(filmId, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
+                    DAOFilm daoFilm = new DAOFilm();
+                    result = daoFilm.updateFilm(filmAAjouter);
+                    Console.print(result);
+                } else { result = "Mise à jour non effectué."; }
             } catch (Exception e) {}
             
             out.println("<!DOCTYPE html>"

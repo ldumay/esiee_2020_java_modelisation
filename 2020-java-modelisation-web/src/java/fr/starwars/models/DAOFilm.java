@@ -129,7 +129,7 @@ public class DAOFilm {
      * 
      * listReadingArrayList(String sqlQuery)
      * @param sqlQuery
-     * @return 
+     * @return ArrayList
      * @throws java.sql.SQLException
      */
     public ArrayList listReadingArrayList(String sqlQuery) throws SQLException{
@@ -182,8 +182,9 @@ public class DAOFilm {
     /**
      * Requète d'ajout d'un film dans une base de donnée
      * 
-     * addFilm(String tableBDD, Film film)
+     * addFilm(Film film)
      * @param film
+     * @return String
      * @throws java.sql.SQLException
      */
     public String addFilm(Film film) throws SQLException{
@@ -202,6 +203,36 @@ public class DAOFilm {
             statement.executeUpdate(sql);
             Console.print("->Insertion des datas dans la [Films] OK");
             result = "Ajout du film réussi.";
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    /**
+     * Requète d'ajout d'un film dans une base de donnée
+     * 
+     * updateFilm(Film film)
+     * @param film
+     * @return String
+     * @throws java.sql.SQLException
+     */
+    public String updateFilm(Film film) throws SQLException{
+        String result = "Mise à jour du film non effectué.";
+        try{
+            String sql = "UPDATE `films` SET "
+                    +"`id`="+film.getId()+","
+                    +"`titre`=\""+film.getTitre()+"\","
+                    +"`anneeDeSortie`=\""+film.getAnneeDeSortie()+"\","
+                    +"`numeroEpisode`="+film.getNumeroEpisode()+","
+                    +"`cout`="+film.getCout()+","
+                    +"`recette`="+film.getRecette()+""
+                    +" WHERE id="+film.getId()+"";
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Update des datas dans la [Films] OK");
+            result = "Mise à jour du film réussi.";
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
