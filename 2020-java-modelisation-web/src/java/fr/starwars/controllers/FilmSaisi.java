@@ -3,16 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.starwars.servets;
+package fr.starwars.controllers;
 
-import fr.bases.Console;
-import fr.starwars.models.DAOFilm;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mtl
+ * @author ldumay
  */
-@WebServlet(name = "FilmSuppression", urlPatterns = {"/FilmSuppression"})
-public class FilmSuppression extends HttpServlet {
-    
-    private int filmIdSelectionne = 0;
-    private String suppressionStatut = "";
+@WebServlet(name = "FilmSaisi", urlPatterns = {"/FilmSaisi"})
+public class FilmSaisi extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,19 +30,6 @@ public class FilmSuppression extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        Console.print("[Suppression d'un film]");
-        if(!request.getParameter("supprimer").isEmpty() && "supprimer".equals(request.getParameter("supprimer"))){
-            try{
-                Console.print(request.getParameter("filmIdSelectionne"));
-                this.filmIdSelectionne = Integer.parseInt(request.getParameter("filmIdSelectionne"));
-                Console.print("id : "+this.filmIdSelectionne);
-                DAOFilm daoFilm = new DAOFilm();
-                suppressionStatut = daoFilm.deleteFilm(filmIdSelectionne);
-                //getServletContext().getRequestDispatcher("/2020-java-modelisation-web/FilmResultRequete").forward(request,response);
-            } catch (Exception e) {}
-        }
-        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>"
@@ -67,9 +45,24 @@ public class FilmSuppression extends HttpServlet {
                     + "<div class=\"col-12\">"
                     + "<h1>Saisir un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
-                    + "[id] = "+this.filmIdSelectionne
+                    + "<form method=\"post\" action=\"FilmSaisiResultat\">"
+                    + "<label for=\"basic-url\" class=\"form-label\">Nom du film</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmTitre\" placeholder=\"(String)\"/>"
                     + "<br>"
-                    + "[Statut suppresions] = "+this.suppressionStatut
+                    + "<label for=\"basic-url\" class=\"form-label\">Année de sortie du film</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmAnneeDeSortie\" placeholder=\"(String)\"/>"
+                    + "<br>"
+                    + "<label for=\"basic-url\" class=\"form-label\">Numéro du film</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmNumeroEpisode\" placeholder=\"(int)\"/>"
+                    + "<br>"
+                    + "<label for=\"basic-url\" class=\"form-label\">Coût du film</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmCout\" placeholder=\"(double)\"/>"
+                    + "<br>"
+                    + "<label for=\"basic-url\" class=\"form-label\">Recette du film</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmRecette\" placeholder=\"(double)\"/>"
+                    + "<br>"
+                    + "<input type=\"submit\" class=\"btn btn-success\" name=\"submit\" value=\"Valider\"/>"
+                    + "</form>"
                     + "</div>"
                     + "</div>"
                     + "</div>"

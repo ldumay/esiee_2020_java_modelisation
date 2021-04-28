@@ -1,61 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>2020 Java Modélisation | App Web</display-name>
-    
     <!-- Servelet - FilmSaisi -->
     <!-- servlet - laison -->
     <servlet>
         <servlet-name>FilmSaisi</servlet-name>
-        <servlet-class>fr.starwars.servets.FilmSaisi</servlet-class>
+        <servlet-class>fr.starwars.controllers.FilmSaisi</servlet-class>
     </servlet>
-    
     <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>
         <servlet-name>FilmSaisi</servlet-name>
         <url-pattern>/FilmSaisi</url-pattern>
     </servlet-mapping>
-    
     <!-- Servelet - FilmSaisiResultat -->
     <!-- servlet - laison -->
     <servlet>
         <servlet-name>FilmSaisiResultat</servlet-name>
-        <servlet-class>fr.starwars.servets.FilmResultatRequete</servlet-class>
+        <servlet-class>fr.starwars.controllers.FilmResultatRequete</servlet-class>
     </servlet>
     <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>
         <servlet-name>FilmSaisiResultat</servlet-name>
         <url-pattern>/FilmSaisiResultat</url-pattern>
     </servlet-mapping>
-    
     <!-- Servelet - FilmSaisiMiseAJour -->
     <!-- servlet - laison -->
     <servlet>
         <servlet-name>FilmMiseAJour</servlet-name>
-        <servlet-class>fr.starwars.servets.FilmMiseAJour</servlet-class>
+        <servlet-class>fr.starwars.controllers.FilmMiseAJour</servlet-class>
     </servlet>
     <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>
         <servlet-name>FilmMiseAJour</servlet-name>
         <url-pattern>/FilmMiseAJour</url-pattern>
     </servlet-mapping>
-    
     <!-- Servelet - FilmSaisiResultat -->
     <!-- servlet - laison -->
     <servlet>
         <servlet-name>FilmListe</servlet-name>
-        <servlet-class>fr.starwars.servets.FilmListe</servlet-class>
+        <servlet-class>fr.starwars.controllers.FilmListe</servlet-class>
     </servlet>
     <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>
         <servlet-name>FilmListe</servlet-name>
         <url-pattern>/FilmListe</url-pattern>
     </servlet-mapping>
-    
     <!-- Servelet - FilmSuppression -->
     <!-- servlet - laison -->
     <servlet>
         <servlet-name>FilmSuppression</servlet-name>
-        <servlet-class>fr.starwars.servets.FilmSuppression</servlet-class>
+        <servlet-class>fr.starwars.controllers.FilmSuppression</servlet-class>
     </servlet>
     <!-- servlet-mapping - URI Accès -->
     <servlet-mapping>

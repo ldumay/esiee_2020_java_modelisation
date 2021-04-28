@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.starwars.servets;
+package fr.starwars.controllers;
 
 import fr.bases.Console;
 import fr.starwars.models.DAOFilm;
