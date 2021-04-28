@@ -5,6 +5,7 @@
  */
 package fr.starwars.servets;
 
+import fr.bases.Console;
 import fr.starwars.models.DAOFilm;
 import fr.starwars.models.Film;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mtl
+ * @author ldumay
  */
 @WebServlet(name = "FilmListe", urlPatterns = {"/FilmListe"})
 public class FilmListe extends HttpServlet {
@@ -87,7 +88,8 @@ public class FilmListe extends HttpServlet {
                 Film film = (Film) it.next();
                 //-
                 String benefice = "";
-                if(film.calculBenefice().get(0)=="true"){
+                boolean benef = (boolean) film.calculBenefice().get(0);
+                if(benef==true){
                     benefice += "En bénéfice";
                 } else { benefice += "En déficite"; }
                 benefice += " / "+film.calculBenefice().get(1)+"€";

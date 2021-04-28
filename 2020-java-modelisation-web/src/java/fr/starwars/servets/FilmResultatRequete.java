@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mtl
+ * @author ldumay
  */
 @WebServlet(name = "FilmSaisiResultat", urlPatterns = {"/FilmSaisiResultat"})
 public class FilmResultatRequete extends HttpServlet {
@@ -64,7 +64,9 @@ public class FilmResultatRequete extends HttpServlet {
                     result = daoFilm.addFilm(filmAAjouter);
                     Console.print(result);
                 } else { result = "Ajout non effectué."; }
-                //-
+            } catch (Exception e) {}
+            //-
+            try{
                 if(!request.getParameter("update").isEmpty() && "Update".equals(request.getParameter("update"))){
                     Console.print("Mise à jour d'un film demandé.");
                     try {
@@ -95,7 +97,9 @@ public class FilmResultatRequete extends HttpServlet {
                     + "<div class=\"col-12\">"
                     + "<h1>Résultat de l'ajout d'un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
-                    +""+result+""
+                    + ""+result+""
+                    + "<br>"
+                    + "<a href=\"/2020-java-modelisation-web/FilmListe\">Retour à la liste des films</a>"
                     + "</div>"
                     + "</div>"
                     + "</div>"
