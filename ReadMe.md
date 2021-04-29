@@ -1,8 +1,6 @@
-#Projet d'apprentissage de Java JSE & JEE
+# Projet d'apprentissage de Java JSE & JEE
 
-##Arborescence du projet
-
-```
+## Arborescence du projet
 .
 ├── 2020-java-modelisation-app
 │   ├── build
@@ -99,6 +97,151 @@
 │   │               ├── Console.java
 │   │               └── DateConversion.java
 │   └── test
+├── 2020-java-modelisation-swing
+│   ├── build
+│   │   ├── built-jar.properties
+│   │   ├── classes
+│   │   │   ├── core
+│   │   │   │   ├── abstracts
+│   │   │   │   │   ├── Brass.class
+│   │   │   │   │   ├── Percussion.class
+│   │   │   │   │   ├── Stringed.class
+│   │   │   │   │   ├── TableModelFilms.class
+│   │   │   │   │   ├── Wind.class
+│   │   │   │   │   └── Woodwind.class
+│   │   │   │   ├── interfaces
+│   │   │   │   │   └── Instrument.class
+│   │   │   │   └── tools
+│   │   │   │       ├── BDDConnector.class
+│   │   │   │       ├── Calcul.class
+│   │   │   │       ├── Fichiers.class
+│   │   │   │       ├── MesDates.class
+│   │   │   │       ├── Planning.class
+│   │   │   │       └── Visite.class
+│   │   │   ├── exos
+│   │   │   │   ├── sqltablesaves
+│   │   │   │   └── starwars
+│   │   │   ├── fr
+│   │   │   │   ├── koor
+│   │   │   │   │   └── tp
+│   │   │   │   │       └── swing
+│   │   │   │   │           ├── MyEclipse.class
+│   │   │   │   │           ├── MyWindow.class
+│   │   │   │   │           ├── MyWindow2$1.class
+│   │   │   │   │           ├── MyWindow2$2.class
+│   │   │   │   │           ├── MyWindow2$3.class
+│   │   │   │   │           ├── MyWindow2.class
+│   │   │   │   │           ├── MyWindow2.form
+│   │   │   │   │           ├── MyWindowBorderLayout.class
+│   │   │   │   │           ├── MyWindowFlowLayout.class
+│   │   │   │   │           ├── MyWindowGridLayout.class
+│   │   │   │   │           └── listeners
+│   │   │   │   │               ├── MyWindowListener1.class
+│   │   │   │   │               ├── MyWindowListener2$1.class
+│   │   │   │   │               ├── MyWindowListener2$2.class
+│   │   │   │   │               ├── MyWindowListener2.class
+│   │   │   │   │               ├── MyWindowListener3$1.class
+│   │   │   │   │               ├── MyWindowListener3$2.class
+│   │   │   │   │               └── MyWindowListener3.class
+│   │   │   │   ├── ldumay
+│   │   │   │   │   ├── main
+│   │   │   │   │   │   ├── Main.class
+│   │   │   │   │   │   ├── ViewLogin.class
+│   │   │   │   │   │   └── ViewUsersList.class
+│   │   │   │   │   └── others
+│   │   │   │   │       ├── Console.class
+│   │   │   │   │       └── DateConversion.class
+│   │   │   │   └── others
+│   │   │   └── starwars
+│   │   │       ├── classes
+│   │   │       │   ├── Acces.class
+│   │   │       │   ├── Acteur.class
+│   │   │       │   ├── Film$1.class
+│   │   │       │   ├── Film.class
+│   │   │       │   ├── Gentil.class
+│   │   │       │   ├── Mechant.class
+│   │   │       │   └── Personnage.class
+│   │   │       ├── dao
+│   │   │       │   ├── DAOFilm.class
+│   │   │       │   └── DAOLogin.class
+│   │   │       └── sqltablesaves
+│   │   │           ├── A_Base.sql
+│   │   │           ├── B_createTable.sql
+│   │   │           └── C_Save_2021_04_27_univcergy22.sql
+│   │   ├── empty
+│   │   └── generated-sources
+│   │       └── ap-source-output
+│   ├── build.xml
+│   ├── dist
+│   │   ├── 2020-java-modelisation-swing.jar
+│   │   └── README.TXT
+│   ├── manifest.mf
+│   ├── nbproject
+│   │   ├── build-impl.xml
+│   │   ├── genfiles.properties
+│   │   ├── private
+│   │   │   ├── config.properties
+│   │   │   ├── private.properties
+│   │   │   └── private.xml
+│   │   ├── project.properties
+│   │   └── project.xml
+│   ├── src
+│   │   ├── core
+│   │   │   ├── abstracts
+│   │   │   │   ├── Brass.java
+│   │   │   │   ├── Percussion.java
+│   │   │   │   ├── Stringed.java
+│   │   │   │   ├── TableModelFilms.java
+│   │   │   │   ├── Wind.java
+│   │   │   │   └── Woodwind.java
+│   │   │   ├── interfaces
+│   │   │   │   └── Instrument.java
+│   │   │   └── tools
+│   │   │       ├── BDDConnector.java
+│   │   │       ├── Calcul.java
+│   │   │       ├── Fichiers.java
+│   │   │       ├── MesDates.java
+│   │   │       ├── Planning.java
+│   │   │       └── Visite.java
+│   │   ├── fr
+│   │   │   ├── koor
+│   │   │   │   └── tp
+│   │   │   │       └── swing
+│   │   │   │           ├── MyEclipse.java
+│   │   │   │           ├── MyWindow.java
+│   │   │   │           ├── MyWindow2.form
+│   │   │   │           ├── MyWindow2.java
+│   │   │   │           ├── MyWindowBorderLayout.java
+│   │   │   │           ├── MyWindowFlowLayout.java
+│   │   │   │           ├── MyWindowGridLayout.java
+│   │   │   │           └── listeners
+│   │   │   │               ├── MyWindowListener1.java
+│   │   │   │               ├── MyWindowListener2.java
+│   │   │   │               └── MyWindowListener3.java
+│   │   │   └── ldumay
+│   │   │       ├── main
+│   │   │       │   ├── Main.java
+│   │   │       │   ├── ViewLogin.java
+│   │   │       │   └── ViewUsersList.java
+│   │   │       └── others
+│   │   │           ├── Console.java
+│   │   │           └── DateConversion.java
+│   │   └── starwars
+│   │       ├── classes
+│   │       │   ├── Acces.java
+│   │       │   ├── Acteur.java
+│   │       │   ├── Film.java
+│   │       │   ├── Gentil.java
+│   │       │   ├── Mechant.java
+│   │       │   └── Personnage.java
+│   │       ├── dao
+│   │       │   ├── DAOFilm.java
+│   │       │   └── DAOLogin.java
+│   │       └── sqltablesaves
+│   │           ├── A_Base.sql
+│   │           ├── B_createTable.sql
+│   │           └── C_Save_2021_04_27_univcergy22.sql
+│   └── test
 ├── 2020-java-modelisation-web
 │   ├── build
 │   │   ├── empty
@@ -112,18 +255,16 @@
 │   │       │   │   ├── exos
 │   │       │   │   │   └── starwars
 │   │       │   │   │       └── Film$1.class
-│   │       │   │   ├── exos\ copie
-│   │       │   │   │   └── sqltablesaves
 │   │       │   │   └── fr
 │   │       │   │       ├── bases
-│   │       │   │       │   ├── Console.class
-│   │       │   │       │   ├── classes
-│   │       │   │       │   └── sqltablesaves
-│   │       │   │       ├── ldumay
-│   │       │   │       │   └── others
-│   │       │   │       ├── sqltablesaves
+│   │       │   │       │   └── Console.class
 │   │       │   │       └── starwars
 │   │       │   │           ├── controllers
+│   │       │   │           │   ├── FilmListe.class
+│   │       │   │           │   ├── FilmMiseAJour.class
+│   │       │   │           │   ├── FilmResultatRequete.class
+│   │       │   │           │   ├── FilmSaisi.class
+│   │       │   │           │   └── FilmSuppression.class
 │   │       │   │           ├── models
 │   │       │   │           │   ├── Acces.class
 │   │       │   │           │   ├── Acteur.class
@@ -133,21 +274,26 @@
 │   │       │   │           │   ├── Gentil.class
 │   │       │   │           │   ├── Mechant.class
 │   │       │   │           │   └── Personnage.class
-│   │       │   │           ├── servets
-│   │       │   │           │   ├── FilmListe.class
-│   │       │   │           │   ├── FilmMiseAJour.class
-│   │       │   │           │   ├── FilmResultatRequete.class
-│   │       │   │           │   ├── FilmSaisi.class
-│   │       │   │           │   └── FilmSuppression.class
-│   │       │   │           ├── sqltablesaves
 │   │       │   │           └── views
 │   │       │   ├── glassfish-web.xml
-│   │       │   ├── img
-│   │       │   │   ├── crayon.png
-│   │       │   │   └── download.png
 │   │       │   └── web.xml
+│   │       ├── css
+│   │       │   └── styles.css
+│   │       ├── filmListe.jsp
+│   │       ├── filmMiseAJour.jsp
+│   │       ├── filmResultatRequete.jsp
+│   │       ├── filmSaisi.jsp
+│   │       ├── filmSuppression.jsp
 │   │       ├── gfv3ee6.dpf
-│   │       └── index.html
+│   │       ├── img
+│   │       │   ├── crayon.png
+│   │       │   └── download.png
+│   │       ├── includes
+│   │       │   ├── foot.jsp
+│   │       │   ├── head.jsp
+│   │       │   └── header.jsp
+│   │       ├── index.html
+│   │       └── index.jsp
 │   ├── build.xml
 │   ├── dist
 │   │   └── 2020-java-modelisation-web.war
@@ -169,30 +315,39 @@
 │   │           │   └── Console.java
 │   │           └── starwars
 │   │               ├── controllers
-│   │               ├── models
-│   │               │   ├── Acces.java
-│   │               │   ├── Acteur.java
-│   │               │   ├── DAOFilm.java
-│   │               │   ├── Film.java
-│   │               │   ├── Gentil.java
-│   │               │   ├── Mechant.java
-│   │               │   └── Personnage.java
-│   │               ├── servets
 │   │               │   ├── FilmListe.java
 │   │               │   ├── FilmMiseAJour.java
 │   │               │   ├── FilmResultatRequete.java
 │   │               │   ├── FilmSaisi.java
 │   │               │   └── FilmSuppression.java
-│   │               └── views
+│   │               └── models
+│   │                   ├── Acces.java
+│   │                   ├── Acteur.java
+│   │                   ├── DAOFilm.java
+│   │                   ├── Film.java
+│   │                   ├── Gentil.java
+│   │                   ├── Mechant.java
+│   │                   └── Personnage.java
 │   ├── test
 │   └── web
 │       ├── WEB-INF
-│       │   ├── img
-│       │   │   ├── crayon.png
-│       │   │   └── download.png
 │       │   └── web.xml
-│       └── index.html
+│       ├── css
+│       │   └── styles.css
+│       ├── filmListe.jsp
+│       ├── filmMiseAJour.jsp
+│       ├── filmResultatRequete.jsp
+│       ├── filmSaisi.jsp
+│       ├── filmSuppression.jsp
+│       ├── img
+│       │   ├── crayon.png
+│       │   └── download.png
+│       ├── includes
+│       │   ├── foot.jsp
+│       │   ├── head.jsp
+│       │   └── header.jsp
+│       ├── index.html
+│       └── index.jsp
 └── ReadMe.md
 
-77 directories, 112 files
-```
+117 directories, 230 files
