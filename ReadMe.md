@@ -1,6 +1,8 @@
 # Projet d'apprentissage de Java JSE & JEE
 
 ## Arborescence du projet
+
+```
 .
 ├── 2020-java-modelisation-app
 │   ├── build
@@ -351,3 +353,4 @@
 └── ReadMe.md
 
 117 directories, 230 files
+```
