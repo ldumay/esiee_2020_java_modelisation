@@ -5,7 +5,6 @@
  */
 package fr.starwars.controllers;
 
-import fr.bases.Console;
 import fr.starwars.models.DAOFilm;
 import fr.starwars.models.Film;
 import java.io.IOException;

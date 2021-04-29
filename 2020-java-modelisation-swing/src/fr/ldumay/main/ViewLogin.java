@@ -5,23 +5,54 @@
  */
 package fr.ldumay.main;
 
+import fr.ldumay.others.Console;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import starwars.classes.Acces;
+import starwars.dao.DAOLogin;
 
 /**
  *
  * @author ldumay
  */
-public class ViewLogin extends JFrame{
+public class ViewLogin extends JFrame implements ActionListener{
+    
+    JPanel contentPanel;
+    //-
+    String messageString;
+    JLabel messageLabel;
+    String loginString;
+    JLabel loginLabel;
+    //-
+    JPanel contentLeftPanel;
+    String passwordString;
+    JLabel passwordLabel;
+    //-
+    JPanel contentRightPanel;
+    String loginRightString;
+    JTextField loginRightTextField;
+    //-
+    String passwordRightString;
+    JPasswordField passwordRightTextField;
+    //-
+    String connexionString;
+    JButton connexionButton;
+    //-
+    Acces user;
+    //-
+    ViewUsersList usersList;
     
     /**
      * Constructor
@@ -32,68 +63,94 @@ public class ViewLogin extends JFrame{
         this.setSize(new Dimension(500, 300));
         this.setLocationRelativeTo(null);
         
-        JPanel contentPanel = (JPanel) this.getContentPane();
+        contentPanel = (JPanel) this.getContentPane();
         contentPanel.setLayout(new FlowLayout());
         
         contentPanel.add(createLeftPanel());
         contentPanel.add(createRightPanel());
         
-        String messageString = "Erreur de login / Mot de Passe";
-        JLabel messageLabel = new JLabel(messageString);
+        messageString = "Erreur de login / Mot de Passe";
+        messageString.toUpperCase();
+        messageLabel = new JLabel(messageString);
+        messageLabel.setVisible(false);
         contentPanel.add(messageLabel);
     }
     
+    /**
+     * Création d'un panneau qui serait placé à gauche.
+     * 
+     * @return JPanel
+     */
     private JPanel createLeftPanel(){
-        JPanel contentLeftPanel = new JPanel(new BorderLayout());
+        contentLeftPanel = new JPanel(new BorderLayout());
         
-        String loginString = "Identifiant";
+        loginString = "Identifiant";
         loginString.toUpperCase();
-        JLabel loginLabel = new JLabel(loginString);
+        loginLabel = new JLabel(loginString);
         loginLabel.setPreferredSize(new Dimension(150, 40));
         contentLeftPanel.add(loginLabel, BorderLayout.NORTH);
         
-        String passwordString = "Mot de passe";
+        passwordString = "Mot de passe";
         passwordString.toUpperCase();
-        JLabel passwordLabel = new JLabel(passwordString);
+        passwordLabel = new JLabel(passwordString);
         passwordLabel.setPreferredSize(new Dimension(150, 40));
         contentLeftPanel.add(passwordLabel, BorderLayout.SOUTH);
         
         return contentLeftPanel;
     }
+    
+    /**
+     * Création d'un panneau qui serait placé à droite.
+     * 
+     * @return JPanel
+     */
     private JPanel createRightPanel(){
-        JPanel contentRightPanel = new JPanel(new BorderLayout());
+        contentRightPanel = new JPanel(new BorderLayout());
         
-        String loginRightString = "Identifiant";
+        loginRightString = "Identifiant";
         loginRightString.toUpperCase();
-        JTextField loginRightLabel = new JTextField(loginRightString);
-        loginRightLabel.setPreferredSize(new Dimension(250, 30));
-        contentRightPanel.add(loginRightLabel, BorderLayout.NORTH);
+        loginRightTextField = new JTextField(loginRightString);
+        loginRightTextField.setPreferredSize(new Dimension(250, 30));
+        contentRightPanel.add(loginRightTextField, BorderLayout.NORTH);
         
-        String passwordRightString = "Mot de passe";
+        passwordRightString = "Mot de passe";
         passwordRightString.toUpperCase();
-        JTextField passwordRightLabel = new JTextField(passwordRightString);
-        passwordRightLabel.setPreferredSize(new Dimension(250, 30));
-        contentRightPanel.add(passwordRightLabel, BorderLayout.WEST);
+        passwordRightTextField = new JPasswordField(passwordRightString);
+        passwordRightTextField.setPreferredSize(new Dimension(250, 30));
+        contentRightPanel.add(passwordRightTextField, BorderLayout.WEST);
         
-        String connexionString = "Se connecter";
+        connexionString = "Se connecter";
         connexionString.toUpperCase();
-        JButton connexionLabel = new JButton(connexionString);
-        connexionLabel.setPreferredSize(new Dimension(150, 40));
-        contentRightPanel.add(connexionLabel, BorderLayout.SOUTH);
+        connexionButton = new JButton(connexionString);
+        connexionButton.addActionListener(this);
+        connexionButton.setPreferredSize(new Dimension(150, 40));
+        contentRightPanel.add(connexionButton, BorderLayout.SOUTH);
         
         return contentRightPanel;
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        //Apply a look'n feel
-        UIManager.setLookAndFeel(new NimbusLookAndFeel());
-        
-        //Start my Window
-        ViewLogin login = new ViewLogin();
-        login.setVisible(true);
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if( (JButton)event.getSource() == connexionButton){
+            Console.print("[Demande de connexion]");
+            DAOLogin daoLogin = new DAOLogin();
+            String login = loginRightTextField.getText();
+            String password = passwordRightTextField.getText();
+            Console.print("Login : "+login+" - Password : "+password);
+            try {
+                user = daoLogin.checkPAssword(login, password);
+                if(user!=null){
+                    Console.print("user : "+user.getLogin()+" / "+user.getPassword());
+                    usersList = new ViewUsersList();
+                    messageLabel.setText("Connecté");
+                    messageLabel.setVisible(true);
+                } else {
+                    messageLabel.setVisible(true);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }

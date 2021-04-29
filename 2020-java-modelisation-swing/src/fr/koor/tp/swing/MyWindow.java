@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.koor.tp;
+package fr.koor.tp.swing;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -21,37 +21,25 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
  * @author ldumay
  */
 
-public class MyWindowGridLayout extends JFrame{
+public class MyWindow extends JFrame{
     
     private static final long serialVersionUID = -728474938758L;
 
     /**
      * Constructor
      */
-    public MyWindowGridLayout(){
-        super("My Window Flow Layout");
+    public MyWindow(){
+        super("My Window 1");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(600, 400));
         this.setLocationRelativeTo(null);
         
         JPanel contentPane = (JPanel) this.getContentPane();
-        contentPane.setLayout(new GridLayout(2, 2, 10, 10));
-        
-        JButton btnPushMe = new JButton("Push Me");
-        btnPushMe.setBounds(200, 20, 160, 30);
-        contentPane.add(btnPushMe);
-        
-        JButton btnClickMe = new JButton("Click Me !!!!!!");
-        btnClickMe.setBounds(200, 70, 160, 30);
-        contentPane.add(btnClickMe);
-        
-        JCheckBox btnCheckMe = new JCheckBox("Check Me !");
-        btnCheckMe.setBounds(200, 120, 160, 30);
-        contentPane.add(btnCheckMe);
-        
-        JTextField btnEditeMe = new JTextField("Edite Me !");
-        btnEditeMe.setPreferredSize(new Dimension(120,30));
-        contentPane.add(btnEditeMe);
+        contentPane.setLayout(new FlowLayout());
+        contentPane.add(new JButton("Push Me"));
+        contentPane.add(new JButton("Click Me !!!!!!"));
+        contentPane.add(new JCheckBox("Check Me !"));
+        contentPane.add(new JTextField("Edite Me !"));
     }
 
     /**
@@ -62,8 +50,8 @@ public class MyWindowGridLayout extends JFrame{
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         
         //Start my Window
-        MyWindowGridLayout myWindowGridLayout = new MyWindowGridLayout();
-        myWindowGridLayout.setVisible(true);
+        MyWindow mainWindow = new MyWindow();
+        mainWindow.setVisible(true);
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exos.starwars;
+package starwars.dao;
 
 import fr.ldumay.others.Console;
 import java.sql.Connection;
@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.table.TableModel;
+import starwars.classes.Film;
 
 /**
  *
@@ -121,14 +123,13 @@ public class DAOFilm {
     /**
      * Requète de lecture des films dans une base de donnée
      * 
-     * listReadingArrayList(String sqlQuery)
-     * @param sqlQuery
-     * @return 
+     * listReadingArrayList()
+     * @return ArrayList
      * @throws java.sql.SQLException
      */
-    public ArrayList listReadingArrayList(String sqlQuery) throws SQLException{
+    public ArrayList listReadingArrayList() throws SQLException{
         try{
-            ResultSet datas = this.statement.executeQuery(sqlQuery);
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM films");
             ArrayList resultDatas = new ArrayList();
                 while (datas.next()) {
                     Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
@@ -138,6 +139,34 @@ public class DAOFilm {
                 conn.close();
                 Console.print("->Sélection des datas OK");
                 return resultDatas;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Requète de lecture des films dans une base de donnée
+     * 
+     * listReadingListTableModel()
+     * @return TableModel
+     * @throws java.sql.SQLException
+     */
+    public TableModel listReadingListTableModel() throws SQLException{
+        try{
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM films");
+            ArrayList<Film> resultDatas = new ArrayList();
+            TableModel result;
+                while (datas.next()) {
+                    Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
+                            datas.getInt(4), datas.getDouble(5), datas.getDouble(6) );
+                    resultDatas.add(newFilm);
+                }
+                conn.close();
+                result = (TableModel) resultDatas;
+                Console.print("->Sélection des datas OK");
+                return result;
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();

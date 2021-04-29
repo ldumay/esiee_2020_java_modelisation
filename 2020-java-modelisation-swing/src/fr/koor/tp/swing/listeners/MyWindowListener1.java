@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.koor.tp;
+package fr.koor.tp.swing.listeners;
 
+import fr.ldumay.others.Console;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -21,14 +24,19 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
  * @author ldumay
  */
 
-public class MyWindowFlowLayout extends JFrame{
+public class MyWindowListener1 extends JFrame implements ActionListener{
     
     private static final long serialVersionUID = -728474938758L;
+    
+    private JButton btnPushMe = new JButton("Push Me");
+    private JButton btnClickMe = new JButton("Click Me !!!!!!");
+    private JCheckBox btnCheckMe = new JCheckBox("Check Me !");
+    private JTextField btnEditeMe = new JTextField("Edite Me !");
 
     /**
      * Constructor
      */
-    public MyWindowFlowLayout(){
+    public MyWindowListener1(){
         super("My Window Flow Layout");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(600, 400));
@@ -37,23 +45,30 @@ public class MyWindowFlowLayout extends JFrame{
         JPanel contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 50));
         
-        JButton btnPushMe = new JButton("Push Me");
         btnPushMe.setBounds(200, 20, 160, 30);
+        btnPushMe.addActionListener(this);
         contentPane.add(btnPushMe);
         
-        JButton btnClickMe = new JButton("Click Me !!!!!!");
         btnClickMe.setBounds(200, 70, 160, 30);
+        btnClickMe.addActionListener(this);
         contentPane.add(btnClickMe);
         
-        JCheckBox btnCheckMe = new JCheckBox("Check Me !");
         btnCheckMe.setBounds(200, 120, 160, 30);
         contentPane.add(btnCheckMe);
         
-        JTextField btnEditeMe = new JTextField("Edite Me !");
         btnEditeMe.setPreferredSize(new Dimension(120,30));
         contentPane.add(btnEditeMe);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if( (JButton) event.getSource() == this.btnPushMe ){
+            Console.print("Push Me - Bouton cliqué !");
+        } else {
+            Console.print("Click Me - Bouton cliqué !");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -62,7 +77,7 @@ public class MyWindowFlowLayout extends JFrame{
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         
         //Start my Window
-        MyWindowFlowLayout myWindowFlowLayout = new MyWindowFlowLayout();
+        MyWindowListener1 myWindowFlowLayout = new MyWindowListener1();
         myWindowFlowLayout.setVisible(true);
     }
     

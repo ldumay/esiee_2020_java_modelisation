@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.koor.tp;
+package fr.koor.tp.swing;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -21,25 +21,33 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
  * @author ldumay
  */
 
-public class MyWindow extends JFrame{
+public class MyWindowBorderLayout extends JFrame{
     
     private static final long serialVersionUID = -728474938758L;
 
     /**
      * Constructor
      */
-    public MyWindow(){
-        super("My Window 1");
+    public MyWindowBorderLayout(){
+        super("My Window Flow Layout");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(600, 400));
         this.setLocationRelativeTo(null);
         
         JPanel contentPane = (JPanel) this.getContentPane();
-        contentPane.setLayout(new FlowLayout());
-        contentPane.add(new JButton("Push Me"));
-        contentPane.add(new JButton("Click Me !!!!!!"));
-        contentPane.add(new JCheckBox("Check Me !"));
-        contentPane.add(new JTextField("Edite Me !"));
+        contentPane.setLayout(new BorderLayout());
+        
+        JButton btnPushMe = new JButton("Push Me");
+        contentPane.add(btnPushMe, BorderLayout.NORTH);
+        
+        JButton btnClickMe = new JButton("Click Me !!!!!!");
+        contentPane.add(btnClickMe, BorderLayout.WEST);
+        
+        JCheckBox btnCheckMe = new JCheckBox("Check Me !");
+        contentPane.add(btnCheckMe, BorderLayout.SOUTH);
+        
+        JTextField btnEditeMe = new JTextField("Edite Me !");
+        contentPane.add(btnEditeMe);
     }
 
     /**
@@ -50,8 +58,8 @@ public class MyWindow extends JFrame{
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         
         //Start my Window
-        MyWindow mainWindow = new MyWindow();
-        mainWindow.setVisible(true);
+        MyWindowBorderLayout myWindowBorderLayout = new MyWindowBorderLayout();
+        myWindowBorderLayout.setVisible(true);
     }
     
 }

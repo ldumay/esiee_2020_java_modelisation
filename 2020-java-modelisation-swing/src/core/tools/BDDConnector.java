@@ -5,7 +5,7 @@
  */
 package core.tools;
 
-import exos.starwars.Film;
+import starwars.classes.Film;
 import fr.ldumay.others.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;

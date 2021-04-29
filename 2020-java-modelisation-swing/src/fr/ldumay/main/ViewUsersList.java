@@ -5,60 +5,38 @@
  */
 package fr.ldumay.main;
 
+import core.abstracts.TableModelFilms;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import starwars.classes.Film;
+import starwars.dao.DAOFilm;
 
 /**
  *
  * @author ldumay
  */
-public class ViewUsersList extends JFrame{
+public class ViewUsersList extends JFrame implements ActionListener{
     
-    private String[] tableCoulmnsName = {"Nom", "Valeur", "Utiliser"};
-    private Object[][] tableDatas = {
-        {"pi", 3.14159, false},
-        {"phi", 1.68803, true},
-        {"e", 2.71828, false},
-        {"euro", 1.0, false},
-        {"franc", 6.59, true},
-        {"pi", 3.14159, false},
-        {"phi", 1.68803, true},
-        {"e", 2.71828, false},
-        {"euro", 1.0, false},
-        {"franc", 6.59, true},
-        {"pi", 3.14159, false},
-        {"phi", 1.68803, true},
-        {"e", 2.71828, false},
-        {"euro", 1.0, false},
-        {"franc", 6.59, true},
-        {"pi", 3.14159, false},
-        {"phi", 1.68803, true},
-        {"e", 2.71828, false},
-        {"euro", 1.0, false},
-        {"franc", 6.59, true},
-        {"pi", 3.14159, false},
-        {"phi", 1.68803, true},
-        {"e", 2.71828, false},
-        {"euro", 1.0, false},
-        {"franc", 6.59, true},
-        {"pi", 3.14159, false},
-        {"phi", 1.68803, true},
-        {"e", 2.71828, false},
-        {"euro", 1.0, false},
-        {"franc", 6.59, true}
-    };
+    private String deconnexionString;
+    private JButton deconnexionButton;
+    //-
+    private ArrayList<Film> daoFilmList;
     
     /**
      * Constructor
      */
-    public ViewUsersList(){
+    public ViewUsersList() throws SQLException{
         super("Star Wars");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(500, 300));
@@ -67,24 +45,30 @@ public class ViewUsersList extends JFrame{
         JPanel contentPanel = (JPanel) this.getContentPane();
         contentPanel.setLayout(new FlowLayout());
         
-        JTable usersListTable = new JTable(this.tableDatas, this.tableCoulmnsName);
-        usersListTable.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        DAOFilm daoFilm = new DAOFilm();
+        this.daoFilmList = daoFilm.listReadingArrayList();
+        daoFilm.close();
+        
+        TableModel filmsTableModel = new TableModelFilms(this.daoFilmList);
+        JTable usersListTable = new JTable(filmsTableModel);
+        usersListTable.setPreferredScrollableViewportSize(new Dimension(480, 260));
         usersListTable.setFillsViewportHeight(true);
         
         JScrollPane scrollPane = new JScrollPane(usersListTable);
         contentPanel.add(scrollPane);
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        //Apply a look'n feel
-        UIManager.setLookAndFeel(new NimbusLookAndFeel());
         
-        //Start my Window
-        ViewUsersList usersList = new ViewUsersList();
-        usersList.setVisible(true);
+        deconnexionString = "Déconnexion";
+        deconnexionButton.setText(deconnexionString);
+        contentPanel.add(deconnexionButton);
+        
+        this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if((JButton)event.getSource() == deconnexionButton){
+            //-->close
+        }
     }
     
 }
