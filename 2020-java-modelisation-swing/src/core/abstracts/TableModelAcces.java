@@ -7,7 +7,7 @@ package core.abstracts;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-import starwars.classes.Film;
+import starwars.classes.Acces;
 
 /**
  *
@@ -15,10 +15,10 @@ import starwars.classes.Film;
  */
 
 /**
- * Class Absract - TableModelFilms
+ * Class Absract - TableModelAcces
  * <br>
  * <br>Constructor :
- * <br>- TableModelFilms(ArrayList<Film> daoFilmList)
+ * <br>- TableModelAcces(ArrayList<Acces> daoUsersList)
  * <br>
  * <br>Functions :
  * <br> - getColumnCount()
@@ -33,24 +33,25 @@ import starwars.classes.Film;
  * <br> - getRowCount()
  * <br> |--> int
  * <br>
+ * <br>
  * <br>End.
  */
-public class TableModelFilms extends AbstractTableModel {
+public class TableModelAcces extends AbstractTableModel {
 
-    private ArrayList<Film> filmsArrayList;
+    private ArrayList<Acces> usersList;
     private String[] columns;
 
     /**
      * Constructor
      * 
-     * TableModelFilms(ArrayList<Film> daoFilmList)
+     * TableModelAcces(ArrayList<Acces> daoUsersList)
      * 
-     * @param daoFilmList
+     * @param daoUsersList
      */
-    public TableModelFilms(ArrayList<Film> daoFilmList) {
+    public TableModelAcces(ArrayList<Acces> daoUsersList) {
         super();
-        filmsArrayList = daoFilmList;
-        columns = new String[]{"ID", "Titre", "Année", "Nb épisode", "Coût", "Recette", "Bénéfice"};
+        usersList = daoUsersList;
+        columns = new String[]{"ID", "Prénom", "Login", "Password", "Statut", "Age"};
     }
 
     // Number of column of your table
@@ -62,23 +63,20 @@ public class TableModelFilms extends AbstractTableModel {
     // The object to render in a cell
     @Override
     public Object getValueAt(int row, int col) {
-        Film film = filmsArrayList.get(row);
+        Acces user = usersList.get(row);
         switch (col) {
             case 0:
-                return film.getId();
+                return user.getId();
             case 1:
-                return film.getTitre();
+                return user.getPrenom();
             case 2:
-                return film.getAnneeDeSortie();
+                return user.getLogin();
             case 3:
-                return film.getNumeroEpisode();
+                return user.getPassword();
             case 4:
-                return film.getCout();
+                return user.getStatut();
             case 5:
-                return film.getRecette();
-            case 6:
-                double benefice = (double) film.calculBenefice().get(1);
-                return benefice;
+                return user.getAge();
             default:
                 return null;
         }
@@ -93,7 +91,7 @@ public class TableModelFilms extends AbstractTableModel {
     // Number of row of your table
     @Override
     public int getRowCount() {
-        return filmsArrayList.size();
+        return usersList.size();
     }
 
     //-Code généré et néssessaire.

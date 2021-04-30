@@ -20,12 +20,37 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import starwars.classes.Acces;
 import starwars.dao.DAOLogin;
 
 /**
  *
  * @author ldumay
+ */
+
+/**
+ * Class - ViewLogin
+ * <br>
+ * <br>Constructor :
+ * <br>- ViewLogin()
+ * <br>
+ * <br>Functions :
+ * <br> - createLeftPanel()
+ * <br> |--> JPanel
+ * <br>
+ * <br> - createRightPanel
+ * <br> |--> JPanel
+ * <br>
+ * <br>Basic getter :
+ * <br>- getUserConnecte()
+ * <br>- getUser()
+ * <br>
+ * <br>Basic setter :
+ * <br>- setUserConnecte()
+ * <br>- setUser()
+ * <br>
+ * <br>End.
  */
 public class ViewLogin extends JFrame implements ActionListener{
     
@@ -53,6 +78,16 @@ public class ViewLogin extends JFrame implements ActionListener{
     private String connexionString;
     private JButton connexionButton;
     //-
+    private JPanel contentBottomPanel;
+    private String filmsListButtonString;
+    private JButton filmsListButton;
+    private String usersListButtonString;
+    private JButton usersListButton;
+    //-
+    private String deconnexionButtonString;
+    private JButton deconnexionButton;
+    //-
+    private ViewFilmsList filmsList;
     private ViewUsersList usersList;
     
     /**
@@ -71,12 +106,7 @@ public class ViewLogin extends JFrame implements ActionListener{
         
         contentPanel.add(createLeftPanel());
         contentPanel.add(createRightPanel());
-        
-        messageString = "Erreur de login / Mot de Passe";
-        messageString.toUpperCase();
-        messageLabel = new JLabel(messageString);
-        messageLabel.setVisible(false);
-        contentPanel.add(messageLabel);
+        contentPanel.add(createBottomPanel());
     }
     
     /**
@@ -131,14 +161,55 @@ public class ViewLogin extends JFrame implements ActionListener{
         
         return contentRightPanel;
     }
+    
+    /**
+     * Création d'un panneau qui serait placé en bas.
+     * 
+     * @return JPanel
+     */
+    private JPanel createBottomPanel(){
+        contentBottomPanel = new JPanel(new BorderLayout());
+        
+        messageString = "Erreur de login / Mot de Passe";
+        messageString.toUpperCase();
+        messageLabel = new JLabel(messageString, SwingConstants.CENTER);
+        messageLabel.setPreferredSize(new Dimension(450, 40));
+        messageLabel.setVisible(false);
+        contentPanel.add(messageLabel);
+        
+        filmsListButtonString = "Liste des films";
+        filmsListButtonString.toUpperCase();
+        filmsListButton = new JButton(filmsListButtonString);
+        filmsListButton.addActionListener(this);
+        filmsListButton.setVisible(false);
+        contentPanel.add(filmsListButton);
+        
+        usersListButtonString = "Liste des users";
+        usersListButtonString.toUpperCase();
+        usersListButton = new JButton(usersListButtonString);
+        usersListButton.addActionListener(this);
+        usersListButton.setVisible(false);
+        contentPanel.add(usersListButton);
+        
+        deconnexionButtonString = "Déconnexion";
+        deconnexionButtonString.toUpperCase();
+        deconnexionButton = new JButton(deconnexionButtonString);
+        deconnexionButton.addActionListener(this);
+        deconnexionButton.setVisible(false);
+        contentPanel.add(deconnexionButton);
+        
+        return contentBottomPanel;
+    }
 
     @Override
     public void actionPerformed(ActionEvent event) {
+        //Click button connexionButton
         if( (JButton)event.getSource() == connexionButton){
             Console.print("[Demande de connexion]");
             DAOLogin daoLogin = new DAOLogin();
             String login = loginRightTextField.getText();
             String password = passwordRightTextField.getText();
+            //String password = Arrays.toString(passwordRightTextField.getPassword());
             Console.print("Login : "+login+" - Password : "+password);
             try {
                 userConnecte = true;
@@ -146,9 +217,13 @@ public class ViewLogin extends JFrame implements ActionListener{
                     user = daoLogin.checkPassword(login, password);
                     if(user!=null){
                         Console.print("user : "+user.getLogin()+" / "+user.getPassword());
-                        usersList = new ViewUsersList(user, userConnecte);
                         messageLabel.setText("Connecté");
                         messageLabel.setVisible(true);
+                        filmsListButton.setVisible(true);
+                        usersListButton.setVisible(true);
+                        deconnexionButton.setVisible(true);
+                        contentLeftPanel.setVisible(false);
+                        contentRightPanel.setVisible(false);
                     } else {
                         messageLabel.setVisible(true);
                     }
@@ -156,6 +231,32 @@ public class ViewLogin extends JFrame implements ActionListener{
             } catch (SQLException ex) {
                 Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        //Click button filmsListButton
+        if( (JButton)event.getSource() == filmsListButton && userConnecte==true){
+            try {
+                filmsList = new ViewFilmsList();
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex); }
+        }
+        //Click button usersListButton
+        if( (JButton)event.getSource() == usersListButton && userConnecte==true){
+            try {
+                usersList = new ViewUsersList();
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex); }
+        }
+        
+        //Click button deconnexionButton
+        if( (JButton)event.getSource() == deconnexionButton){
+            messageLabel.setText("Déconnecté");
+            filmsListButton.setVisible(false);
+            usersListButton.setVisible(false);
+            userConnecte = false;
+            user = null;
+            deconnexionButton.setVisible(false);
+            contentLeftPanel.setVisible(true);
+            contentRightPanel.setVisible(true);
         }
     }
 

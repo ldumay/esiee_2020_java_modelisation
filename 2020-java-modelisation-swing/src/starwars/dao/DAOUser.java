@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import starwars.classes.Acces;
 
 /**
@@ -20,14 +21,14 @@ import starwars.classes.Acces;
  */
 
 /**
- * Class - DAOLogin
+ * Class - DAOUser
  * <br>
  * <br>Constructor :
- * <br>- DAOLogin()
+ * <br>- DAOUser()
  * <br>
  * <br>Functions :
  * <br>
- * <br>- DAOLogin.checkPassword(String login, String Password)
+ * <br>- DAOUser.listReading()
  * <br> |--> void
  * <br>
  * <br>- DAOFilm.close()
@@ -51,7 +52,7 @@ import starwars.classes.Acces;
  * <br>
  * <br>End.
  */
-public class DAOLogin {
+public class DAOUser {
     
     //-Attributs de base
     private String bddName = "univcergy22";
@@ -71,7 +72,7 @@ public class DAOLogin {
      * 
      * DAOFilm()
      */
-    public DAOLogin(){
+    public DAOUser(){
         try {
             Class.forName(this.strClassName);
             this.conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
@@ -89,14 +90,11 @@ public class DAOLogin {
     /**
      * Requète de lecture des films dans une base de donnée
      * 
-     * checkPassword(String login, String password)
-     * @param login
-     * @param password
+     * listReading()
      * @return Acces
      * @throws java.sql.SQLException
      */
-    public Acces checkPassword(String login, String password) throws SQLException{
-        Acces accesSelectionne = null;
+    public ArrayList listReading() throws SQLException{
         try{
             ResultSet datas = this.statement.executeQuery("SELECT * FROM acces");
             ArrayList resultDatas = new ArrayList();
@@ -104,18 +102,14 @@ public class DAOLogin {
                     Acces newAcces = new Acces(datas.getInt(1), datas.getString(2), datas.getString(3), 
                             datas.getString(4), datas.getString(5), datas.getInt(6));
                     resultDatas.add(newAcces);
-                    if( (newAcces.getLogin() == null ? login == null : newAcces.getLogin().equals(login))
-                        && (newAcces.getPassword() == null ? password == null : newAcces.getPassword().equals(password)) ){
-                        accesSelectionne = newAcces;
-                        Console.print("->Correspondance du login et mdp OK");
-                    }
+                    Console.print("->Liste OK");
                 }
                 conn.close();
-                return accesSelectionne;
+                return resultDatas;
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
-            return accesSelectionne;
+            return null;
         }
     }
     

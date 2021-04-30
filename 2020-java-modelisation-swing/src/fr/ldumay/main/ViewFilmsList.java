@@ -5,7 +5,7 @@
  */
 package fr.ldumay.main;
 
-import core.abstracts.TableModelAcces;
+import core.abstracts.TableModelFilms;
 import fr.ldumay.others.Console;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -19,8 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
-import starwars.classes.Acces;
-import starwars.dao.DAOUser;
+import starwars.classes.Film;
+import starwars.dao.DAOFilm;
 
 /**
  *
@@ -28,26 +28,27 @@ import starwars.dao.DAOUser;
  */
 
 /**
- * Class - ViewUsersList
+ * Class - ViewFilmsList
  * <br>
  * <br>Constructor :
- * <br>- ViewUsersList()
+ * <br>- ViewFilmsList()
  * <br>
  * <br>End.
  */
-public class ViewUsersList extends JFrame implements ActionListener{
+public class ViewFilmsList extends JFrame implements ActionListener{
     
     //-
     private String closeViewString;
     private JButton closeViewButton;
     //-
-    private ArrayList<Acces> daoUserList;
+    private ArrayList<Film> daoFilmList;
     
     /**
      * Constructor
+     * 
      * @throws java.sql.SQLException
      */
-    public ViewUsersList() throws SQLException{
+    public ViewFilmsList() throws SQLException{
         super("Star Wars");
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,12 +58,12 @@ public class ViewUsersList extends JFrame implements ActionListener{
         JPanel contentPanel = (JPanel) this.getContentPane();
         contentPanel.setLayout(new FlowLayout());
         
-        DAOUser daoUsers = new DAOUser();
-        this.daoUserList = daoUsers.listReading();
-        daoUsers.close();
+        DAOFilm daoFilm = new DAOFilm();
+        this.daoFilmList = daoFilm.listReadingArrayList();
+        daoFilm.close();
         
-        TableModel usersTableModel = new TableModelAcces(this.daoUserList);
-        JTable usersListTable = new JTable(usersTableModel);
+        TableModel filmsTableModel = new TableModelFilms(this.daoFilmList);
+        JTable usersListTable = new JTable(filmsTableModel);
         usersListTable.setPreferredScrollableViewportSize(new Dimension(780, 250));
         usersListTable.setFillsViewportHeight(true);
         
