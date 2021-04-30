@@ -29,30 +29,31 @@ import starwars.dao.DAOLogin;
  */
 public class ViewLogin extends JFrame implements ActionListener{
     
-    JPanel contentPanel;
+    private Acces user;
+    private boolean userConnecte;
     //-
-    String messageString;
-    JLabel messageLabel;
-    String loginString;
-    JLabel loginLabel;
+    private JPanel contentPanel;
     //-
-    JPanel contentLeftPanel;
-    String passwordString;
-    JLabel passwordLabel;
+    private String messageString;
+    private JLabel messageLabel;
+    private String loginString;
+    private JLabel loginLabel;
     //-
-    JPanel contentRightPanel;
-    String loginRightString;
-    JTextField loginRightTextField;
+    private JPanel contentLeftPanel;
+    private String passwordString;
+    private JLabel passwordLabel;
     //-
-    String passwordRightString;
-    JPasswordField passwordRightTextField;
+    private JPanel contentRightPanel;
+    private String loginRightString;
+    private JTextField loginRightTextField;
     //-
-    String connexionString;
-    JButton connexionButton;
+    private String passwordRightString;
+    private JPasswordField passwordRightTextField;
     //-
-    Acces user;
+    private String connexionString;
+    private JButton connexionButton;
     //-
-    ViewUsersList usersList;
+    private ViewUsersList usersList;
     
     /**
      * Constructor
@@ -62,6 +63,8 @@ public class ViewLogin extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(500, 300));
         this.setLocationRelativeTo(null);
+        
+        userConnecte = false;
         
         contentPanel = (JPanel) this.getContentPane();
         contentPanel.setLayout(new FlowLayout());
@@ -138,19 +141,29 @@ public class ViewLogin extends JFrame implements ActionListener{
             String password = passwordRightTextField.getText();
             Console.print("Login : "+login+" - Password : "+password);
             try {
-                user = daoLogin.checkPAssword(login, password);
-                if(user!=null){
-                    Console.print("user : "+user.getLogin()+" / "+user.getPassword());
-                    usersList = new ViewUsersList();
-                    messageLabel.setText("Connecté");
-                    messageLabel.setVisible(true);
-                } else {
-                    messageLabel.setVisible(true);
-                }
+                userConnecte = true;
+                if(userConnecte==true){
+                    user = daoLogin.checkPassword(login, password);
+                    if(user!=null){
+                        Console.print("user : "+user.getLogin()+" / "+user.getPassword());
+                        usersList = new ViewUsersList(user, userConnecte);
+                        messageLabel.setText("Connecté");
+                        messageLabel.setVisible(true);
+                    } else {
+                        messageLabel.setVisible(true);
+                    }
+                } else { messageLabel.setText("Déjà connecté"); }
             } catch (SQLException ex) {
                 Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+
+    // The methods of basic getter below.
+    public boolean getUserConnecte() { return userConnecte; }
+    public Acces getUser() { return user; }
     
+    // The methods of basic setter below.
+    public void setUserConnecte(boolean userConnecte) { this.userConnecte = userConnecte; }
+    public void setUser(Acces user) { this.user = user; }
 }

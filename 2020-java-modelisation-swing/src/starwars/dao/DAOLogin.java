@@ -28,8 +28,8 @@ import starwars.classes.Film;
  * <br>
  * <br>Functions :
  * <br>
- * <br>- DAOFilm.checkPAssword(String login, String Password)
- * <br> |--> void
+ * <br>- DAOFilm.checkPassword(String login, String Password)
+ <br> |--> void
  * <br>
  * <br>- DAOFilm.close()
  * <br> |--> void
@@ -90,13 +90,13 @@ public class DAOLogin {
     /**
      * Requète de lecture des films dans une base de donnée
      * 
-     * checkPAssword(String login, String password)
+     * checkPassword(String login, String password)
      * @param login
      * @param password
      * @return Acces
      * @throws java.sql.SQLException
      */
-    public Acces checkPAssword(String login, String password) throws SQLException{
+    public Acces checkPassword(String login, String password) throws SQLException{
         Acces accesSelectionne = null;
         try{
             ResultSet datas = this.statement.executeQuery("SELECT * FROM acces");
