@@ -50,7 +50,7 @@ public class TableModelFilms extends AbstractTableModel {
     public TableModelFilms(ArrayList<Film> daoFilmList) {
         super();
         filmsArrayList = daoFilmList;
-        columns = new String[]{"ID", "Titre", "Année", "Nb épisode", "Coût", "Recette", "Bénéfice"};
+        columns = new String[]{"ID", "Titre", "Année", "Nb épisode", "Coût", "Recette", "Bénéfice", "Avis"};
     }
 
     // Number of column of your table
@@ -79,6 +79,12 @@ public class TableModelFilms extends AbstractTableModel {
             case 6:
                 double benefice = (double) film.calculBenefice().get(1);
                 return benefice;
+            case 7:
+                int moyenne = 0;
+                try{
+                    moyenne = (int) film.calculMoyenneAvis();
+                }catch(Exception e){ System.err.println(e); }
+                return moyenne+"/5";
             default:
                 return null;
         }

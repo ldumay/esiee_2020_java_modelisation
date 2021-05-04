@@ -6,6 +6,7 @@
 package fr.starwars.models;
 
 import fr.bases.Console;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +41,7 @@ import java.util.Scanner;
  * <br>- getNombreActeurs()
  * <br>- getNombrePersonnages()
  * <br>- calculBenefice()
+ * <br>- calculMoyenneAvis()
  * <br>- isBefore()
  * <br>
  * <br>Basic getter :
@@ -67,6 +69,8 @@ public class Film {
     private double cout;
     private double recette;
     private ArrayList<Acteur> acteurs;
+    private ArrayList<Avis> daoAvisList;
+    private int moyenneAvis = 0;
     
     /**
      * Constructor
@@ -171,6 +175,28 @@ public class Film {
             result.add(x);
         }
         return result;
+    }
+    
+    /**
+     * Calcule de la moyenne des avis du film
+     * 
+     */
+    public int calculMoyenneAvis() throws SQLException{
+        try {
+            DAOAvis daoAvis = new DAOAvis();
+            this.daoAvisList = daoAvis.listReadingArrayList(this.id);
+            daoAvis.close();
+
+            int moyenneAvis = 0;
+            for(Avis avisList : this.daoAvisList){
+                moyenneAvis = moyenneAvis + avisList.getId();
+            }
+            if(moyenneAvis<0 || moyenneAvis>0){
+                moyenneAvis = ( moyenneAvis / this.daoAvisList.size() ) / 10;
+            }
+            this.moyenneAvis = moyenneAvis;
+        } catch (Exception e) { System.err.println(e); }
+        return this.moyenneAvis;
     }
     
     /**

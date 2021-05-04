@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.TableModel;
+import starwars.classes.Avis;
 import starwars.classes.Film;
 
 /**
@@ -21,23 +22,23 @@ import starwars.classes.Film;
  */
 
 /**
- * Class - DAOFilm
+ * Class - DAOAvis
  * <br>
  * <br>Constructor :
- * <br>- DAOFilm()
+ * <br>- DAOAvis()
  * <br>
  * <br>Functions :
  * <br>
- * <br>- DAOFilm.listReading(String typeElement, String sqlQuery)
+ * <br>- DAOAvis.listReading(String typeElement, String sqlQuery)
  * <br> |--> void
  * <br>
- * <br>- DAOFilm.addFilm(String tableBDD, Film film)
+ * <br>- DAOAvis.addAvis(String tableBDD, Film film)
  * <br> |--> void
  * <br>
- * <br>- DAOFilm.deleteFilm(String tableBDD, int datasId)
+ * <br>- DAOAvis.deleteAvis(String tableBDD, int datasId)
  * <br> |--> void
  * <br>
- * <br>- DAOFilm.close()
+ * <br>- DAOAvis.close()
  * <br> |--> void
  * <br>
  * <br>Basic getter :
@@ -58,7 +59,7 @@ import starwars.classes.Film;
  * <br>
  * <br>End.
  */
-public class DAOFilm {
+public class DAOAvis {
     
     //-Attributs de base
     private String bddName = "univcergy22";
@@ -76,14 +77,14 @@ public class DAOFilm {
     /**
      * Constructor
      * 
-     * DAOFilm()
+     * DAOAvis()
      */
-    public DAOFilm(){
+    public DAOAvis(){
         try {
             Class.forName(this.strClassName);
             this.conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
             this.statement = (Statement) conn.createStatement();
-            Console.print("=> DAOFilm ready");
+            Console.print("=> DAOAvis ready");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver non chargé !");
             e.printStackTrace();
@@ -94,7 +95,7 @@ public class DAOFilm {
     }
     
     /**
-     * Requète de lecture des films dans une base de donnée
+     * Requète de lecture des avis dans une base de donnée
      * 
      * listReadingConsole(String sqlQuery)
      * @param sqlQuery
@@ -105,13 +106,10 @@ public class DAOFilm {
             ResultSet datas = this.statement.executeQuery(sqlQuery);
             Console.print("->Sélection des datas OK");
             while (datas.next()) {
-                Console.print("Film :"
-                        +"\n- id du film : "+datas.getInt(1)
-                        +"\n- titre du film : "+datas.getString(2)
-                        +"\n- année de sortie : "+datas.getString(3)
-                        +"\n- numéro de l'épisode du film : "+datas.getInt(4)
-                        +"\n- coût du film : "+datas.getDouble(5)
-                        +"\n- recette du film : "+datas.getDouble(6)
+                Console.print("Avis :"
+                        +"\n- id du avis : "+datas.getInt(1)
+                        +"\n- titre du avis : "+datas.getString(2)
+                        +"\n- description : "+datas.getString(3)
                         );
             }
         } catch (SQLException e) {
@@ -121,7 +119,7 @@ public class DAOFilm {
     }
     
     /**
-     * Requète de lecture des films dans une base de donnée
+     * Requète de lecture des Avis dans une base de donnée
      * 
      * listReadingArrayList()
      * @return ArrayList
@@ -129,12 +127,11 @@ public class DAOFilm {
      */
     public ArrayList listReadingArrayList() throws SQLException{
         try{
-            ResultSet datas = this.statement.executeQuery("SELECT * FROM films");
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM avis");
             ArrayList resultDatas = new ArrayList();
                 while (datas.next()) {
-                    Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
-                            datas.getInt(4), datas.getDouble(5), datas.getDouble(6));
-                    resultDatas.add(newFilm);
+                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3));
+                    resultDatas.add(newAvis);
                 }
                 conn.close();
                 Console.print("->Sélection des datas OK");
@@ -147,7 +144,32 @@ public class DAOFilm {
     }
     
     /**
-     * Requète de lecture des films dans une base de donnée
+     * Requète de lecture des Avis d'un film dans une base de donnée
+     * 
+     * listReadingArrayList()
+     * @return ArrayList
+     * @throws java.sql.SQLException
+     */
+    public ArrayList listReadingArrayList(int idFilm) throws SQLException{
+        try{
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM films_acces_avis WHERE films_id="+idFilm+"");
+            ArrayList resultDatas = new ArrayList();
+                while (datas.next()) {
+                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3));
+                    resultDatas.add(newAvis);
+                }
+                conn.close();
+                Console.print("->Sélection des datas OK");
+                return resultDatas;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Requète de lecture des avis dans une base de donnée
      * 
      * listReadingListTableModel()
      * @return TableModel
@@ -155,13 +177,12 @@ public class DAOFilm {
      */
     public TableModel listReadingListTableModel() throws SQLException{
         try{
-            ResultSet datas = this.statement.executeQuery("SELECT * FROM films");
-            ArrayList<Film> resultDatas = new ArrayList();
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM avis");
+            ArrayList<Avis> resultDatas = new ArrayList();
             TableModel result;
                 while (datas.next()) {
-                    Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
-                            datas.getInt(4), datas.getDouble(5), datas.getDouble(6) );
-                    resultDatas.add(newFilm);
+                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3));
+                    resultDatas.add(newAvis);
                 }
                 conn.close();
                 result = (TableModel) resultDatas;
@@ -175,22 +196,20 @@ public class DAOFilm {
     }
     
     /**
-     * Requète d'ajout d'un film dans une base de donnée
+     * Requète d'ajout d'un avis dans une base de donnée
      * 
-     * addFilm(String tableBDD, Film film)
+     * addAvis(String tableBDD, Avis avis)
      * @param tableBDD
-     * @param film
+     * @param avis
      * @throws java.sql.SQLException
      */
-    public void addFilm(String tableBDD, Film film) throws SQLException{
+    public void addAvis(String tableBDD, Avis avis) throws SQLException{
         try{
-            String sql = "INSERT INTO "+tableBDD+" (`titre`, `anneeDeSortie`, `numeroEpisode`, `cout`, `recette`) VALUES ";
+            String sql = "INSERT INTO "+tableBDD+" (`titre`, `title`, `description`, `note_avis`) VALUES ";
             String sqlElements = "("
-                            +"\""+film.getTitre()+"\""+","
-                            +"\""+film.getAnneeDeSortie()+"\""+","
-                            +film.getNumeroEpisode()+","
-                            +film.getCout()+","
-                            +film.getRecette()
+                            +"\""+avis.getTitre()+"\""+","
+                            +"\""+avis.getDescription()+"\""+","
+                            +avis.getNoteAvis()
                             +")";
             sql += sqlElements;
             Console.print(sql);
@@ -203,14 +222,14 @@ public class DAOFilm {
     }
     
     /**
-     * Requète de suppression d'un film dans une base de donnée
+     * Requète de suppression d'un avis dans une base de donnée
      * 
-     * deleteFilm(String table, int datasId)
+     * deleteAvis(String table, int datasId)
      * @param tableBDD
      * @param datasId
      * @throws java.sql.SQLException
      */
-    public void deleteFilm(String tableBDD, int datasId) throws SQLException{
+    public void deleteAvis(String tableBDD, int datasId) throws SQLException{
         try{
             String sql = "DELETE FROM "+tableBDD+" WHERE id="+datasId+";";
             Console.print(sql);
@@ -223,19 +242,19 @@ public class DAOFilm {
     }
     
     /**
-     * Requète de suppression d'un film dans une base de donnée
+     * Requète de suppression d'un avis dans une base de donnée
      * 
-     * deleteFilm(String table, int datasId)
+     * deleteAvis(String table, int datasId)
      * @param tableBDD
-     * @param film
+     * @param avis
      * @throws java.sql.SQLException
      */
-    public void deleteFilm(String tableBDD, Film film) throws SQLException{
+    public void deleteAvis(String tableBDD, Avis avis) throws SQLException{
         try{
-            String sql = "DELETE FROM "+tableBDD+" WHERE id="+film.getId()+";";
+            String sql = "DELETE FROM "+tableBDD+" WHERE id="+avis.getId()+";";
             Console.print(sql);
             statement.executeUpdate(sql);
-            Console.print("->Suppression de la ligne "+film.getId()+" dans la table ["+tableBDD+"] OK");
+            Console.print("->Suppression de la ligne "+avis.getId()+" dans la table ["+tableBDD+"] OK");
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
