@@ -8,11 +8,11 @@ package starwars.dao;
 import fr.ldumay.others.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import starwars.classes.Acces;
+import starwars.classes.Avis;
+import starwars.classes.Film;
 
 /**
  *
@@ -20,17 +20,20 @@ import starwars.classes.Acces;
  */
 
 /**
- * Class - DAOUser
- * <br>
+ * Class - DAOAvisForFilmByAcces
+ <br>
  * <br>Constructor :
- * <br>- DAOUser()
- * <br>
+ * <br>- DAOAvisForFilmByAcces()
+ <br>
  * <br>Functions :
  * <br>
- * <br>- DAOUser.listReading()
+ * <br>- DAOAvisForFilmByAcces.addAvisForFilmByAcces(Avis avis, Film film, Acces acces)
  * <br> |--> void
  * <br>
- * <br>- DAOFilm.close()
+ * <br>- DAOAvisForFilmByAcces.deleteAvisForFilmByAcces(Avis avis, Film film, Acces acces)
+ * <br> |--> void
+ * <br>
+ * <br>- DAOAvisForFilmByAcces.close()
  * <br> |--> void
  * <br>
  * <br>Basic getter :
@@ -51,7 +54,7 @@ import starwars.classes.Acces;
  * <br>
  * <br>End.
  */
-public class DAOUser {
+public class DAOAvisForFilmByAcces {
     
     //-Attributs de base
     private String bddName = "univcergy22";
@@ -69,14 +72,14 @@ public class DAOUser {
     /**
      * Constructor
      * 
-     * DAOFilm()
+     * DAOFilmEtAvis()
      */
-    public DAOUser(){
+    public DAOAvisForFilmByAcces(){
         try {
             Class.forName(this.strClassName);
             this.conn = DriverManager.getConnection(this.bddUrl, this.bddLogin, this.bddPassword);
             this.statement = (Statement) conn.createStatement();
-            Console.print("=> DAOFilm ready");
+            Console.print("=> DAOAvisForFilmByAcces ready");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver non chargé !");
             e.printStackTrace();
@@ -87,52 +90,47 @@ public class DAOUser {
     }
     
     /**
-     * Requète de lecture des films dans une base de donnée
+     * Requète d'ajout d'une liaison avis, film et accès dans une base de donnée
      * 
-     * listReading()
-     * @return Acces
-     * @throws java.sql.SQLException
-     */
-    public ArrayList listReading() throws SQLException{
-        try{
-            ResultSet datas = this.statement.executeQuery("SELECT * FROM acces");
-            ArrayList resultDatas = new ArrayList();
-                while (datas.next()) {
-                    Acces newAcces = new Acces(datas.getInt(1), datas.getString(2), datas.getString(3), 
-                            datas.getString(4), datas.getString(5), datas.getInt(6));
-                    resultDatas.add(newAcces);
-                    Console.print("->Liste OK");
-                }
-                conn.close();
-                return resultDatas;
-        } catch (SQLException e) {
-            System.err.println("Autre erreur !");
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    /**
-     * Requète d'ajout d'un film dans une base de donnée
-     * 
-     * addFilm(Acces acces)
+     * addAvis(Avis avis)
+     * @param film
      * @param acces
+     * @param avis
      * @throws java.sql.SQLException
      */
-    public void addAcces(Acces acces) throws SQLException{
+    public void addAvisForFilmByAcces(Avis avis, Film film, Acces acces) throws SQLException{
         try{
-            String sql = "INSERT INTO `acces` (`prenom`, `login`, `password`, `statut`, `age`) VALUES ";
+            String sql = "INSERT INTO `films_acces_avis` (`films_id`, `acces_id`, `avis_id`) VALUES ";
             String sqlElements = "("
-                            +"\""+acces.getPrenom()+"\""+","
-                            +"\""+acces.getLogin()+"\""+","
-                            +"\""+acces.getPassword()+"\""+","
-                            +"\""+acces.getStatut()+"\""+","
-                            +acces.getAge()
+                            +film.getId()+","
+                            +acces.getId()+","
+                            +avis.getId()
                             +")";
             sql += sqlElements;
             Console.print(sql);
             statement.executeUpdate(sql);
-            Console.print("->Insertion des datas dans la [acces] OK");
+            Console.print("->Insertion des datas dans la [films_acces_avis] OK");
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète de suppression d'une liaison avis, film et accès dans une base de donnée
+     * 
+     * deleteAvis(Avis avis)
+     * @param film
+     * @param acces
+     * @param avis
+     * @throws java.sql.SQLException
+     */
+    public void deleteAvisForFilmByAcces(Avis avis, Film film, Acces acces) throws SQLException{
+        try{
+            String sql = "DELETE FROM `films_acces_avis` WHERE id="+avis.getId()+";";
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Suppression de la ligne "+avis.getId()+" dans la table [films_acces_avis] OK");
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();

@@ -49,7 +49,7 @@ public class ViewFilmsList extends JFrame implements ActionListener{
      * @throws java.sql.SQLException
      */
     public ViewFilmsList() throws SQLException{
-        super("Star Wars");
+        super("Star Wars - Liste des films");
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(800, 350));

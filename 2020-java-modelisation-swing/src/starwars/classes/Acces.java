@@ -14,7 +14,8 @@ package starwars.classes;
  * Class - Acces
  * <br>
  * <br>Constructor :
- * <br>- Acces()
+ * <br>- Acces(String prenom, String login, String password, String statut, int age)
+ * <br>- Acces(int id, String prenom, String login, String password, String statut, int age)
  * <br>
  * <br>Functions :
  * <br>
@@ -52,6 +53,24 @@ public class Acces {
      * Acces()
      */
     public Acces(){}
+    
+    /**
+     * Constructor
+     * 
+     * Acces()
+     * @param prenom
+     * @param login
+     * @param password
+     * @param statut
+     * @param age
+     */
+    public Acces(String prenom, String login, String password, String statut, int age){
+        this.prenom = prenom;
+        this.login = login;
+        this.password = password;
+        this.statut = statut;
+        this.age = age;
+    }
     
     /**
      * Constructor

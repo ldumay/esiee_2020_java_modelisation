@@ -37,7 +37,8 @@ import starwars.dao.DAOAvis;
  * <br>Constructor :
  * <br>- Film()
  * <br>- Film(boolean nouveaFilm)
- * <br>- Film(String titre, String anneeDeSortie, String numeroEpisode, String cout, String recette)
+ * <br>- Film(String titre, String anneeDeSortie, int numeroEpisode, double cout, double recette)
+ * <br>- Film(int id, String titre, String anneeDeSortie, int numeroEpisode, double cout, double recette)
  * <br>
  * <br>Functions :
  * <br>- getNombreActeurs()
@@ -118,6 +119,24 @@ public class Film {
             //-
             print("[Nouveau film enregistré]");
         }
+    }
+    /**
+     * Constructor
+     * 
+     * Film(String titre, String anneeDeSortie, String numeroEpisode, String cout, String recette)
+     * @param titre
+     * @param anneeDeSortie
+     * @param numeroEpisode
+     * @param cout
+     * @param recette
+     */
+    public Film(String titre, String anneeDeSortie, int numeroEpisode, double cout, double recette) {
+        this.titre = titre;
+        this.anneeDeSortie = anneeDeSortie;
+        this.numeroEpisode = numeroEpisode;
+        this.cout = cout;
+        this.recette = recette;
+        this.acteurs = new ArrayList();
     }
     
     /**
@@ -258,13 +277,15 @@ public class Film {
     public String toString(){
         return "[Film]"+
             "\n"+this.getId()
-            +"\n- titre du film : "+this.getTitre()
-            +"\n- année de sortie du film : "+this.getAnneeDeSortie()
-            +"\n- numéro de l'épisode du film : "+this.getNumeroEpisode()
-            +"\n- coût du film : "+this.getCout()
-            +"\n- recette du film : "+this.getRecette()
+            +"\n- titre : "+this.getTitre()
+            +"\n- annéeSortie : "+this.getAnneeDeSortie()
+            +"\n- nbEpisode : "+this.getNumeroEpisode();
+            /*
+            +"\n- coût : "+this.getCout()
+            +"\n- recette : "+this.getRecette()
             +"\n- bénéfice : "+this.calculBenefice()
             +"\n- nb acteurs : "+this.getNombreActeurs()
             +"\n- nb personnages : "+this.getNombrePersonnages();
+            */
     }
 }

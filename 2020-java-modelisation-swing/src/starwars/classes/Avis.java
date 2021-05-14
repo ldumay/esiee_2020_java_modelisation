@@ -22,7 +22,8 @@ package starwars.classes;
  * <br>
  * <br>Constructor :
  * <br>- Avis()
- * <br>- Avis(int id, String titre, String description)
+ * <br>- Avis(String titre, String description, int note_avis)
+ * <br>- Avis(int id, String titre, String description, int note_avis)
  * <br>
  * <br>Functions :
  * <br>- getNombreActeurs()
@@ -61,15 +62,31 @@ public class Avis {
     /**
      * Constructor
      * 
+     * Avis(String titre, String description)
+     * @param titre
+     * @param description
+     * @param note_avis
+     */
+    public Avis(String titre, String description, int note_avis){
+        this.titre = titre;
+        this.description = description;
+        this.note_avis = note_avis;
+    }
+    
+    /**
+     * Constructor
+     * 
      * Avis(int id, String titre, String description)
      * @param id
      * @param titre
      * @param description
+     * @param note_avis
      */
-    public Avis(int id, String titre, String description){
+    public Avis(int id, String titre, String description, int note_avis){
         this.id = id;
         this.titre = titre;
         this.description = description;
+        this.note_avis = note_avis;
     }
     
     // The methods of basic getter below.

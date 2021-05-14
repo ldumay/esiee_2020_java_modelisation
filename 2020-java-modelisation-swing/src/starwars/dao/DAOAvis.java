@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.TableModel;
 import starwars.classes.Avis;
-import starwars.classes.Film;
 
 /**
  *
@@ -32,7 +31,9 @@ import starwars.classes.Film;
  * <br>- DAOAvis.listReading(String typeElement, String sqlQuery)
  * <br> |--> void
  * <br>
- * <br>- DAOAvis.addAvis(String tableBDD, Film film)
+ * <br>- DAOAvis.addAvis(Avis avis)
+ * <br>
+ * <br>- DAOAvis.addAvis(String tableBDD, Avis avis)
  * <br> |--> void
  * <br>
  * <br>- DAOAvis.deleteAvis(String tableBDD, int datasId)
@@ -130,7 +131,7 @@ public class DAOAvis {
             ResultSet datas = this.statement.executeQuery("SELECT * FROM avis");
             ArrayList resultDatas = new ArrayList();
                 while (datas.next()) {
-                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3));
+                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3), datas.getInt(4));
                     resultDatas.add(newAvis);
                 }
                 conn.close();
@@ -155,7 +156,7 @@ public class DAOAvis {
             ResultSet datas = this.statement.executeQuery("SELECT * FROM films_acces_avis WHERE films_id="+idFilm+"");
             ArrayList resultDatas = new ArrayList();
                 while (datas.next()) {
-                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3));
+                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3), datas.getInt(4));
                     resultDatas.add(newAvis);
                 }
                 conn.close();
@@ -181,7 +182,7 @@ public class DAOAvis {
             ArrayList<Avis> resultDatas = new ArrayList();
             TableModel result;
                 while (datas.next()) {
-                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3));
+                    Avis newAvis = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3), datas.getInt(4));
                     resultDatas.add(newAvis);
                 }
                 conn.close();
@@ -192,6 +193,31 @@ public class DAOAvis {
             System.err.println("Autre erreur !");
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    /**
+     * Requète d'ajout d'un avis dans une base de donnée
+     * 
+     * addAvis(Avis avis)
+     * @param avis
+     * @throws java.sql.SQLException
+     */
+    public void addAvis(Avis avis) throws SQLException{
+        try{
+            String sql = "INSERT INTO `avis` (`titre`, `title`, `description`, `note_avis`) VALUES ";
+            String sqlElements = "("
+                            +"\""+avis.getTitre()+"\""+","
+                            +"\""+avis.getDescription()+"\""+","
+                            +avis.getNoteAvis()
+                            +")";
+            sql += sqlElements;
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Insertion des datas dans la [avis] OK");
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
         }
     }
     
@@ -218,6 +244,30 @@ public class DAOAvis {
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète d'ajout d'un avis dans une base de donnée
+     * 
+     * addAvis(Avis avis)
+     * @param avis
+     * @throws java.sql.SQLException
+     */
+    public int getAvisID(Avis avis) throws SQLException{
+        try{
+            ResultSet datas = this.statement.executeQuery("SELECT `id`, `title` FROM `avis` WHERE `title` LIKE \"%"+avis.getTitre()+"%\"");
+            int resultData = 0;
+                while (datas.next()) {
+                    resultData = Integer.parseInt(datas.getString(2));
+                }
+                conn.close();
+                Console.print("->Sélection des datas OK");
+                return resultData;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return 0;
         }
     }
     

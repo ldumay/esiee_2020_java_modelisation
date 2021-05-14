@@ -63,6 +63,12 @@ public class ViewLogin extends JFrame implements ActionListener{
     private JLabel messageLabel;
     private String loginString;
     private JLabel loginLabel;
+    private String spaceString1;
+    private JLabel spaceLabel1;
+    private String spaceString2;
+    private JLabel spaceLabel2;
+    private String spaceString3;
+    private JLabel spaceLabel3;
     //-
     private JPanel contentLeftPanel;
     private String passwordString;
@@ -84,9 +90,19 @@ public class ViewLogin extends JFrame implements ActionListener{
     private String usersListButtonString;
     private JButton usersListButton;
     //-
+    private String ajoutFilmString;
+    private JButton ajoutFilmButton;
+    private String ajoutUserString;
+    private JButton ajoutUserButton;
+    private String ajoutAvisString;
+    private JButton ajoutAvisButton;
+    //-
     private String deconnexionButtonString;
     private JButton deconnexionButton;
     //-
+    private ViewFilmsAjout filmAjout;
+    private ViewUsersAjout usersAjout;
+    private ViewAvisAjout avisAjout;
     private ViewFilmsList filmsList;
     private ViewUsersList usersList;
     
@@ -173,9 +189,44 @@ public class ViewLogin extends JFrame implements ActionListener{
         messageString = "Erreur de login / Mot de Passe";
         messageString.toUpperCase();
         messageLabel = new JLabel(messageString, SwingConstants.CENTER);
-        messageLabel.setPreferredSize(new Dimension(450, 40));
+        messageLabel.setPreferredSize(new Dimension(450, 20));
         messageLabel.setVisible(false);
         contentPanel.add(messageLabel);
+        
+        spaceString1 = "= = = = = = [ Les ajouts ] = = = = = = =";
+        spaceString1.toUpperCase();
+        spaceLabel1 = new JLabel(spaceString1, SwingConstants.CENTER);
+        spaceLabel1.setPreferredSize(new Dimension(450, 20));
+        spaceLabel1.setVisible(false);
+        contentPanel.add(spaceLabel1);
+        
+        ajoutFilmString = "Ajouter un film";
+        ajoutFilmString.toUpperCase();
+        ajoutFilmButton = new JButton(ajoutFilmString);
+        ajoutFilmButton.addActionListener(this);
+        ajoutFilmButton.setVisible(false);
+        contentPanel.add(ajoutFilmButton);
+        
+        ajoutUserString = "Ajouter un utilisateur";
+        ajoutUserString.toUpperCase();
+        ajoutUserButton = new JButton(ajoutUserString);
+        ajoutUserButton.addActionListener(this);
+        ajoutUserButton.setVisible(false);
+        contentPanel.add(ajoutUserButton);
+        
+        ajoutAvisString = "Ajouter un avis";
+        ajoutAvisString.toUpperCase();
+        ajoutAvisButton = new JButton(ajoutAvisString);
+        ajoutAvisButton.addActionListener(this);
+        ajoutAvisButton.setVisible(false);
+        contentPanel.add(ajoutAvisButton);
+        
+        spaceString2 = "= = = = = = [ Les listes ] = = = = = = =";
+        spaceString2.toUpperCase();
+        spaceLabel2 = new JLabel(spaceString2, SwingConstants.CENTER);
+        spaceLabel2.setPreferredSize(new Dimension(450, 20));
+        spaceLabel2.setVisible(false);
+        contentPanel.add(spaceLabel2);
         
         filmsListButtonString = "Liste des films";
         filmsListButtonString.toUpperCase();
@@ -190,6 +241,13 @@ public class ViewLogin extends JFrame implements ActionListener{
         usersListButton.addActionListener(this);
         usersListButton.setVisible(false);
         contentPanel.add(usersListButton);
+        
+        spaceString3 = "= = = = = = [ Déconnexion ] = = = = = = =";
+        spaceString3.toUpperCase();
+        spaceLabel3 = new JLabel(spaceString3, SwingConstants.CENTER);
+        spaceLabel3.setPreferredSize(new Dimension(450, 20));
+        spaceLabel3.setVisible(false);
+        contentPanel.add(spaceLabel3);
         
         deconnexionButtonString = "Déconnexion";
         deconnexionButtonString.toUpperCase();
@@ -219,8 +277,14 @@ public class ViewLogin extends JFrame implements ActionListener{
                         Console.print("user : "+user.getLogin()+" / "+user.getPassword());
                         messageLabel.setText("Connecté");
                         messageLabel.setVisible(true);
+                        spaceLabel1.setVisible(true);
+                        ajoutFilmButton.setVisible(true);
+                        ajoutUserButton.setVisible(true);
+                        ajoutAvisButton.setVisible(true);
+                        spaceLabel2.setVisible(true);
                         filmsListButton.setVisible(true);
                         usersListButton.setVisible(true);
+                        spaceLabel3.setVisible(true);
                         deconnexionButton.setVisible(true);
                         contentLeftPanel.setVisible(false);
                         contentRightPanel.setVisible(false);
@@ -231,6 +295,27 @@ public class ViewLogin extends JFrame implements ActionListener{
             } catch (SQLException ex) {
                 Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        //Click button ajoutFilmButton
+        if( (JButton)event.getSource() == ajoutFilmButton && userConnecte==true){
+            try {
+                filmAjout = new ViewFilmsAjout();
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex); }
+        }
+        //Click button ajoutUserButton
+        if( (JButton)event.getSource() == ajoutUserButton && userConnecte==true){
+            try {
+                usersAjout = new ViewUsersAjout();
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex); }
+        }
+        //Click button ajoutAvisButton
+        if( (JButton)event.getSource() == ajoutAvisButton && userConnecte==true){
+            try {
+                avisAjout = new ViewAvisAjout(user);
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex); }
         }
         //Click button filmsListButton
         if( (JButton)event.getSource() == filmsListButton && userConnecte==true){
