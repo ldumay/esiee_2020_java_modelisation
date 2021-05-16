@@ -342,6 +342,12 @@ public class ViewLogin extends JFrame implements ActionListener{
             deconnexionButton.setVisible(false);
             contentLeftPanel.setVisible(true);
             contentRightPanel.setVisible(true);
+            spaceLabel1.setVisible(false);
+            ajoutFilmButton.setVisible(false);
+            ajoutUserButton.setVisible(false);
+            ajoutAvisButton.setVisible(false);
+            spaceLabel2.setVisible(false);
+            spaceLabel3.setVisible(false);
         }
     }
 
