@@ -5,14 +5,10 @@
  */
 package fr.starwars.controllers;
 
-import fr.bases.Console;
-import fr.starwars.models.DAOFilm;
+import fr.ldumay.others.Console;
+import fr.starwars.dao.DAOFilm;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

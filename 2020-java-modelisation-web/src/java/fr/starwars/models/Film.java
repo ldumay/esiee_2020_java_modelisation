@@ -5,7 +5,8 @@
  */
 package fr.starwars.models;
 
-import fr.bases.Console;
+import fr.ldumay.others.Console;
+import fr.starwars.dao.DAOAvis;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;

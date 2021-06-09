@@ -5,8 +5,10 @@
  */
 package fr.starwars.controllers;
 
-import fr.bases.Console;
-import fr.starwars.models.DAOFilm;
+import fr.ldumay.others.Console;
+import fr.starwars.dao.DAOAvis;
+import fr.starwars.dao.DAOFilm;
+import fr.starwars.models.Avis;
 import fr.starwars.models.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,8 +51,14 @@ public class FilmResultatRequete extends HttpServlet {
             double filmRecette = 0;
             Film filmAAjouter = null;
             
+            int avisId = 0;
+            String avisTitre = "";
+            String avisDescription = "";
+            int avisNote = 0;
+            Avis avisAAjouter = null;
+            
             try {
-                if(!request.getParameter("submit").isEmpty() && "Valider".equals(request.getParameter("submit"))){
+                if(!request.getParameter("filmajoutvalider").isEmpty() && "Valider".equals(request.getParameter("filmajoutvalider"))){
                     Console.print("Ajout d'un film demandé.");
                     try {
                         filmTitre = request.getParameter("FilmTitre");
@@ -65,6 +73,21 @@ public class FilmResultatRequete extends HttpServlet {
                     Console.print(result);
                 } else { result = "Ajout non effectué."; }
             } catch (Exception e) {}
+//            //-
+//            try {
+//                if(!request.getParameter("avisajoutvalider").isEmpty() && "Valider".equals(request.getParameter("avisajoutvalider"))){
+//                    Console.print("Ajout d'un avis demandé.");
+//                    try {
+//                        avisTitre = request.getParameter("AvisTitre");
+//                        avisDescription = request.getParameter("AvisDescription");
+//                        avisNote = Integer.parseInt(request.getParameter("AvisNote"));
+//                    } catch (Exception e) {}
+//                    avisAAjouter = new Avis(avisTitre, avisDescription, avisNote);
+//                    DAOAvis daoAvis = new DAOAvis();
+//                    result = daoAvis.addAvis(avisAAjouter);
+//                    Console.print(result);
+//                } else { result = "Ajout non effectué."; }
+//            } catch (Exception e) {}
             //-
             try{
                 if(!request.getParameter("update").isEmpty() && "Update".equals(request.getParameter("update"))){

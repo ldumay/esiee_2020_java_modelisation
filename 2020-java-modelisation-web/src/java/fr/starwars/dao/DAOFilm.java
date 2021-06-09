@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.starwars.models;
+package fr.starwars.dao;
 
-import fr.bases.Console;
+import fr.ldumay.others.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.table.TableModel;
+import fr.starwars.models.Film;
 
 /**
  *
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 
 /**
  * Class - DAOFilm
- <br>
+ * <br>
  * <br>Constructor :
  * <br>- DAOFilm()
  * <br>
@@ -32,13 +34,13 @@ import java.util.ArrayList;
  * <br>- DAOFilm.addFilm(String tableBDD, Film film)
  * <br> |--> void
  * <br>
- * <br>- DAOFilm.addFilm(Film film)
+  * <br>- DAOFilm.addFilm(Film film)
  * <br> |--> String
  * <br>
- * <br>- DAOFilm.deleteFilm(int datasId)
+ * <br>- DAOFilm.deleteFilm(String tableBDD, int datasId)
  * <br> |--> void
  * <br>
- * <br>- DAOFilm.deleteFilm(String tableBDD, Film film)
+ * <br>- DAOFilm.deleteFilm(int datasId)
  * <br> |--> void
  * <br>
  * <br>- DAOFilm.close()
@@ -127,15 +129,14 @@ public class DAOFilm {
     /**
      * Requète de lecture des films dans une base de donnée
      * 
-     * listReadingArrayList(String sqlQuery)
-     * @param sqlQuery
+     * listReadingArrayList()
      * @return ArrayList
      * @throws java.sql.SQLException
      */
-    public ArrayList listReadingArrayList(String sqlQuery) throws SQLException{
+    public ArrayList listReadingArrayList() throws SQLException{
         try{
-            ResultSet datas = this.statement.executeQuery(sqlQuery);
-            ArrayList resultDatas = new ArrayList();
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM films");
+            ArrayList<Film> resultDatas = new ArrayList();
                 while (datas.next()) {
                     Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
                             datas.getInt(4), datas.getDouble(5), datas.getDouble(6));
@@ -144,6 +145,34 @@ public class DAOFilm {
                 conn.close();
                 Console.print("->Sélection des datas OK");
                 return resultDatas;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Requète de lecture des films dans une base de donnée
+     * 
+     * listReadingListTableModel()
+     * @return TableModel
+     * @throws java.sql.SQLException
+     */
+    public TableModel listReadingListTableModel() throws SQLException{
+        try{
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM films");
+            ArrayList<Film> resultDatas = new ArrayList();
+            TableModel result;
+                while (datas.next()) {
+                    Film newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
+                            datas.getInt(4), datas.getDouble(5), datas.getDouble(6) );
+                    resultDatas.add(newFilm);
+                }
+                conn.close();
+                result = (TableModel) resultDatas;
+                Console.print("->Sélection des datas OK");
+                return result;
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();
@@ -243,6 +272,46 @@ public class DAOFilm {
     /**
      * Requète de suppression d'un film dans une base de donnée
      * 
+     * deleteFilm(String table, int datasId)
+     * @param tableBDD
+     * @param datasId
+     * @throws java.sql.SQLException
+     */
+    public void deleteFilm(String tableBDD, int datasId) throws SQLException{
+        try{
+            String sql = "DELETE FROM "+tableBDD+" WHERE id="+datasId+";";
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Suppression de la ligne "+datasId+" dans la table ["+tableBDD+"] OK");
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète de suppression d'un film dans une base de donnée
+     * 
+     * deleteFilm(String table, Film film)
+     * @param tableBDD
+     * @param film
+     * @throws java.sql.SQLException
+     */
+    public void deleteFilm(String tableBDD, Film film) throws SQLException{
+        try{
+            String sql = "DELETE FROM "+tableBDD+" WHERE id="+film.getId()+";";
+            Console.print(sql);
+            statement.executeUpdate(sql);
+            Console.print("->Suppression de la ligne "+film.getId()+" dans la table ["+tableBDD+"] OK");
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Requète de suppression d'un film dans une base de donnée
+     * 
      * datasDelete(int datasId)
      * @param datasId
      * @throws java.sql.SQLException
@@ -260,26 +329,6 @@ public class DAOFilm {
             e.printStackTrace();
         }
         return result;
-    }
-    
-    /**
-     * Requète de suppression d'un film dans une base de donnée
-     * 
-     * datasDelete(String table, int datasId)
-     * @param tableBDD
-     * @param film
-     * @throws java.sql.SQLException
-     */
-    public void deleteFilm(String tableBDD, Film film) throws SQLException{
-        try{
-            String sql = "DELETE FROM "+tableBDD+" WHERE id="+film.getId()+";";
-            Console.print(sql);
-            statement.executeUpdate(sql);
-            Console.print("->Suppression de la ligne "+film.getId()+" dans la table ["+tableBDD+"] OK");
-        } catch (SQLException e) {
-            System.err.println("Autre erreur !");
-            e.printStackTrace();
-        }
     }
     
     /**

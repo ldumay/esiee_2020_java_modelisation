@@ -5,8 +5,14 @@
  */
 package fr.starwars.controllers;
 
+import fr.starwars.dao.DAOFilm;
+import fr.starwars.models.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ldumay
  */
-@WebServlet(name = "FilmSaisi", urlPatterns = {"/FilmSaisi"})
-public class FilmSaisi extends HttpServlet {
+@WebServlet(name = "AvisSaisi", urlPatterns = {"/AvisSaisi"})
+public class AvisSaisi extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,13 +35,20 @@ public class FilmSaisi extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String listeFilm = "";
+            DAOFilm films = new DAOFilm();
+            ArrayList<Film> filmsTemp = new ArrayList();
+            filmsTemp.addAll(films.listReadingArrayList());
+            for(Film film : filmsTemp){
+                listeFilm += "<option value=\""+film.getId()+"\">"+film.getTitre()+"</option>";
+            }
             out.println("<!DOCTYPE html>"
                     + "<html>"
                     + "<head>"
-                    + "<title>Servlet FilmSaisi</title>"
+                    + "<title>Servlet AvisSaisi</title>"
                     + "<link href=\"https://dev.ldumay.fr/resources/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\">"
                     + "<link href=\"https://dev.ldumay.fr/resources/bootstrap/4.1.3/css/bootstrap-grid.min.css\" rel=\"stylesheet\">"
                     + "</head>"
@@ -43,25 +56,23 @@ public class FilmSaisi extends HttpServlet {
                     + "<div class=\"container\">"
                     + "<div class=\"row\">"
                     + "<div class=\"col-12\">"
-                    + "<h1>Saisir un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
+                    + "<h1>Saisir un avis <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
                     + "<hr>"
-                    + "<form method=\"post\" action=\"FilmSaisiResultat\">"
-                    + "<label for=\"basic-url\" class=\"form-label\">Nom du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmTitre\" placeholder=\"(String)\"/>"
+                    +"<select class=\"form-select\" name=\"AvisFilmSelect\">"
+                    +"<option selected>Choisissez le film</option>"
+                    +""+listeFilm+""
+                    +"</select>"
+                    + "<form method=\"post\" action=\"AvisSaisiResultat\">"
+                    + "<label for=\"basic-url\" class=\"form-label\">Nom de l'avis</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"AvisTitre\" placeholder=\"(String)\"/>"
                     + "<br>"
-                    + "<label for=\"basic-url\" class=\"form-label\">Année de sortie du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmAnneeDeSortie\" placeholder=\"(String)\"/>"
+                    + "<label for=\"basic-url\" class=\"form-label\">Description</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"AvisDescription\" placeholder=\"(String)\"/>"
                     + "<br>"
-                    + "<label for=\"basic-url\" class=\"form-label\">Numéro du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmNumeroEpisode\" placeholder=\"(int)\"/>"
+                    + "<label for=\"basic-url\" class=\"form-label\">Note</label>"
+                    + "<input type=\"texte\" class=\"form-control\" name=\"AvisNote\" placeholder=\"(int)\"/>"
                     + "<br>"
-                    + "<label for=\"basic-url\" class=\"form-label\">Coût du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmCout\" placeholder=\"(double)\"/>"
-                    + "<br>"
-                    + "<label for=\"basic-url\" class=\"form-label\">Recette du film</label>"
-                    + "<input type=\"texte\" class=\"form-control\" name=\"FilmRecette\" placeholder=\"(double)\"/>"
-                    + "<br>"
-                    + "<input type=\"submit\" class=\"btn btn-success\" name=\"filmajoutvalider\" value=\"Valider\"/>"
+                    + "<input type=\"submit\" class=\"btn btn-success\" name=\"avisajoutvalider\" value=\"Valider\"/>"
                     + "</form>"
                     + "</div>"
                     + "</div>"
@@ -83,7 +94,11 @@ public class FilmSaisi extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AvisSaisi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -96,7 +111,11 @@ public class FilmSaisi extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AvisSaisi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

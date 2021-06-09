@@ -5,8 +5,8 @@
  */
 package fr.starwars.controllers;
 
-import fr.bases.Console;
-import fr.starwars.models.DAOFilm;
+import fr.ldumay.others.Console;
+import fr.starwars.dao.DAOFilm;
 import fr.starwars.models.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +48,7 @@ public class FilmMiseAJour extends HttpServlet {
                 String requetSQL = "SELECT * FROM films WHERE id="+filmIdSelectionne+"";
                 DAOFilm daoFilm = new DAOFilm();
                 ArrayList daoFilmList = new ArrayList();
-                daoFilmList.addAll(daoFilm.listReadingArrayList(requetSQL));
+                daoFilmList.addAll(daoFilm.listReadingArrayList());
                 
                 Film film = (Film) daoFilmList.get(0);
                 int filmId = film.getId();

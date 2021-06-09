@@ -5,7 +5,7 @@
  */
 package fr.starwars.controllers;
 
-import fr.starwars.models.DAOFilm;
+import fr.starwars.dao.DAOFilm;
 import fr.starwars.models.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,7 +45,7 @@ public class FilmListe extends HttpServlet {
             String requetSQL = "SELECT * FROM films";
             DAOFilm daoFilm = new DAOFilm();
             ArrayList daoFilmList = new ArrayList();
-            daoFilmList.addAll(daoFilm.listReadingArrayList(requetSQL));
+            daoFilmList.addAll(daoFilm.listReadingArrayList());
 
             out.println("<!DOCTYPE html>"
                     + "<html>"
@@ -62,7 +62,8 @@ public class FilmListe extends HttpServlet {
                     + "<h1>Liste des films "
                     + "<small style=\"font-size:16px;\">"
                     + "<a href=\"/2020-java-modelisation-web/\">[accueil]</a>"
-                    + "<a href=\"/2020-java-modelisation-web/FilmSaisi\">[saisir nouveau film]</a>"
+                    + "<a href=\"/2020-java-modelisation-web/FilmSaisi\">[saisir un nouveau film]</a>"
+                    + "<a href=\"/2020-java-modelisation-web/AvisSaisi\">[saisir un nouvel avis]</a>"
                     + "</small>"
                     + "</h1>"
                     + "<hr>"
