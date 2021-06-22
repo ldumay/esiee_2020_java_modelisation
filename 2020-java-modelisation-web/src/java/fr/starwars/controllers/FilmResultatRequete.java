@@ -7,6 +7,7 @@ package fr.starwars.controllers;
 
 import fr.ldumay.others.Console;
 import fr.starwars.dao.DAOAvis;
+import fr.starwars.dao.DAOAvisForFilmByAcces;
 import fr.starwars.dao.DAOFilm;
 import fr.starwars.models.Avis;
 import fr.starwars.models.Film;
@@ -43,6 +44,11 @@ public class FilmResultatRequete extends HttpServlet {
             
             String result = "Aucun résultat.";
             
+            //Film sélectionné
+            int idfilmSelectionne = 0; 
+            Film filmSelectionne = null;
+            
+            //Film à ajouter
             int filmId = 0;
             String filmTitre = "";
             String filmAnneeDeSortie = "";
@@ -51,6 +57,7 @@ public class FilmResultatRequete extends HttpServlet {
             double filmRecette = 0;
             Film filmAAjouter = null;
             
+            //Avis à ajouter
             int avisId = 0;
             String avisTitre = "";
             String avisDescription = "";
@@ -58,54 +65,81 @@ public class FilmResultatRequete extends HttpServlet {
             Avis avisAAjouter = null;
             
             try {
-                if(!request.getParameter("filmajoutvalider").isEmpty() && "Valider".equals(request.getParameter("filmajoutvalider"))){
-                    Console.print("Ajout d'un film demandé.");
-                    try {
-                        filmTitre = request.getParameter("FilmTitre");
-                        filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
-                        filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
-                        filmCout = Double.parseDouble(request.getParameter("FilmCout"));
-                        filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
-                    } catch (Exception e) {}
-                    filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
-                    DAOFilm daoFilm = new DAOFilm();
-                    result = daoFilm.addFilm(filmAAjouter);
-                    Console.print(result);
-                } else { result = "Ajout non effectué."; }
-            } catch (Exception e) {}
-//            //-
-//            try {
-//                if(!request.getParameter("avisajoutvalider").isEmpty() && "Valider".equals(request.getParameter("avisajoutvalider"))){
-//                    Console.print("Ajout d'un avis demandé.");
-//                    try {
-//                        avisTitre = request.getParameter("AvisTitre");
-//                        avisDescription = request.getParameter("AvisDescription");
-//                        avisNote = Integer.parseInt(request.getParameter("AvisNote"));
-//                    } catch (Exception e) {}
-//                    avisAAjouter = new Avis(avisTitre, avisDescription, avisNote);
-//                    DAOAvis daoAvis = new DAOAvis();
-//                    result = daoAvis.addAvis(avisAAjouter);
-//                    Console.print(result);
-//                } else { result = "Ajout non effectué."; }
-//            } catch (Exception e) {}
-            //-
-            try{
-                if(!request.getParameter("update").isEmpty() && "Update".equals(request.getParameter("update"))){
-                    Console.print("Mise à jour d'un film demandé.");
-                    try {
-                        filmId = Integer.parseInt(request.getParameter("FilmId"));
-                        filmTitre = request.getParameter("FilmTitre");
-                        filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
-                        filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
-                        filmCout = Double.parseDouble(request.getParameter("FilmCout"));
-                        filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
-                    } catch (Exception e) {}
-                    filmAAjouter = new Film(filmId, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
-                    DAOFilm daoFilm = new DAOFilm();
-                    result = daoFilm.updateFilm(filmAAjouter);
-                    Console.print(result);
-                } else { result = "Mise à jour non effectué."; }
-            } catch (Exception e) {}
+                //si le paramètre == filmajoutvalider
+                if(request.getParameter("filmajoutvalider")!=null){
+                    
+                    //-Validation Ajout Film
+                    if(!request.getParameter("filmajoutvalider").isEmpty() && "Valider".equals(request.getParameter("filmajoutvalider"))){
+                        Console.print("Ajout d'un film demandé.");
+                        try {
+                            filmTitre = request.getParameter("FilmTitre");
+                            filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
+                            filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
+                            filmCout = Double.parseDouble(request.getParameter("FilmCout"));
+                            filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
+                        } catch (Exception e) { System.err.println(e); }
+                        filmAAjouter = new Film(0, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
+                        DAOFilm daoFilm = new DAOFilm();
+                        result = daoFilm.addFilm(filmAAjouter);
+                        Console.print(result);
+                    } else { result = "Ajout non effectué."; }
+                    
+                //si le paramètre == update
+                } else if(request.getParameter("update")!=null){
+            
+                    //-Validation Mise à jour Film
+                    if(!request.getParameter("update").isEmpty() && "Update".equals(request.getParameter("update"))){
+                        Console.print("Mise à jour d'un film demandé.");
+                        try {
+                            filmId = Integer.parseInt(request.getParameter("FilmId"));
+                            filmTitre = request.getParameter("FilmTitre");
+                            filmAnneeDeSortie = request.getParameter("FilmAnneeDeSortie");
+                            filmNumeroEpisode = Integer.parseInt(request.getParameter("FilmNumeroEpisode"));
+                            filmCout = Double.parseDouble(request.getParameter("FilmCout"));
+                            filmRecette = Double.parseDouble(request.getParameter("FilmRecette"));
+                        } catch (Exception e) { System.err.println(e); }
+                        filmAAjouter = new Film(filmId, filmTitre, filmAnneeDeSortie, filmNumeroEpisode, filmCout, filmRecette);
+                        DAOFilm daoFilm = new DAOFilm();
+                        result = daoFilm.updateFilm(filmAAjouter);
+                        Console.print(result);
+                    } else { result = "Mise à jour non effectué."; }
+                    
+                //si le paramètre == avisajoutvalider
+                } else if(request.getParameter("avisajoutvalider")!=null){
+                
+                    //-Validation Ajout Avis
+                    if(!request.getParameter("avisajoutvalider").isEmpty() && "Valider".equals(request.getParameter("avisajoutvalider"))){
+                        Console.print("Ajout d'un avis demandé.");
+                        try {
+                            //Récupération du film sélectionné
+                            String temp = request.getParameter("AvisFilmSelect");
+                            idfilmSelectionne = Integer.parseInt(temp);
+                            DAOFilm daoFilm = new DAOFilm();
+                            filmSelectionne = daoFilm.selectAFilm(idfilmSelectionne);
+                            //Récupération des information du nouvel avis
+                            avisTitre = request.getParameter("AvisTitre");
+                            avisDescription = request.getParameter("AvisDescription");
+                            avisNote = Integer.parseInt(request.getParameter("AvisNote"));
+                        } catch (Exception e) { System.err.println(e); }
+                        //Création d'un nouvel avis
+                        avisAAjouter = new Avis(avisTitre, avisDescription, avisNote);
+                        //Ajoute du nouvel avis dans la table avis
+                        DAOAvis daoAvis = new DAOAvis();
+                        result = daoAvis.addAvisString(avisAAjouter);
+                        avisAAjouter.setId(daoAvis.getAvisID(avisAAjouter));
+                        //Ajout du nouvel avis dans la table de liaison avis et film
+                        DAOAvisForFilmByAcces daoAvisForFilmByAcces = new DAOAvisForFilmByAcces();
+                        daoAvisForFilmByAcces.addAvisForFilmByAcces(avisAAjouter, filmSelectionne, null);
+                        Console.print(result);
+                    } else { result = "Ajout non effectué."; }
+
+                }
+                
+            } catch (SQLException e) {
+                System.err.println(e);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
             
             out.println("<!DOCTYPE html>"
                     + "<html>"

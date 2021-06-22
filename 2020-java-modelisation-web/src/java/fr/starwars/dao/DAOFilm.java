@@ -31,6 +31,8 @@ import fr.starwars.models.Film;
  * <br>- DAOFilm.listReading(String typeElement, String sqlQuery)
  * <br> |--> void
  * <br>
+ * <br>- Film selectAFilm(int id)
+ * <br> |--> Film
  * <br>- DAOFilm.addFilm(String tableBDD, Film film)
  * <br> |--> void
  * <br>
@@ -173,6 +175,32 @@ public class DAOFilm {
                 result = (TableModel) resultDatas;
                 Console.print("->Sélection des datas OK");
                 return result;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Requète de lecture d'un film dans une base de donnée
+     * 
+     * Film selectAFilm(int id)
+     * @param id
+     * @return Film
+     * @throws java.sql.SQLException
+     */
+    public Film selectAFilm(int id) throws SQLException{
+        Film newFilm = null;
+        try{
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM films WHERE id="+id+"");
+            while (datas.next()) {
+                newFilm = new Film(datas.getInt(1), datas.getString(2), datas.getString(3), 
+                        datas.getInt(4), datas.getDouble(5), datas.getDouble(6));
+            }
+            conn.close();
+            Console.print("->Sélection des datas OK");
+            return newFilm;
         } catch (SQLException e) {
             System.err.println("Autre erreur !");
             e.printStackTrace();

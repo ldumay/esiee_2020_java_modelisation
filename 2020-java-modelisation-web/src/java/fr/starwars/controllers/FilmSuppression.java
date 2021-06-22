@@ -66,6 +66,8 @@ public class FilmSuppression extends HttpServlet {
                     + "[id] = "+this.filmIdSelectionne
                     + "<br>"
                     + "[Statut suppresions] = "+this.suppressionStatut
+                    + "<br>"
+                    + "<a href=\"/2020-java-modelisation-web/FilmListe\">Retour à la liste des films</a>"
                     + "</div>"
                     + "</div>"
                     + "</div>"

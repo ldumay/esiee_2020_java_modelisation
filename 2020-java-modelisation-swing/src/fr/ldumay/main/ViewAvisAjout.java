@@ -71,6 +71,7 @@ public class ViewAvisAjout extends JFrame implements ActionListener{
     /**
      * Constructor
      * 
+     * @param acces
      * @throws java.sql.SQLException
      */
     public ViewAvisAjout(Acces acces) throws SQLException{
@@ -85,7 +86,9 @@ public class ViewAvisAjout extends JFrame implements ActionListener{
         
         Dimension dimensionForm = new Dimension(450, 25);
         
-        filmSelectionneLabel = new JLabel("Chxoi du film");
+        this.acces = acces;
+        
+        filmSelectionneLabel = new JLabel("Choix du film");
         filmSelectionneLabel.setPreferredSize(dimensionForm);
         contentPanel.add(filmSelectionneLabel);
         generationDuComboBoxFilms();
@@ -152,15 +155,19 @@ public class ViewAvisAjout extends JFrame implements ActionListener{
                 if( film!=null && avis!=null && acces!=null
                     && !titreAvisTextField.getText().isEmpty() && !descriptionAvisTextField.getText().isEmpty()
                     && !noteAvisTextField.getText().isEmpty() ){
+                    
+                    //Récupération des informations du nouvel avis
                     String titreAvis = titreAvisTextField.getText();
                     String descriptionAvis = descriptionAvisTextField.getText();
                     int noteAvis = Integer.parseInt(noteAvisTextField.getText());
-                    //-
+                    //Ajout du nouvel avis
                     Avis newAvis = new Avis(titreAvis, descriptionAvis, noteAvis);
                     daoAvis.addAvis(newAvis);
                     daoAvis.close();
-                    //-
+                    //Ajout du nouvel avis dans la table avis
                     avis = newAvis;
+                    Avis avisTmp = daoAvis.getLastAvis();
+                    avis.setId(avisTmp.getId());
                     film = (Film) filmSelectionneComboBox.getSelectedItem();
                     DAOAvisForFilmByAcces daoAvisForFilmByAcces= new DAOAvisForFilmByAcces();
                     daoAvisForFilmByAcces.addAvisForFilmByAcces(avis, film, acces);

@@ -99,6 +99,15 @@ public class DAOAvisForFilmByAcces {
      * @throws java.sql.SQLException
      */
     public void addAvisForFilmByAcces(Avis avis, Film film, Acces acces) throws SQLException{
+        if(acces==null){
+            acces.setId(3);
+            acces.setPrenom("Michel");
+            acces.setLogin("lamere");
+            acces.setPassword("sonchat");
+            acces.setStatut("Admin");
+            acces.setAge(69);
+        } else { acces = acces; }
+        //-
         try{
             String sql = "INSERT INTO `films_acces_avis` (`films_id`, `acces_id`, `avis_id`) VALUES ";
             String sqlElements = "("

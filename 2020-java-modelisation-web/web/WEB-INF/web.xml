@@ -11,6 +11,18 @@
     
     <!-- Servlets -->
     
+    <!-- Servelet - AvisSaisi -->
+    <!-- servlet - laison -->
+    <servlet>
+        <servlet-name>AvisSaisi</servlet-name>
+        <servlet-class>fr.starwars.controllers.AvisSaisi</servlet-class>
+    </servlet>
+    <!-- servlet-mapping - URI Accès -->
+    <servlet-mapping>
+        <servlet-name>AvisSaisi</servlet-name>
+        <url-pattern>/AvisSaisi</url-pattern>
+    </servlet-mapping>
+    
     <!-- Servelet - FilmSaisi -->
     <!-- servlet - laison -->
     <servlet>
@@ -22,6 +34,7 @@
         <servlet-name>FilmSaisi</servlet-name>
         <url-pattern>/FilmSaisi</url-pattern>
     </servlet-mapping>
+    
     <!-- Servelet - FilmSaisiResultat -->
     <!-- servlet - laison -->
     <servlet>
@@ -33,6 +46,7 @@
         <servlet-name>FilmSaisiResultat</servlet-name>
         <url-pattern>/FilmSaisiResultat</url-pattern>
     </servlet-mapping>
+    
     <!-- Servelet - FilmSaisiMiseAJour -->
     <!-- servlet - laison -->
     <servlet>
@@ -44,7 +58,8 @@
         <servlet-name>FilmMiseAJour</servlet-name>
         <url-pattern>/FilmMiseAJour</url-pattern>
     </servlet-mapping>
-    <!-- Servelet - FilmSaisiResultat -->
+    
+    <!-- Servelet - FilmListe -->
     <!-- servlet - laison -->
     <servlet>
         <servlet-name>FilmListe</servlet-name>
@@ -55,6 +70,7 @@
         <servlet-name>FilmListe</servlet-name>
         <url-pattern>/FilmListe</url-pattern>
     </servlet-mapping>
+    
     <!-- Servelet - FilmSuppression -->
     <!-- servlet - laison -->
     <servlet>

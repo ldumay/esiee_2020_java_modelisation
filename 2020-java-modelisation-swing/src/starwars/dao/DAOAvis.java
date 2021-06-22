@@ -36,6 +36,9 @@ import starwars.classes.Avis;
  * <br>- DAOAvis.addAvis(String tableBDD, Avis avis)
  * <br> |--> void
  * <br>
+ * <br>- DAOAvis.getLastAvis()
+ * <br> |--> Avis
+ * <br>
  * <br>- DAOAvis.deleteAvis(String tableBDD, int datasId)
  * <br> |--> void
  * <br>
@@ -205,7 +208,7 @@ public class DAOAvis {
      */
     public void addAvis(Avis avis) throws SQLException{
         try{
-            String sql = "INSERT INTO `avis` (`titre`, `title`, `description`, `note_avis`) VALUES ";
+            String sql = "INSERT INTO `avis` (`title`, `description`, `note_avis`) VALUES ";
             String sqlElements = "("
                             +"\""+avis.getTitre()+"\""+","
                             +"\""+avis.getDescription()+"\""+","
@@ -231,7 +234,7 @@ public class DAOAvis {
      */
     public void addAvis(String tableBDD, Avis avis) throws SQLException{
         try{
-            String sql = "INSERT INTO "+tableBDD+" (`titre`, `title`, `description`, `note_avis`) VALUES ";
+            String sql = "INSERT INTO "+tableBDD+" (`title`, `description`, `note_avis`) VALUES ";
             String sqlElements = "("
                             +"\""+avis.getTitre()+"\""+","
                             +"\""+avis.getDescription()+"\""+","
@@ -268,6 +271,28 @@ public class DAOAvis {
             System.err.println("Autre erreur !");
             e.printStackTrace();
             return 0;
+        }
+    }
+    
+    /**
+     * Requète de récupération du dernier avis ajouté
+     * 
+     * @return avis
+     */
+    public Avis getLastAvis(){
+        Avis avisRecuperer = null;
+        try{
+            ResultSet datas = this.statement.executeQuery("SELECT * FROM avis ORDER BY id DESC LIMIT 0,1");
+            while (datas.next()) {
+                avisRecuperer = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3), datas.getInt(4));
+            }
+            conn.close();
+            Console.print("->Sélection des datas OK");
+            return avisRecuperer;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return avisRecuperer;
         }
     }
     

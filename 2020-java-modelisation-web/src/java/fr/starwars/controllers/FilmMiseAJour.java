@@ -45,12 +45,8 @@ public class FilmMiseAJour extends HttpServlet {
                 Console.print("id : "+this.filmIdSelectionne);
                 //getServletContext().getRequestDispatcher("/2020-java-modelisation-web/FilmResultRequete").forward(request,response);
         
-                String requetSQL = "SELECT * FROM films WHERE id="+filmIdSelectionne+"";
                 DAOFilm daoFilm = new DAOFilm();
-                ArrayList daoFilmList = new ArrayList();
-                daoFilmList.addAll(daoFilm.listReadingArrayList());
-                
-                Film film = (Film) daoFilmList.get(0);
+                Film film = (Film) daoFilm.selectAFilm(filmIdSelectionne);
                 int filmId = film.getId();
                 String filmTitre = film.getTitre();
                 String filmAnneeDeSortie = film.getAnneeDeSortie();
@@ -71,7 +67,10 @@ public class FilmMiseAJour extends HttpServlet {
                             + "<div class=\"container\">"
                             + "<div class=\"row\">"
                             + "<div class=\"col-12\">"
-                            + "<h1>Mettre à jour un film <small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small></h1>"
+                            + "<h1>Mettre à jour un film "
+                            + "<small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/\">[accueil]</a></small>"
+                            + "<small style=\"font-size:16px;\"><a href=\"/2020-java-modelisation-web/FilmListe\">[Liste des Films]</a></small>"
+                            + "</h1>"
                             + "<hr>"
                             + "<form method=\"post\" action=\"FilmSaisiResultat\">"
                             + "<input type=\"text\" name=\"FilmId\" value=\""+filmId+"\" hidden />"
