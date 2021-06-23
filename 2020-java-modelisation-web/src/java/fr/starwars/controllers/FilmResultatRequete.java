@@ -82,7 +82,7 @@ public class FilmResultatRequete extends HttpServlet {
                         DAOFilm daoFilm = new DAOFilm();
                         result = daoFilm.addFilm(filmAAjouter);
                         Console.print(result);
-                    } else { result = "Ajout non effectué."; }
+                    } else { result = "Ajout du film non effectué."; }
                     
                 //si le paramètre == update
                 } else if(request.getParameter("update")!=null){
@@ -102,7 +102,7 @@ public class FilmResultatRequete extends HttpServlet {
                         DAOFilm daoFilm = new DAOFilm();
                         result = daoFilm.updateFilm(filmAAjouter);
                         Console.print(result);
-                    } else { result = "Mise à jour non effectué."; }
+                    } else { result = "Mise à jour du film non effectué."; }
                     
                 //si le paramètre == avisajoutvalider
                 } else if(request.getParameter("avisajoutvalider")!=null){
@@ -134,7 +134,7 @@ public class FilmResultatRequete extends HttpServlet {
                             //-
                             Console.print(result);
                         } catch (Exception e) { System.err.println(e); }
-                    } else { result = "Ajout non effectué."; }
+                    } else { result = "Ajout de l'avis non effectué."; }
 
                 }
                 
