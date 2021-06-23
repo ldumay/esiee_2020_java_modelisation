@@ -120,17 +120,20 @@ public class FilmResultatRequete extends HttpServlet {
                             avisTitre = request.getParameter("AvisTitre");
                             avisDescription = request.getParameter("AvisDescription");
                             avisNote = Integer.parseInt(request.getParameter("AvisNote"));
+                            avisAAjouter = new Avis(avisTitre, avisDescription, avisNote);
+                            //Ajoute du nouvel avis dans la table avis
+                            DAOAvis daoAvis = new DAOAvis();
+                            result = daoAvis.addAvisString(avisAAjouter);
+                            avisAAjouter.setId(daoAvis.getAvisID(avisAAjouter));
+                            //Ajout du nouvel avis dans la table de liaison avis et film
+                            DAOAvisForFilmByAcces daoAvisForFilmByAcces = new DAOAvisForFilmByAcces();
+                            daoAvisForFilmByAcces.addAvisForFilmByAcces(avisAAjouter, filmSelectionne, null);
+                            //Fermerture de toutes les connexion
+                            daoAvis.close();
+                            daoAvisForFilmByAcces.close();
+                            //-
+                            Console.print(result);
                         } catch (Exception e) { System.err.println(e); }
-                        //Création d'un nouvel avis
-                        avisAAjouter = new Avis(avisTitre, avisDescription, avisNote);
-                        //Ajoute du nouvel avis dans la table avis
-                        DAOAvis daoAvis = new DAOAvis();
-                        result = daoAvis.addAvisString(avisAAjouter);
-                        avisAAjouter.setId(daoAvis.getAvisID(avisAAjouter));
-                        //Ajout du nouvel avis dans la table de liaison avis et film
-                        DAOAvisForFilmByAcces daoAvisForFilmByAcces = new DAOAvisForFilmByAcces();
-                        daoAvisForFilmByAcces.addAvisForFilmByAcces(avisAAjouter, filmSelectionne, null);
-                        Console.print(result);
                     } else { result = "Ajout non effectué."; }
 
                 }

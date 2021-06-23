@@ -274,15 +274,17 @@ public class DAOAvis {
         }
     }
     
-    /**
+   /**
      * Requète de récupération du dernier avis ajouté
      * 
      * @return avis
+     * @throws java.sql.SQLException
      */
-    public Avis getLastAvis(){
+    public Avis getLastAvis() throws SQLException{
         Avis avisRecuperer = null;
         try{
             ResultSet datas = this.statement.executeQuery("SELECT * FROM avis ORDER BY id DESC LIMIT 0,1");
+            String emp = "";
             while (datas.next()) {
                 avisRecuperer = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3), datas.getInt(4));
             }

@@ -156,21 +156,25 @@ public class ViewAvisAjout extends JFrame implements ActionListener{
                     && !titreAvisTextField.getText().isEmpty() && !descriptionAvisTextField.getText().isEmpty()
                     && !noteAvisTextField.getText().isEmpty() ){
                     
+                    //Récupération de film sélectionné
+                    film = (Film) filmSelectionneComboBox.getSelectedItem();
                     //Récupération des informations du nouvel avis
                     String titreAvis = titreAvisTextField.getText();
                     String descriptionAvis = descriptionAvisTextField.getText();
                     int noteAvis = Integer.parseInt(noteAvisTextField.getText());
-                    //Ajout du nouvel avis
                     Avis newAvis = new Avis(titreAvis, descriptionAvis, noteAvis);
+                    //Ajout du nouvel avis
                     daoAvis.addAvis(newAvis);
-                    daoAvis.close();
                     //Ajout du nouvel avis dans la table avis
                     avis = newAvis;
+                    //Récupération du dernier avis de la table avis
                     Avis avisTmp = daoAvis.getLastAvis();
                     avis.setId(avisTmp.getId());
-                    film = (Film) filmSelectionneComboBox.getSelectedItem();
+                    //Ajout de l'avis dans la table de liaision avis-et-film
                     DAOAvisForFilmByAcces daoAvisForFilmByAcces= new DAOAvisForFilmByAcces();
                     daoAvisForFilmByAcces.addAvisForFilmByAcces(avis, film, acces);
+                    //Fermerture de toutes les connexion
+                    daoAvis.close();
                     daoAvisForFilmByAcces.close();
                     //-
                     Console.print("[Ajout réussi]");
