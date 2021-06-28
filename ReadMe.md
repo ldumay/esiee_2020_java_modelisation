@@ -32,9 +32,9 @@ Disponible ici => [lien-git](https://github.com/ldumay/2020-java-modelisation/bl
 ## 4 | Démonstration vidéos
 
 Démo de l'application lourde : 
-[Ici - MP4](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Lourde.mp4)
-[Ici - MOV](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Lourde.mov)
+[MP4](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Lourde.mp4)
+| [MOV](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Lourde.mov)
 
 Démo de l'application web :
-[Ici - MP4](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Web.mp4)
-[Ici - MOV](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Web.mov)
+[MP4](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Web.mp4)
+| [MOV](http://uploads.ldumay.fr/tmp/Demos_Java_Modelisation/Demo_App_Web.mov)
