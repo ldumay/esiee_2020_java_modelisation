@@ -284,7 +284,6 @@ public class DAOAvis {
         Avis avisRecuperer = null;
         try{
             ResultSet datas = this.statement.executeQuery("SELECT * FROM avis ORDER BY id DESC LIMIT 0,1");
-            String emp = "";
             while (datas.next()) {
                 avisRecuperer = new Avis(datas.getInt(1), datas.getString(2), datas.getString(3), datas.getInt(4));
             }
@@ -295,6 +294,30 @@ public class DAOAvis {
             System.err.println("Autre erreur !");
             e.printStackTrace();
             return avisRecuperer;
+        }
+    }
+    
+    /**
+     * Requète de récupération de la moyenne d'un film
+     * 
+     * @param id
+     * @return int
+     */
+    public int getMoyenne(int id){
+        int moyenne = 0;
+        try{
+            String sql = "SELECT avg(a.note_avis) as moyenne_avis FROM films_acces_avis faa, films f, avis a WHERE faa.films_id=f.id AND faa.avis_id=a.id AND faa.films_id="+id+";";
+            ResultSet datas = this.statement.executeQuery(sql);
+            while (datas.next()) {
+                moyenne = datas.getInt(1);
+            }
+            conn.close();
+            Console.print("->Sélection des datas OK");
+            return moyenne;
+        } catch (SQLException e) {
+            System.err.println("Autre erreur !");
+            e.printStackTrace();
+            return moyenne;
         }
     }
     

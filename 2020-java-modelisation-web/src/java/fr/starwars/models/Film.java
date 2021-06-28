@@ -181,21 +181,14 @@ public class Film {
     /**
      * Calcule de la moyenne des avis du film
      * 
+     * @return int
+     * @throws java.sql.SQLException
      */
     public int calculMoyenneAvis() throws SQLException{
         try {
             DAOAvis daoAvis = new DAOAvis();
-            this.daoAvisList = daoAvis.listReadingArrayList(this.id);
+            this.moyenneAvis = daoAvis.getMoyenne(this.id);
             daoAvis.close();
-
-            int moyenneAvis = 0;
-            for(Avis avisList : this.daoAvisList){
-                moyenneAvis = moyenneAvis + avisList.getId();
-            }
-            if(moyenneAvis<0 || moyenneAvis>0){
-                moyenneAvis = ( moyenneAvis / this.daoAvisList.size() ) / 10;
-            }
-            this.moyenneAvis = moyenneAvis;
         } catch (Exception e) { System.err.println(e); }
         return this.moyenneAvis;
     }
