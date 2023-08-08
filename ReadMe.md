@@ -1,6 +1,6 @@
 # Projet d'apprentissage de Java JSE & JEE
 
-> 🚨 **Projet déplacer ici ▶▶ : [https://github.com/2023-esiee-projectlab/esiee-it_2020_java_modelisation](https://github.com/2023-esiee-projectlab/esiee-it_2020_java_modelisation)**
+> 🚨 **Projet déplacer ici ▶▶ : [https://github.com/2023-esiee-projectlab/L3_java_modelisation](https://github.com/2023-esiee-projectlab/L3_java_modelisation)**
 
 ## 1 | Projet développer avec : 
 
