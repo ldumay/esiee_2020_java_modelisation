@@ -1,5 +1,7 @@
 # Projet d'apprentissage de Java JSE & JEE
 
+> 🚨 **Projet déplacer ici ▶▶ : [https://github.com/2023-esiee-projectlab/esiee-it_2020_java_modelisation](https://github.com/2023-esiee-projectlab/esiee-it_2020_java_modelisation)**
+
 ## 1 | Projet développer avec : 
 
 - Java 8 : JR8 / JDK8
